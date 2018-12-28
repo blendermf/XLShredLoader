@@ -76,10 +76,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\Components\CameraControllerData.cs" />
+    <Compile Include="Extensions\Components\PlayerControllerData.cs" />
     <Compile Include="Extensions\BoardControllerExtensions.cs" />
+    <Compile Include="Extensions\CameraControllerExtensions.cs" />
+    <Compile Include="Extensions\PlayerControllerExtensions.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="ModMenu.cs" />
     <Compile Include="Patches\BoardControllerPatches.cs" />
+    <Compile Include="Patches\CameraControllerPatches.cs" />
+    <Compile Include="Patches\PlayerControllerPatches.cs" />
+    <Compile Include="Patches\PlayerState_GrindingPatches.cs" />
+    <Compile Include="Patches\RespawnPatches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Harmony12;
+using System;
 using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,6 @@ namespace XLShredLoader.Patches {
     static class BoardController_Rotate_Patch {
 
         static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) {
-
             var codes = instructions.ToList();
             int bufferedRotationMultCnt = 0;
             int skipCount = 0;

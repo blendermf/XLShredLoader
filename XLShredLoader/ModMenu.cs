@@ -3,6 +3,8 @@ using System;
 
 namespace XLShredLoader {
 
+    using Extensions.Components;
+
     public class ModMenu : MonoBehaviour {
         private float btnLastPressed;
         private ModMenu.TmpMessage tmpMessage;
@@ -25,7 +27,8 @@ namespace XLShredLoader {
                 } else {
                     this.showMessage("Realistic Flip Tricks: DEACTIVATED");
                 }
-            }
+            }            PlayerController.Instance.gameObject.AddComponent<PlayerControllerData>();
+            PlayerController.Instance.gameObject.AddComponent<CameraControllerData>();
             if (Input.GetKey(KeyCode.M) && (double)(realtimeSinceStartup - this.btnLastPressed) > 0.2) {
                 this.btnLastPressed = realtimeSinceStartup;
                 Main.settings.fixedSwitchFlipPositions = !Main.settings.fixedSwitchFlipPositions;

@@ -7,7 +7,7 @@ namespace XLShredLoader.Extensions {
         public static void RealisticFlipTricks(this BoardController ob) {
             if (Main.settings.realisticFlipTricks && Main.enabled) {
 
-                if (ob.secondVel == 0f) {
+                if (ob.secondVel < 10f) {
                     ob.RotateBoardWithSkater();
                 }
             } else {
