@@ -33,10 +33,12 @@ namespace XLShredLoader.Extensions.Components {
         }
 
         public void adjustCameraToGrind(bool backside) {
+            
             if (!Main.settings.GetCameraModActive()) {
                 return;
             }
 
+            Console.WriteLine("Camera Controller: " + cameraController);
             this.inGrindCamera = true;
             if (SettingsManager.Instance.stance == SettingsManager.Stance.Goofy) {
                 if (PlayerController.Instance.IsSwitch) {
@@ -88,6 +90,7 @@ namespace XLShredLoader.Extensions.Components {
         }
 
         public void ResetGrindCamera() {
+         
             if (!Main.settings.GetCameraModActive()) {
                 return;
             }

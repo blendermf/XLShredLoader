@@ -10,31 +10,80 @@ using XLShredLoader.Patches;
 
 namespace XLShredLoader
 {
-    [Serializable()]
+    [Serializable]
     public class Settings : UnityModManager.ModSettings {
 
-        public bool realisticFlipTricks = true;
-        public bool fixedSwitchFlipPositions = true;
+        public bool realisticFlipTricks = false;
+        public bool fixedSwitchFlipPositions = false;
         public float customGrindPopForce = 2f;
-        public bool grindSpinVelocityEnabled = true;
+        public float customManualPopForce = 2.5f;
+        public bool grindSpinVelocityEnabled = false;
+        public bool spinVelocityEnabled = false;
+        public bool autoSlowmo = false;
+        public bool fixedSlowmo = false;
+        public float timeScaleTarget = 1f;
 
-        private bool _cameraModActive = true;
+        private float _customPopForce = 3f;
+        private float _customPushForce = 8f;
+        private bool _cameraModActive = false;
+
+       public Settings() : base() {
+            PlayerController.Instance.popForce = _customPopForce;
+            PlayerController.Instance.skaterController.pushForce = _customPushForce;
+       }
+
+        public float customPopForce {
+            get {
+                return this._customPopForce;
+            }
+            set {
+                this._customPopForce = value;
+                PlayerController.Instance.popForce = value;
+            }
+        }
+
+        public float customPushForce {
+            get {
+                return this._customPushForce;
+            }
+            set {
+                this._customPushForce = value;
+                PlayerController.Instance.skaterController.pushForce = value;
+                PlayerController.Instance.topSpeed = 7f + ((value - 8f) * 0.5f);
+            }
+        }
+
+        public bool GetCameraModActive() {
+            return _cameraModActive;
+        }
 
         public void ToggleCameraModActive() {
-            this._cameraModActive = !this._cameraModActive;
-            if (!this._cameraModActive) {
+            _cameraModActive = !_cameraModActive;
+            if (!_cameraModActive) {
                 if (PlayerController.Instance != null) {
                     PlayerController.Instance.cameraController.GetExtensionComponent().inGrindCamera = false;
                 }
             }
         }
 
-        public bool GetCameraModActive() {
-            return this._cameraModActive;
+        public void IncreaseGrindPopForce() {
+           customGrindPopForce += 0.1f;
+        }
+
+        public void DecreaseGrindPopForce() {
+            customGrindPopForce -= 0.1f;
+        }
+
+        public void IncreaseManualPopForce() {
+            customManualPopForce += 0.1f;
+        }
+        
+        public void DecreaseManualPopForce() {
+            customManualPopForce -= 0.1f;
         }
 
         public override void Save(UnityModManager.ModEntry modEntry) {
-            base.Save(modEntry);
+            Save(modEntry);
         }
     }
 
@@ -57,7 +106,8 @@ namespace XLShredLoader
             UnityEngine.Object.DontDestroyOnLoad(Main.modmenu);
 
             PlayerController.Instance.gameObject.AddComponent<PlayerControllerData>();
-            PlayerController.Instance.cameraController.gameObject.AddComponent<CameraControllerData>();
+            CameraControllerData cameraControllerData = PlayerController.Instance.cameraController.gameObject.AddComponent<CameraControllerData>();
+            cameraControllerData.cameraController = PlayerController.Instance.cameraController;
 
             return true;
         }
@@ -65,6 +115,10 @@ namespace XLShredLoader
         static bool OnToggle(UnityModManager.ModEntry modEntry, bool value) {
             enabled = value;
             return true;
+        }
+
+        static void OnSaveGUI(UnityModManager.ModEntry modEntry) {
+            settings.Save(modEntry);
         }
     }
 }

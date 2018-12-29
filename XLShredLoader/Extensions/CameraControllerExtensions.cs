@@ -10,9 +10,5 @@ namespace XLShredLoader.Extensions {
         public static CameraControllerData GetExtensionComponent(this CameraController ob) {
             return ob.GetComponent<CameraControllerData>();
         }
-
-        public static void ChangeCameraToFront(this CameraController ob) {
-            ob.GetExtensionComponent().ChangeCameraToFront();
-        }
     }
 }

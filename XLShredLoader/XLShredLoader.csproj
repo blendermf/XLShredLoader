@@ -83,10 +83,12 @@
     <Compile Include="Extensions\PlayerControllerExtensions.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="ModMenu.cs" />
+    <Compile Include="ModUIBox.cs" />
     <Compile Include="Patches\BoardControllerPatches.cs" />
     <Compile Include="Patches\CameraControllerPatches.cs" />
     <Compile Include="Patches\PlayerControllerPatches.cs" />
     <Compile Include="Patches\PlayerState_GrindingPatches.cs" />
+    <Compile Include="Patches\PlayerState_ManuallingPatches.cs" />
     <Compile Include="Patches\RespawnPatches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
