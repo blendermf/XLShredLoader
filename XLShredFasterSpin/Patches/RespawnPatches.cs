@@ -6,15 +6,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
 
-using XLShredLoader.Extensions.Components;
+using XLShredFasterSpin.Extensions.Components;
 
-namespace XLShredLoader.Patches {
+namespace XLShredFasterSpin.Patches {
     [HarmonyPatch(typeof(Respawn), "DoRespawn")]
     static class Respawn_DoRespawn_Patch {
 
         static void Prefix(Respawn __instance, bool ____canPress) {
-            if (____canPress && !__instance.respawning) {
-                PlayerControllerData.Instance.resetSpinVelocity();
+            if (Main.enabled) {
+                if (____canPress && !__instance.respawning) {
+                    PlayerControllerData.Instance.resetSpinVelocity();
+                }
             }
         }
     }
@@ -23,7 +25,9 @@ namespace XLShredLoader.Patches {
     static class Respawn_EndRespawning_Patch {
 
         static void Prefix() {
-            PlayerControllerData.Instance.resetSpinVelocity();
+            if (Main.enabled) {
+                PlayerControllerData.Instance.resetSpinVelocity();
+            }
         }
     }
 }

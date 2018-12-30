@@ -16,9 +16,6 @@ namespace XLShredLoader
 
         public bool realisticFlipTricks = false;
         public bool fixedSwitchFlipPositions = false;
-        public bool grindSpinVelocityEnabled = false;
-        public bool spinVelocityEnabled = false;
-        public float timeScaleTarget = 1f;
 
         private float _customPopForce = 3f;
         private float _customPushForce = 8f;
@@ -85,7 +82,6 @@ namespace XLShredLoader
 
             ModMenu.Instance.gameObject.AddComponent<ModMenuXLLoader>();
 
-            PlayerController.Instance.gameObject.AddComponent<PlayerControllerData>();
             CameraControllerData cameraControllerData = PlayerController.Instance.cameraController.gameObject.AddComponent<CameraControllerData>();
             cameraControllerData.cameraController = PlayerController.Instance.cameraController;
 

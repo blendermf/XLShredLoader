@@ -1,0 +1,10 @@
+{
+  "Id": "XLShredFasterSpin",
+  "DisplayName": "XL Shred Faster Spin",
+  "Author": "blendermf",
+  "Version": "0.0.1",
+  "ManagerVersion": "0.12.3",
+  "Requirements": [ "XLShredMenu-0.0.1" ],
+  "AssemblyName": "XLShredFasterSpin.dll",
+  "EntryMethod": "XLShredFasterSpin.Main.Load"
+}

@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLShredFixedSlowmo", "XLShr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLShredAutoSlowmo", "XLShredAutoSlowmo\XLShredAutoSlowmo.csproj", "{19192B0D-5B5B-44DF-A10F-CFDFA2E00E5D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLShredFasterSpin", "XLShredFasterSpin\XLShredFasterSpin.csproj", "{D89910DF-3D84-4581-A7A8-5CC2B35B8A62}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{19192B0D-5B5B-44DF-A10F-CFDFA2E00E5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19192B0D-5B5B-44DF-A10F-CFDFA2E00E5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19192B0D-5B5B-44DF-A10F-CFDFA2E00E5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D89910DF-3D84-4581-A7A8-5CC2B35B8A62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D89910DF-3D84-4581-A7A8-5CC2B35B8A62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D89910DF-3D84-4581-A7A8-5CC2B35B8A62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D89910DF-3D84-4581-A7A8-5CC2B35B8A62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

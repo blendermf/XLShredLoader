@@ -2,7 +2,7 @@
 using Harmony12;
 using System;
 
-namespace XLShredLoader.Extensions {
+namespace XLShredFasterSpin.Extensions {
 
     using Components;
     public static class PlayerControllerExtensions {
@@ -17,7 +17,7 @@ namespace XLShredLoader.Extensions {
                     ob.boardController.AddTurnTorque(-(p_value / 5f));
                     return;
                 case InputController.TurningMode.InAir:
-                    if (Main.settings.spinVelocityEnabled) {
+                    if (Main.settings.spinVelocityEnabled && Main.enabled) {
                         ob.skaterController.AddTurnTorque(-p_value + PlayerControllerData.Instance.getSpinVelocity());
                         PlayerControllerData.Instance.addSpinVelocity("left");
                     } else {
@@ -56,7 +56,7 @@ namespace XLShredLoader.Extensions {
                     ob.boardController.AddTurnTorque(p_value / 5f);
                     return;
                 case InputController.TurningMode.InAir:
-                    if (Main.settings.spinVelocityEnabled) {
+                    if (Main.settings.spinVelocityEnabled && Main.enabled) {
                         ob.skaterController.AddTurnTorque(p_value + PlayerControllerData.Instance.getSpinVelocity());
                         PlayerControllerData.Instance.addSpinVelocity("right");
                         return;

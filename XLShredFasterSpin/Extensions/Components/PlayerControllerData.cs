@@ -2,7 +2,7 @@
 using System;
 
 
-namespace XLShredLoader.Extensions.Components {
+namespace XLShredFasterSpin.Extensions.Components {
 
     public class PlayerControllerData : MonoBehaviour {
 
