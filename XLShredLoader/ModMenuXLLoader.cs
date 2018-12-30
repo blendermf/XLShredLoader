@@ -43,8 +43,7 @@ namespace XLShredLoader {
             uiBoxFigzyy.AddLabel("Page UP/DOWN - Adjust Push Speed", ModUIBox.Side.left, () => Main.enabled);
             uiBoxFigzyy.AddLabel("+/- - Adjust Pop Force", ModUIBox.Side.right, () => Main.enabled);
 
-            ModUIBox uiBoxKubas = ModMenu.Instance.RegisterModMaker("com.kubas121", "kubas121");
-            uiBoxKubas.AddLabel("S - Enable Automatic Slow Motion", ModUIBox.Side.left, () => Main.enabled);
+
 
            ModUIBox uiBoxSalty = ModMenu.Instance.RegisterModMaker("com.salty", "Salty");
             uiBoxSalty.AddCustom(() => {
@@ -223,14 +222,6 @@ namespace XLShredLoader {
                 ModMenu.Instance.ShowMessage("Push Force: " + string.Format("{0:0.0}", Main.settings.customPushForce) + " Default: 8.0");
             });
 
-            ModMenu.Instance.KeyPress(KeyCode.S, 0.2f, () => {
-                Main.settings.autoSlowmo = !Main.settings.autoSlowmo;
-                if (Main.settings.autoSlowmo) {
-                    ModMenu.Instance.ShowMessage("Automatic Slow Motion: ON");
-                } else {
-                    ModMenu.Instance.ShowMessage("Automatic Slow Motion: OFF");
-                }
-            });
 
             ModMenu.Instance.KeyPress(KeyCode.C, 0.2f, () => {
                 Main.settings.ToggleCameraModActive();
@@ -276,16 +267,6 @@ namespace XLShredLoader {
                     ModMenu.Instance.ShowMessage("Realistic Flip Tricks: DEACTIVATED");
                 }
             });
-
-
-
-            if (Main.settings.autoSlowmo) {
-                if (!PlayerController.Instance.boardController.AllDown) {
-                    ModMenu.Instance.timeScaleTarget = 0.6f;
-                } else {
-                    ModMenu.Instance.timeScaleTarget = 1f;
-                }
-            }
 
         }
     }

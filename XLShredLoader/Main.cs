@@ -18,7 +18,6 @@ namespace XLShredLoader
         public bool fixedSwitchFlipPositions = false;
         public bool grindSpinVelocityEnabled = false;
         public bool spinVelocityEnabled = false;
-        public bool autoSlowmo = false;
         public float timeScaleTarget = 1f;
 
         private float _customPopForce = 3f;
