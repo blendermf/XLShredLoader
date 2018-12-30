@@ -8,8 +8,8 @@ namespace XLShredFasterSpin {
 
         public void Start() {
             ModUIBox uiBoxRafahel = ModMenu.Instance.RegisterModMaker("com.rafahel_mello", "Rafahel Mello");
-            uiBoxRafahel.AddLabel("G - Toggle Faster Grind Spin", ModUIBox.Side.left, () => Main.enabled);
-            uiBoxRafahel.AddLabel("L - Toggle Faster Body Spin", ModUIBox.Side.right, () => Main.enabled);
+            uiBoxRafahel.AddLabel("G - Toggle Faster Grind Spin", ModUIBox.Side.left, () => Main.enabled, 2);
+            uiBoxRafahel.AddLabel("L - Toggle Faster Body Spin", ModUIBox.Side.right, () => Main.enabled, 2);
         }
 
         public void Update() {

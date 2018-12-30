@@ -6,10 +6,10 @@ using System.Linq;
 using System.Reflection.Emit;
 using System;
 
-using XLShredLoader.Extensions;
-using XLShredLoader.Extensions.Components;
+using XLShredDynamicCamera.Extensions;
+using XLShredDynamicCamera.Extensions.Components;
 
-namespace XLShredLoader.Patches {
+namespace XLShredDynamicCamera.Patches {
 
     [HarmonyPatch(typeof(CameraController), "MoveCameraToPlayer")]
     static class CameraController_MoveCameraToPlayer_Patch {

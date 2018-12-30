@@ -3,7 +3,7 @@ using Harmony12;
 using System;
 using System.Reflection;
 
-namespace XLShredLoader.Extensions.Components {
+namespace XLShredDynamicCamera.Extensions.Components {
 
     public class CameraControllerData : MonoBehaviour {
 
@@ -34,11 +34,10 @@ namespace XLShredLoader.Extensions.Components {
 
         public void adjustCameraToGrind(bool backside) {
             
-            if (!Main.settings.GetCameraModActive()) {
+            if (!Main.settings.GetCameraModActive() || !Main.enabled) {
                 return;
             }
-
-            Console.WriteLine("Camera Controller: " + cameraController);
+            
             this.inGrindCamera = true;
             if (SettingsManager.Instance.stance == SettingsManager.Stance.Goofy) {
                 if (PlayerController.Instance.IsSwitch) {
@@ -91,7 +90,7 @@ namespace XLShredLoader.Extensions.Components {
 
         public void ResetGrindCamera() {
          
-            if (!Main.settings.GetCameraModActive()) {
+            if (!Main.settings.GetCameraModActive() || !Main.enabled) {
                 return;
             }
 
@@ -121,7 +120,7 @@ namespace XLShredLoader.Extensions.Components {
         }
 
         public void ChangeCameraToFront() {
-            if (!this.inGrindCamera && Main.settings.GetCameraModActive()) {
+            if (!this.inGrindCamera && Main.settings.GetCameraModActive() && Main.enabled) {
 
                 if (PlayerController.Instance.IsSwitch && SettingsManager.Instance.stance == SettingsManager.Stance.Goofy) {
                     _actualCam_pos.Value = Vector3.Lerp(_actualCam_pos.Value, _rightTopPos_pos.Value, Time.fixedDeltaTime * 2f);

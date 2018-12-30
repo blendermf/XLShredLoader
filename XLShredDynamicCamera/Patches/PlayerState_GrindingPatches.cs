@@ -6,10 +6,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
 
-using XLShredLoader.Extensions;
-using XLShredLoader.Extensions.Components;
+using XLShredDynamicCamera.Extensions;
+using XLShredDynamicCamera.Extensions.Components;
 
-namespace XLShredLoader.Patches {
+namespace XLShredDynamicCamera.Patches {
     [HarmonyPatch(typeof(PlayerState_Grinding), "Enter")]
     static class PlayerState_Grinding_Enter_Patch {
 

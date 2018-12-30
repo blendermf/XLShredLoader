@@ -8,8 +8,8 @@ namespace XLShredFlipMods {
 
         public void Start() {
             ModUIBox uiBoxRafahel = ModMenu.Instance.RegisterModMaker("com.rafahel_mello", "Rafahel Mello");
-            uiBoxRafahel.AddLabel("M - Toggle Switch Flip Trick Positions", ModUIBox.Side.right, () => Main.enabled);
-            uiBoxRafahel.AddLabel("N - Toggle Realistic Flip Tricks Mode", ModUIBox.Side.left, () => Main.enabled);
+            uiBoxRafahel.AddLabel("M - Toggle Switch Flip Trick Positions", ModUIBox.Side.right, () => Main.enabled, 1);
+            uiBoxRafahel.AddLabel("N - Toggle Realistic Flip Tricks Mode", ModUIBox.Side.left, () => Main.enabled, 1);
         }
 
         public void Update() {

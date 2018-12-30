@@ -6,8 +6,6 @@ using System.Text.RegularExpressions;
 
 namespace XLShredLoader {
 
-    using Extensions.Components;
-
     public class ModMenuXLLoader : MonoBehaviour {
 
         private bool showSpawnMenu = false;
@@ -32,11 +30,9 @@ namespace XLShredLoader {
                 "Hubba"
             };
 
-            ModUIBox uiBoxRafahel = ModMenu.Instance.RegisterModMaker("com.rafahel_mello", "Rafahel Mello");
-            uiBoxRafahel.AddLabel("C - Toggle Dynamic Camera", ModUIBox.Side.left, () => Main.enabled);
+
 
             ModUIBox uiBoxFigzyy = ModMenu.Instance.RegisterModMaker("com.figzy","*Figzyy");
-            uiBoxFigzyy.AddLabel("Page UP/DOWN - Adjust Push Speed", ModUIBox.Side.left, () => Main.enabled);
             uiBoxFigzyy.AddLabel("+/- - Adjust Pop Force", ModUIBox.Side.right, () => Main.enabled);
 
 
@@ -190,46 +186,6 @@ namespace XLShredLoader {
                 }
                 ModMenu.Instance.ShowMessage("Pop Force: " + string.Format("{0:0.0}", Main.settings.customPopForce) + " Default: 3.0");
             });
-
-            ModMenu.Instance.KeyPress(KeyCode.PageUp, 0.1f, () => {
-                if (Main.settings.customPushForce <= 300f) {
-                    Main.settings.customPushForce += 0.2f;
-                }
-                ModMenu.Instance.ShowMessage("Push Force: " + string.Format("{0:0.0}", Main.settings.customPushForce) + " Default: 8.0");
-            });
-
-            ModMenu.Instance.KeyPress(KeyCode.Delete, 0.1f, () => {
-                Main.settings.customPushForce -= 10f;
-
-                ModMenu.Instance.ShowMessage("Push Force: " + string.Format("{0:0.0}", Main.settings.customPushForce) + " Default: 8.0");
-            });
-
-            ModMenu.Instance.KeyPress(KeyCode.Insert, 0.1f, () => {
-                Main.settings.customPushForce += 10f;
-
-                ModMenu.Instance.ShowMessage("Push Force: " + string.Format("{0:0.0}", Main.settings.customPushForce) + " Default: 8.0");
-            });
-
-            ModMenu.Instance.KeyPress(KeyCode.PageDown, 0.1f, () => {
-                if (Main.settings.customPushForce >= 1f) {
-                    Main.settings.customPushForce -= 0.2f;
-
-                }
-                ModMenu.Instance.ShowMessage("Push Force: " + string.Format("{0:0.0}", Main.settings.customPushForce) + " Default: 8.0");
-            });
-
-
-            ModMenu.Instance.KeyPress(KeyCode.C, 0.2f, () => {
-                Main.settings.ToggleCameraModActive();
-                if (Main.settings.GetCameraModActive()) {
-                    ModMenu.Instance.ShowMessage("Dynamic Camera: ON");
-                } else {
-                    ModMenu.Instance.ShowMessage("Dynamic Camera: OFF");
-                }
-            });
-
-
-
         }
     }
 }

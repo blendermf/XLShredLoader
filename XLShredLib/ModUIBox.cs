@@ -22,12 +22,14 @@ namespace XLShredLib {
         public struct ModUILabel {
             public String text;
             public IsEnabled isEnabled;
+            public uint priority;
         }
 
         public struct ModUICustom {
             public delegate void OnGUI();
             public OnGUI onGUI;
             public IsEnabled isEnabled;
+            public uint priority;
         }
 
         public enum Side {
@@ -36,11 +38,12 @@ namespace XLShredLib {
         }
 
         
-        public void AddLabel(String text, Side side, IsEnabled isEnabled) {
+        public void AddLabel(String text, Side side, IsEnabled isEnabled, uint priority = 0) {
 
             ModUILabel uiLabel = new ModUILabel {
                 text = text,
-                isEnabled = isEnabled
+                isEnabled = isEnabled,
+                priority = priority
             };
             
             if (side == Side.left) {
@@ -50,10 +53,11 @@ namespace XLShredLib {
             }
         }
 
-        public void AddCustom(ModUICustom.OnGUI onGUI, IsEnabled isEnabled) {
+        public void AddCustom(ModUICustom.OnGUI onGUI, IsEnabled isEnabled, uint priority = 0) {
             customs.Add(new ModUICustom {
                 onGUI = onGUI,
-                isEnabled = isEnabled
+                isEnabled = isEnabled,
+                priority = priority
             });
         }
     }

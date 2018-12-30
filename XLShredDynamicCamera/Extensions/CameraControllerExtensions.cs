@@ -2,7 +2,7 @@
 using Harmony12;
 using System;
 
-namespace XLShredLoader.Extensions {
+namespace XLShredDynamicCamera.Extensions {
 
     using Components;
 

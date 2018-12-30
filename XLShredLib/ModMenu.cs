@@ -147,10 +147,12 @@ namespace XLShredLib {
 
             foreach (ModUIBox uiBox in uiBoxes) {
                 int labelLeftCount = Enumerable.Count<ModUIBox.ModUILabel>(uiBox.labelsLeft, (l) => l.isEnabled());
-                int labelRightCount = Enumerable.Count<ModUIBox.ModUILabel>(uiBox.labelsRight, (l) => l.isEnabled()); ;
-                int customCount = Enumerable.Count<ModUIBox.ModUICustom>(uiBox.customs, (l) => l.isEnabled()); ;
+                int labelRightCount = Enumerable.Count<ModUIBox.ModUILabel>(uiBox.labelsRight, (l) => l.isEnabled());
+                int customCount = Enumerable.Count<ModUIBox.ModUICustom>(uiBox.customs, (l) => l.isEnabled());
 
-                Console.WriteLine(labelLeftCount + labelRightCount + customCount);
+                uiBox.labelsLeft.Sort((lbl1, lbl2) => lbl2.priority.CompareTo(lbl1.priority));
+                uiBox.labelsRight.Sort((lbl1, lbl2) => lbl2.priority.CompareTo(lbl1.priority));
+                uiBox.customs.Sort((ctm1, ctm2) => ctm2.priority.CompareTo(ctm1.priority));
 
                 if (labelLeftCount + labelRightCount + customCount > 0) {
                     GUILayout.BeginVertical(String.Format("Modifications by {0}", uiBox.modMaker), "Box");

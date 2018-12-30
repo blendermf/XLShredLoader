@@ -4,9 +4,6 @@ using System.Reflection;
 using UnityModManagerNet;
 using System;
 
-using XLShredLoader.Extensions;
-using XLShredLoader.Extensions.Components;
-using XLShredLoader.Patches;
 using XLShredLib;
 
 namespace XLShredLoader
@@ -17,12 +14,11 @@ namespace XLShredLoader
 
 
         private float _customPopForce = 3f;
-        private float _customPushForce = 8f;
-        private bool _cameraModActive = false;
+        
+        
 
        public Settings() : base() {
             PlayerController.Instance.popForce = _customPopForce;
-            PlayerController.Instance.skaterController.pushForce = _customPushForce;
        }
 
         public float customPopForce {
@@ -35,29 +31,9 @@ namespace XLShredLoader
             }
         }
 
-        public float customPushForce {
-            get {
-                return this._customPushForce;
-            }
-            set {
-                this._customPushForce = value;
-                PlayerController.Instance.skaterController.pushForce = value;
-                PlayerController.Instance.topSpeed = 7f + ((value - 8f) * 0.5f);
-            }
-        }
 
-        public bool GetCameraModActive() {
-            return _cameraModActive;
-        }
 
-        public void ToggleCameraModActive() {
-            _cameraModActive = !_cameraModActive;
-            if (!_cameraModActive) {
-                if (PlayerController.Instance != null) {
-                    PlayerController.Instance.cameraController.GetExtensionComponent().inGrindCamera = false;
-                }
-            }
-        }
+
 
         public override void Save(UnityModManager.ModEntry modEntry) {
             Save(modEntry);
@@ -80,9 +56,6 @@ namespace XLShredLoader
             modEntry.OnSaveGUI = OnSaveGUI;
 
             ModMenu.Instance.gameObject.AddComponent<ModMenuXLLoader>();
-
-            CameraControllerData cameraControllerData = PlayerController.Instance.cameraController.gameObject.AddComponent<CameraControllerData>();
-            cameraControllerData.cameraController = PlayerController.Instance.cameraController;
 
             return true;
         }
