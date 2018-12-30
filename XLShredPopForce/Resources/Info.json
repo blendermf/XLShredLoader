@@ -1,0 +1,10 @@
+{
+  "Id": "XLShredPopForce",
+  "DisplayName": "XL Shred Pop Force",
+  "Author": "blendermf",
+  "Version": "0.0.1",
+  "ManagerVersion": "0.12.3",
+  "Requirements": [ "XLShredMenu-0.0.1" ],
+  "AssemblyName": "XLShredPopForce.dll",
+  "EntryMethod": "XLShredPopForce.Main.Load"
+}

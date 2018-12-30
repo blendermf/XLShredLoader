@@ -58,4 +58,8 @@
   <PropertyGroup>
     <PreBuildEvent>powershell.exe -ExecutionPolicy Unrestricted -File "$(SolutionDir)pre_build.ps1" -SolutionDir "$(SolutionDir)\"</PreBuildEvent>
   </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(TargetPath)" "$(SolutionDir)XLShredMenuMod\$(OutDir)" /F /Y
+xcopy "$(TargetDir)$(TargetName).pdb" "$(SolutionDir)XLShredMenuMod\$(OutDir)" /F /Y</PostBuildEvent>
+  </PropertyGroup>
 </Project>

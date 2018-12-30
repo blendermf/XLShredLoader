@@ -4,9 +4,9 @@ using XLShredLib;
 using System;
 using System.Text.RegularExpressions;
 
-namespace XLShredLoader {
+namespace XLShredObjectSpawner {
 
-    public class ModMenuXLLoader : MonoBehaviour {
+    public class XLShredObjectSpawner : MonoBehaviour {
 
         private bool showSpawnMenu = false;
         private bool showPlacementMenu = false;
@@ -30,13 +30,6 @@ namespace XLShredLoader {
                 "Hubba"
             };
 
-
-
-            ModUIBox uiBoxFigzyy = ModMenu.Instance.RegisterModMaker("com.figzy","*Figzyy");
-            uiBoxFigzyy.AddLabel("+/- - Adjust Pop Force", ModUIBox.Side.right, () => Main.enabled);
-
-
-
            ModUIBox uiBoxSalty = ModMenu.Instance.RegisterModMaker("com.salty", "Salty");
             uiBoxSalty.AddCustom(() => {
                 if (GUILayout.Button("Open Map Object Spawner", GUILayout.Height(30f))) {
@@ -44,10 +37,6 @@ namespace XLShredLoader {
                     this.showSpawnMenu = true;
                 }
             }, () => Main.enabled);
-        }
-
-        public void Update() {
-            this.processKeyPresses();
         }
 
         private void OnGUI() {
@@ -158,34 +147,6 @@ namespace XLShredLoader {
         
         private string createDisplayName(string name) {
             return Regex.Replace(name.Replace(" ", ""), "([a-z])([A-Z])", "$1 $2");
-        }
-
-        private void processKeyPresses() {
-            ModMenu.Instance.KeyPress(KeyCode.F8, 0.15f, () => {
-                if (!this.showPlacementMenu) {
-                    if (this.showSpawnMenu) {
-                        this.showSpawnMenu = false;
-                    } else {
-                        ModMenu.Instance.showMenu = !ModMenu.Instance.showMenu;
-                    }
-                } else {
-                    ModMenu.Instance.ShowMessage("Finish placing your object.");
-                }
-            });
-
-            ModMenu.Instance.KeyPress(KeyCode.Equals, 0.1f, () => {
-                if (Main.settings.customPopForce <= 7.8f) {
-                    Main.settings.customPopForce += 0.2f;
-                }
-                ModMenu.Instance.ShowMessage("Pop Force: " + string.Format("{0:0.0}", Main.settings.customPopForce) + " Default: 3.0");
-            });
-
-            ModMenu.Instance.KeyPress(KeyCode.Minus, 0.1f, () => {
-                if (Main.settings.customPopForce >= 1.5f) {
-                    Main.settings.customPopForce -= 0.2f;
-                }
-                ModMenu.Instance.ShowMessage("Pop Force: " + string.Format("{0:0.0}", Main.settings.customPopForce) + " Default: 3.0");
-            });
         }
     }
 }

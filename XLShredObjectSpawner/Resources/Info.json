@@ -1,0 +1,10 @@
+{
+  "Id": "XLShredObjectSpawner",
+  "DisplayName": "XL Shred Object Spawner",
+  "Author": "blendermf",
+  "Version": "0.0.1",
+  "ManagerVersion": "0.12.3",
+  "Requirements": [ "XLShredMenu-0.0.1" ],
+  "AssemblyName": "XLShredObjectSpawner.dll",
+  "EntryMethod": "XLShredObjectSpawner.Main.Load"
+}
