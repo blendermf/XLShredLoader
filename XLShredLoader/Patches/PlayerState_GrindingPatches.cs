@@ -14,7 +14,6 @@ namespace XLShredLoader.Patches {
     static class PlayerState_Grinding_Enter_Patch {
 
         static void Prefix(ref float ____popForce) {
-            ____popForce = Main.settings.customGrindPopForce;
             PlayerControllerData.Instance.resetSpinVelocity();
             PlayerController.Instance.cameraController.GetExtensionComponent().adjustCameraToGrind(PlayerController.Instance.IsBacksideGrind());
         }

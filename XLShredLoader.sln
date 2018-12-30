@@ -8,8 +8,18 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BF66796B-46EC-4B28-AA1A-91E0C76A74CD}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
-		Info.json = Info.json
+		config.json = config.json
+		post_build.ps1 = post_build.ps1
+		pre_build.ps1 = pre_build.ps1
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLShredLib", "XLShredLib\XLShredLib.csproj", "{421325E5-D304-4B9B-B207-E511E4423F56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLShredMenuMod", "XLShredMenuMod\XLShredMenuMod.csproj", "{1F40B834-E402-4DC0-8724-3C065F3BB83D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLShredCustomGrindManualPop", "XLShredCustomGrindManualPop\XLShredCustomGrindManualPop.csproj", "{75B64D0F-0148-4DE7-BFF9-4C729EA124CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLShredFixedSlowmo", "XLShredFixedSlowmo\XLShredFixedSlowmo.csproj", "{21E90463-16DD-48F0-B616-D4078554E3C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +31,22 @@ Global
 		{E17DFAF5-5ABD-4715-98B1-19B72039E732}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E17DFAF5-5ABD-4715-98B1-19B72039E732}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E17DFAF5-5ABD-4715-98B1-19B72039E732}.Release|Any CPU.Build.0 = Release|Any CPU
+		{421325E5-D304-4B9B-B207-E511E4423F56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{421325E5-D304-4B9B-B207-E511E4423F56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{421325E5-D304-4B9B-B207-E511E4423F56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{421325E5-D304-4B9B-B207-E511E4423F56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F40B834-E402-4DC0-8724-3C065F3BB83D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F40B834-E402-4DC0-8724-3C065F3BB83D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F40B834-E402-4DC0-8724-3C065F3BB83D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F40B834-E402-4DC0-8724-3C065F3BB83D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75B64D0F-0148-4DE7-BFF9-4C729EA124CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75B64D0F-0148-4DE7-BFF9-4C729EA124CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75B64D0F-0148-4DE7-BFF9-4C729EA124CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75B64D0F-0148-4DE7-BFF9-4C729EA124CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21E90463-16DD-48F0-B616-D4078554E3C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21E90463-16DD-48F0-B616-D4078554E3C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21E90463-16DD-48F0-B616-D4078554E3C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21E90463-16DD-48F0-B616-D4078554E3C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

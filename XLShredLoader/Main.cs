@@ -7,6 +7,7 @@ using System;
 using XLShredLoader.Extensions;
 using XLShredLoader.Extensions.Components;
 using XLShredLoader.Patches;
+using XLShredLib;
 
 namespace XLShredLoader
 {
@@ -15,12 +16,9 @@ namespace XLShredLoader
 
         public bool realisticFlipTricks = false;
         public bool fixedSwitchFlipPositions = false;
-        public float customGrindPopForce = 2f;
-        public float customManualPopForce = 2.5f;
         public bool grindSpinVelocityEnabled = false;
         public bool spinVelocityEnabled = false;
         public bool autoSlowmo = false;
-        public bool fixedSlowmo = false;
         public float timeScaleTarget = 1f;
 
         private float _customPopForce = 3f;
@@ -66,22 +64,6 @@ namespace XLShredLoader
             }
         }
 
-        public void IncreaseGrindPopForce() {
-           customGrindPopForce += 0.1f;
-        }
-
-        public void DecreaseGrindPopForce() {
-            customGrindPopForce -= 0.1f;
-        }
-
-        public void IncreaseManualPopForce() {
-            customManualPopForce += 0.1f;
-        }
-        
-        public void DecreaseManualPopForce() {
-            customManualPopForce -= 0.1f;
-        }
-
         public override void Save(UnityModManager.ModEntry modEntry) {
             Save(modEntry);
         }
@@ -100,10 +82,9 @@ namespace XLShredLoader
             harmony.PatchAll(Assembly.GetExecutingAssembly());
 
             modEntry.OnToggle = OnToggle;
+            modEntry.OnSaveGUI = OnSaveGUI;
 
-            modmenu = new GameObject();
-            modmenu.AddComponent<ModMenu>();
-            UnityEngine.Object.DontDestroyOnLoad(Main.modmenu);
+            ModMenu.Instance.gameObject.AddComponent<ModMenuXLLoader>();
 
             PlayerController.Instance.gameObject.AddComponent<PlayerControllerData>();
             CameraControllerData cameraControllerData = PlayerController.Instance.cameraController.gameObject.AddComponent<CameraControllerData>();

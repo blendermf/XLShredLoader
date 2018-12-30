@@ -1,0 +1,10 @@
+{
+  "Id": "XLShredMenu",
+  "DisplayName": "XL Shred Menu",
+  "Author": "blendermf",
+  "Version": "0.0.1",
+  "ManagerVersion": "0.12.3",
+  "Requirements": [],
+  "AssemblyName": "XLShredMenuMod.dll",
+  "EntryMethod": "XLShredMenuMod.Main.Load"
+}
