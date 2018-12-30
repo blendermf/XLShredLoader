@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
 
-using XLShredLoader.Extensions;
+using XLShredFlipMods.Extensions;
 
-namespace XLShredLoader.Patches {
+namespace XLShredFlipMods.Patches {
     
     [HarmonyPatch(typeof(BoardController), "Rotate")]
     static class BoardController_Rotate_Patch {

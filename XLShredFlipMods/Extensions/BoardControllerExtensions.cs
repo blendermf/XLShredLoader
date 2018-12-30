@@ -2,7 +2,7 @@
 using Harmony12;
 using System;
 
-namespace XLShredLoader.Extensions {
+namespace XLShredFlipMods.Extensions {
     public static class BoardControllerExtensions {
         public static void RealisticFlipTricks(this BoardController ob) {
             if (Main.settings.realisticFlipTricks && Main.enabled) {

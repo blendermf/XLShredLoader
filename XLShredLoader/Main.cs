@@ -14,8 +14,7 @@ namespace XLShredLoader
     [Serializable]
     public class Settings : UnityModManager.ModSettings {
 
-        public bool realisticFlipTricks = false;
-        public bool fixedSwitchFlipPositions = false;
+
 
         private float _customPopForce = 3f;
         private float _customPushForce = 8f;
