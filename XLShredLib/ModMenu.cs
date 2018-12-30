@@ -17,6 +17,9 @@ namespace XLShredLib {
         private float realtimeSinceStartup;
 
 
+        private Dictionary<String, Func<int>> shouldShowCursorFuncs = new Dictionary<string, Func<int>>();
+        private bool shouldShowCursor;
+
         private Dictionary<String, Func<float>> timeScaleTargets = new Dictionary<string, Func<float>>();
         private float timeScaleTarget = 1.0f;
 
@@ -68,9 +71,13 @@ namespace XLShredLib {
             timeScaleTargets[modid] = func;
         }
 
-        public ModUIBox RegisterModMaker(String identifier, String name) {
+        public void RegisterShowCursor(String modid, Func<int> func) {
+            shouldShowCursorFuncs[modid] = func;
+        }
+
+        public ModUIBox RegisterModMaker(String identifier, String name, int priority = 0) {
             if (!modMakers.ContainsKey(identifier)) {
-                ModUIBox uiBox = new ModUIBox(name);
+                ModUIBox uiBox = new ModUIBox(name, priority);
                 modMakers.Add(identifier, uiBox);
                 AddUIBox(uiBox);
                 return uiBox;
@@ -86,8 +93,11 @@ namespace XLShredLib {
                 this.showMenu = !this.showMenu;
             });
 
-            timeScaleTarget = Enumerable.Min<Func<float>>(timeScaleTargets.Values, (f) => f.Invoke());
-
+            if (timeScaleTargets.Any()) {
+                timeScaleTarget = Enumerable.Min<Func<float>>(timeScaleTargets.Values, (f) => f.Invoke());
+            } else {
+                timeScaleTarget = 1.0f;
+            }
             if (Math.Round((double)Time.timeScale, 1) != timeScaleTarget) {
                 Time.timeScale += (timeScaleTarget - Time.timeScale) * Time.deltaTime * 10f;
                 return;
@@ -126,7 +136,13 @@ namespace XLShredLib {
                 }
             }
 
-            if (!this.showMenu && !(UnityModManager.UI.Instance != null && UnityModManager.UI.Instance.Opened)) {
+            if (shouldShowCursorFuncs.Any()) {
+                shouldShowCursor = Enumerable.Max<Func<int>>(shouldShowCursorFuncs.Values, (f) => f.Invoke()) != 0;
+            } else {
+                shouldShowCursor = false;
+            }
+
+            if (!this.showMenu && !(UnityModManager.UI.Instance != null && UnityModManager.UI.Instance.Opened) && !shouldShowCursor) {
                 Cursor.visible = false;
                 return;
             }
@@ -144,6 +160,8 @@ namespace XLShredLib {
             GUI.DragWindow(new Rect(0, 0, 10000, 20));
 
             GUILayout.BeginVertical();
+
+            uiBoxes.Sort((box1, box2) => box2.priority.CompareTo(box1.priority));
 
             foreach (ModUIBox uiBox in uiBoxes) {
                 int labelLeftCount = Enumerable.Count<ModUIBox.ModUILabel>(uiBox.labelsLeft, (l) => l.isEnabled());
