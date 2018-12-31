@@ -6,6 +6,4 @@ $configContent = Get-Content ([io.path]::combine($SolutionDir, "config.json")) |
 
 $gameDirectory = $configContent.game_directory;
 
-New-Item -ItemType directory -Path ([io.path]::combine($SolutionDir , "references\")) -Force;
-
-robocopy ([io.path]::combine( $gameDirectory, "SkaterXL_Data\Managed")) ([io.path]::combine($SolutionDir , "references")) /MIR
+robocopy ([io.path]::combine( $gameDirectory, "SkaterXL_Data\Managed")) ([io.path]::combine($SolutionDir , "references")) "Assembly-CSharp.dll" "Assembly-CSharp-firstpass.dll" "0Harmony12.dll" "UnityEngine.dll" "UnityEngine.UI.dll" "UnityEngine.CoreModule.dll" "UnityEngine.IMGUIModule.dll" "UnityEngine.PhysicsModule.dll" "UnityEngine.AnimationModule.dll" "Rewired_Core.dll" /COPY:DAT /XF
