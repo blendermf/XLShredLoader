@@ -33,10 +33,11 @@ namespace XLShredObjectSpawner {
                 "Hubba"
             };
 
-           ModUIBox uiBoxSalty = ModMenu.Instance.RegisterModMaker("com.salty", "Salty", -1);
+            ModMenu.Instance.RegisterTempHideMenu(Main.modId, () => (showSpawnMenu || showPlacementMenu) ? 1 : 0);
+
+            ModUIBox uiBoxSalty = ModMenu.Instance.RegisterModMaker("com.salty", "Salty", -1);
             uiBoxSalty.AddCustom(() => {
                 if (GUILayout.Button("Open Map Object Spawner", GUILayout.Height(30f))) {
-                    ModMenu.Instance.showMenu = false;
                     this.showSpawnMenu = true;
                 }
             }, () => Main.enabled);
@@ -206,14 +207,13 @@ namespace XLShredObjectSpawner {
             if (GUILayout.Button("DONE", GUILayout.Height(50))) {
                 this.objectBeingPlaced = null;
                 this.showPlacementMenu = false;
-                ModMenu.Instance.showMenu = false;
+     
                 this.showSpawnMenu = true;
             }
             if (GUILayout.Button("CANCEL/DELETE", GUILayout.Height(50))) {
                 UnityEngine.Object.Destroy(this.objectBeingPlaced);
                 this.objectBeingPlaced = null;
                 this.showPlacementMenu = false;
-                ModMenu.Instance.showMenu = false;
                 this.showSpawnMenu = true;
             }
             GUILayout.EndVertical();
@@ -245,7 +245,6 @@ namespace XLShredObjectSpawner {
                 Vector3 position = GameObject.Find("GripTape").transform.position;
                 gameObject2.transform.position = new Vector3(position.x, position.y, position.z);
                 this.objectBeingPlaced = gameObject2;
-                ModMenu.Instance.showMenu = false;
                 this.showSpawnMenu = false;
                 this.showPlacementMenu = true;
                 return;

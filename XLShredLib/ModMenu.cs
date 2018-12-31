@@ -9,19 +9,20 @@ namespace XLShredLib {
     
 
     public class ModMenu : MonoBehaviour {
-        public bool showMenu = false;
-
+        private bool showMenu = false;
         private ModMenu.TmpMessage tmpMessage;
 
         private float btnLastPressed;
         private float realtimeSinceStartup;
-
 
         private Dictionary<String, Func<int>> shouldShowCursorFuncs = new Dictionary<string, Func<int>>();
         private bool shouldShowCursor;
 
         private Dictionary<String, Func<float>> timeScaleTargets = new Dictionary<string, Func<float>>();
         private float timeScaleTarget = 1.0f;
+
+        private Dictionary<String, Func<int>> tempHideFuncs = new Dictionary<string, Func<int>>();
+        private bool tempHideMenu = false;
 
         public static readonly GUIStyle fontLarge;
         public static readonly GUIStyle fontMed;
@@ -73,6 +74,10 @@ namespace XLShredLib {
 
         public void RegisterShowCursor(String modid, Func<int> func) {
             shouldShowCursorFuncs[modid] = func;
+        }
+
+        public void RegisterTempHideMenu(String modid, Func<int> func) {
+            tempHideFuncs[modid] = func;
         }
 
         public ModUIBox RegisterModMaker(String identifier, String name, int priority = 0) {
@@ -150,7 +155,13 @@ namespace XLShredLib {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
 
-            if (this.showMenu) {
+            if (tempHideFuncs.Any()) {
+                tempHideMenu = Enumerable.Max<Func<int>>(tempHideFuncs.Values, (f) => f.Invoke()) != 0;
+            } else {
+                tempHideMenu = false;
+            }
+
+            if (this.showMenu && !tempHideMenu) {
                 windowRect.height = 0;
                 windowRect = GUILayout.Window(1, windowRect, renderWindow, "Skater XL Shred Menu", GUILayout.Width(600));
             }
