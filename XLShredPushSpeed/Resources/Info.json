@@ -1,7 +1,7 @@
 {
   "Id": "XLShredPushSpeed",
   "DisplayName": "XL Shred Push Speed",
-  "Author": "blendermf",
+  "Author": "*Figzyy (adapted by blendermf)",
   "Version": "0.0.1",
   "ManagerVersion": "0.12.3",
   "Requirements": [ "XLShredMenu-0.0.1" ],
