@@ -40,7 +40,7 @@ Follow the installation steps for installing the Mod Loader (but not any of the 
 Clone the repo:
 
 ```
-git clone https://github.com/xmrdsc/XLShredMenu.git
+git clone https://github.com/blendermf/XLShredLoader.git
 ```
 
 Open the solution (.sln) file.
