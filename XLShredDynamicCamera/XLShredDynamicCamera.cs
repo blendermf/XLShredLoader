@@ -7,7 +7,7 @@ namespace XLShredDynamicCamera {
     class XLShredDynamicCamera : MonoBehaviour {
 
         public void Start() {
-            ModUIBox uiBoxRafahel = ModMenu.Instance.RegisterModMaker("com.rafahel_mello", "Rafahel Mello");
+            ModUIBox uiBoxRafahel = ModMenu.Instance.RegisterModMaker("rafahel_mello", "Rafahel Mello");
             uiBoxRafahel.AddLabel("C - Toggle Dynamic Camera", ModUIBox.Side.left, () => Main.enabled, 0);
         }
 

@@ -1,10 +1,10 @@
 {
-  "Id": "XLShredPopForce",
+  "Id": "figzy.XLShredPopForce",
   "DisplayName": "XL Shred Pop Force",
   "Author": "*Figzyy (adapted by blendermf)",
-  "Version": "0.0.1",
+  "Version": "0.0.2",
   "ManagerVersion": "0.12.3",
-  "Requirements": [ "XLShredMenu-0.0.1" ],
+  "Requirements": [ "blendermf.XLShredMenu-0.0.2" ],
   "AssemblyName": "XLShredPopForce.dll",
   "EntryMethod": "XLShredPopForce.Main.Load"
 }

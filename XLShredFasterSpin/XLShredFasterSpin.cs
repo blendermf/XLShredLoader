@@ -7,7 +7,7 @@ namespace XLShredFasterSpin {
     class XLShredFasterSpin : MonoBehaviour {
 
         public void Start() {
-            ModUIBox uiBoxRafahel = ModMenu.Instance.RegisterModMaker("com.rafahel_mello", "Rafahel Mello");
+            ModUIBox uiBoxRafahel = ModMenu.Instance.RegisterModMaker("rafahel_mello", "Rafahel Mello");
             uiBoxRafahel.AddLabel("G - Toggle Faster Grind Spin", ModUIBox.Side.left, () => Main.enabled, 2);
             uiBoxRafahel.AddLabel("L - Toggle Faster Body Spin", ModUIBox.Side.right, () => Main.enabled, 2);
         }

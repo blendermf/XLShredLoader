@@ -2,11 +2,19 @@
 using XLShredLib;
 
 using System;
+using System.Linq;
+
+using UnityModManagerNet;
+using System.Reflection;
 
 namespace XLShredFixedSlowmo {
     class XLShredFixedSlowmo : MonoBehaviour {
+        private UnityModManager.ModEntry replayModEntry = null;
+        private object replayModInstance = null;
+        private FieldInfo replayEditorActiveField = null;
+
         public void Start() {
-            ModUIBox uiBoxKlepto = ModMenu.Instance.RegisterModMaker("com.commander_klepto", "Commander Klepto");
+            ModUIBox uiBoxKlepto = ModMenu.Instance.RegisterModMaker("commander_klepto", "Commander Klepto");
             uiBoxKlepto.AddLabel("LB - Enable Slow Motion", ModUIBox.Side.right, () => Main.enabled);
 
             ModMenu.Instance.RegisterTimeScaleTarget(Main.modId, () => {
@@ -18,9 +26,21 @@ namespace XLShredFixedSlowmo {
         }
 
         public void Update() {
-            if (PlayerController.Instance.inputController.player.GetButtonSinglePressDown("LB")) {
-                if (Main.enabled) {
-                    Main.settings.fixedSlowmo = !Main.settings.fixedSlowmo;
+            if (replayModInstance == null) {
+                replayModInstance = ModUtils.GetModObject("kiwi.ReplayModLoader", "ReplayModLoader.ReplayMod", out replayModEntry,
+                    (t) => t.GetProperty("Instance").GetGetMethod().Invoke(null, null)
+                );
+
+                replayEditorActiveField = replayModInstance?.GetType().GetField("isEditorActive");
+            }
+
+            bool replayEditorActive = (replayEditorActiveField == null) ? false : replayModEntry.Enabled && (bool)replayEditorActiveField.GetValue(replayModInstance);
+
+            if (!replayEditorActive) {
+                if (PlayerController.Instance.inputController.player.GetButtonSinglePressDown("LB")) {
+                    if (Main.enabled) {
+                        Main.settings.fixedSlowmo = !Main.settings.fixedSlowmo;
+                    }
                 }
             }
         }

@@ -35,7 +35,7 @@ namespace XLShredObjectSpawner {
 
             ModMenu.Instance.RegisterTempHideMenu(Main.modId, () => (showSpawnMenu || showPlacementMenu) ? 1 : 0);
 
-            ModUIBox uiBoxSalty = ModMenu.Instance.RegisterModMaker("com.salty", "Salty", -1);
+            ModUIBox uiBoxSalty = ModMenu.Instance.RegisterModMaker("salty", "Salty", -1);
             uiBoxSalty.AddCustom(() => {
                 if (GUILayout.Button("Open Map Object Spawner", GUILayout.Height(30f))) {
                     this.showSpawnMenu = true;

@@ -6,7 +6,7 @@ using System;
 namespace XLShredPushSpeed {
     class XLShredPushSpeed : MonoBehaviour {
         public void Start() {
-            ModUIBox uiBoxFigzyy = ModMenu.Instance.RegisterModMaker("com.figzy", "*Figzyy");
+            ModUIBox uiBoxFigzyy = ModMenu.Instance.RegisterModMaker("figzy", "*Figzyy");
             uiBoxFigzyy.AddLabel("Page UP/DOWN - Adjust Push Speed", ModUIBox.Side.left, () => Main.enabled);
         }
 

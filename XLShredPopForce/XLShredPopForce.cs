@@ -6,7 +6,7 @@ using System;
 namespace XLShredPopForce {
     class XLShredPopForce : MonoBehaviour {
         public void Start() {
-            ModUIBox uiBoxFigzyy = ModMenu.Instance.RegisterModMaker("com.figzy", "*Figzyy");
+            ModUIBox uiBoxFigzyy = ModMenu.Instance.RegisterModMaker("figzy", "*Figzyy");
             uiBoxFigzyy.AddLabel("+/- - Adjust Pop Force", ModUIBox.Side.right, () => Main.enabled);
         }
 

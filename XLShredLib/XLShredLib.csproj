@@ -79,6 +79,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Utils.cs" />
     <Compile Include="ModMenu.cs" />
     <Compile Include="ModUIBox.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

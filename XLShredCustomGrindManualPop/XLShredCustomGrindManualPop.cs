@@ -7,7 +7,7 @@ namespace XLShredCustomGrindManualPop {
     class XLShredCustomGrindManualPop : MonoBehaviour {
 
         public void Start() {
-            ModUIBox uiBoxKlepto = ModMenu.Instance.RegisterModMaker("com.commander_klepto", "Commander Klepto");
+            ModUIBox uiBoxKlepto = ModMenu.Instance.RegisterModMaker("commander_klepto", "Commander Klepto");
             uiBoxKlepto.AddLabel("UP/DOWN - Adjust Grind Pop Force", ModUIBox.Side.left, () => { return Main.enabled; });
             uiBoxKlepto.AddLabel("LEFT/RIGHT - Adjust Manual Pop Force", ModUIBox.Side.left, () => { return Main.enabled; });
         }

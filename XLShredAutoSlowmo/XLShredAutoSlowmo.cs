@@ -6,7 +6,7 @@ using System;
 namespace XLShredAutoSlowmo {
     class XLShredAutoSlowmo : MonoBehaviour {
         public void Start() {
-            ModUIBox uiBoxKubas = ModMenu.Instance.RegisterModMaker("com.kubas121", "kubas121");
+            ModUIBox uiBoxKubas = ModMenu.Instance.RegisterModMaker("kubas121", "kubas121");
             uiBoxKubas.AddLabel("S - Enable Automatic Slow Motion", ModUIBox.Side.left, () => Main.enabled);
 
             ModMenu.Instance.RegisterTimeScaleTarget(Main.modId, () => {
