@@ -8,38 +8,95 @@ using UnityModManagerNet;
 
 namespace XLShredLib {
 
+    public class XLShredDataRegistry {
+        private static XLShredDataRegistry _instance;
+        private Dictionary<string, Dictionary<string, object>> modData;
+
+        static XLShredDataRegistry() {
+            _instance = new XLShredDataRegistry();
+            _instance.modData = new Dictionary<string, Dictionary<string, object>>();
+        }
+
+        public static bool TryGetData(string modid, string key, out dynamic data) {
+            Dictionary<string, object> modDataEntries;
+
+            if (!_instance.modData.TryGetValue(modid, out modDataEntries)) {
+                XLShredLogger.Log($"The mod '{modid}' does not have any data registered.", _instance.GetType());
+                data = null;
+                return false;
+            }
+            object modData;
+            if (!modDataEntries.TryGetValue(key, out modData)) {
+                XLShredLogger.Log($"The mod '{modid}' does not have the any data registered with key '{key}'.", _instance.GetType());
+                data = null;
+                return false;
+            }
+            data = modData;
+            return true;
+        }
+
+        public static bool TryGetData<T>(string modid, string key, out T data) {
+            Dictionary<string, object> modDataEntries;
+
+            if (!_instance.modData.TryGetValue(modid, out modDataEntries)) {
+                XLShredLogger.Log($"The mod '{modid}' does not have any data registered.", _instance.GetType());
+                data = default(T);
+                return false;
+            }
+            object modData;
+            if (!modDataEntries.TryGetValue(key, out modData)) {
+                XLShredLogger.Log($"The mod '{modid}' does not have the any data registered with key '{key}'.", _instance.GetType());
+                data = default(T);
+                return false;
+            }
+
+            data = (T)modData;
+            return true;
+        }
+
+        public static void SetData(string modid, string key, object data) {
+            Dictionary<string, object> modDataEntries;
+
+            if (!_instance.modData.TryGetValue(modid, out modDataEntries)) {
+                _instance.modData[modid] = new Dictionary<string, object>();
+            }
+
+            _instance.modData[modid][key] = data;
+        }
+    }
+
     public class XLShredLogger {
         private string lastMessage;
         private int repeatMessageCount;
-        private static XLShredLogger instance;
+        private static XLShredLogger _instance;
 
         static XLShredLogger() {
-            instance = new XLShredLogger();
+            _instance = new XLShredLogger();
         }
 
 
         public static void Log(string message, Type type = null) {
             string newMessage = (type == null) ? $"MOD_LOG: {message}": $"MOD_LOG {type.Name}: {message}";
 
-            if (instance.lastMessage == newMessage) {
-                instance.repeatMessageCount++;
+            if (_instance.lastMessage == newMessage) {
+                _instance.repeatMessageCount++;
             } else {
-                instance.repeatMessageCount = 0;
-                instance.lastMessage = newMessage;
+                _instance.repeatMessageCount = 0;
+                _instance.lastMessage = newMessage;
             }
 
-            if (instance.repeatMessageCount < 10) {
+            if (_instance.repeatMessageCount < 10) {
                 Console.WriteLine(newMessage);
                 return;
             }
 
-            newMessage = $"{newMessage} ({instance.repeatMessageCount})";
+            newMessage = $"{newMessage} ({_instance.repeatMessageCount})";
 
-            if (instance.repeatMessageCount <= 100 && instance.repeatMessageCount % 10 == 0) {
+            if (_instance.repeatMessageCount <= 100 && _instance.repeatMessageCount % 10 == 0) {
                 Console.WriteLine(newMessage);
-            } else if (instance.repeatMessageCount <= 1000 && instance.repeatMessageCount % 100 == 0) {
+            } else if (_instance.repeatMessageCount <= 1000 && _instance.repeatMessageCount % 100 == 0) {
                 Console.WriteLine(newMessage);
-            } else if (instance.repeatMessageCount <= 10000 && instance.repeatMessageCount % 1000 == 0) {
+            } else if (_instance.repeatMessageCount <= 10000 && _instance.repeatMessageCount % 1000 == 0) {
                 Console.WriteLine(newMessage);
             }
         }

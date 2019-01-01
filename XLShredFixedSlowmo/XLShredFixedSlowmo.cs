@@ -26,15 +26,12 @@ namespace XLShredFixedSlowmo {
         }
 
         public void Update() {
-            if (replayModInstance == null) {
-                replayModInstance = ModUtils.GetModObject("kiwi.ReplayModLoader", "ReplayModLoader.ReplayMod", out replayModEntry,
-                    (t) => t.GetProperty("Instance").GetGetMethod().Invoke(null, null)
-                );
 
-                replayEditorActiveField = replayModInstance?.GetType().GetField("isEditorActive");
+            bool replayEditorActive;
+
+            if (!XLShredDataRegistry.TryGetData<bool>("blendermf.ReplayModMenuCompatibility", "isReplayEditorActive", out replayEditorActive)) {
+                replayEditorActive = false;
             }
-
-            bool replayEditorActive = (replayEditorActiveField == null) ? false : replayModEntry.Enabled && (bool)replayEditorActiveField.GetValue(replayModInstance);
 
             if (!replayEditorActive) {
                 if (PlayerController.Instance.inputController.player.GetButtonSinglePressDown("LB")) {
