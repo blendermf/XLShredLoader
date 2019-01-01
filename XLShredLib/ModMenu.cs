@@ -163,7 +163,7 @@ namespace XLShredLib {
 
             if (this.showMenu && !tempHideMenu) {
                 windowRect.height = 0;
-                windowRect = GUILayout.Window(1, windowRect, renderWindow, "Skater XL Shred Menu", GUILayout.Width(600));
+                windowRect = GUILayout.Window(GUIUtility.GetControlID(FocusType.Passive), windowRect, renderWindow, "Skater XL Shred Menu", GUILayout.Width(600));
             }
         }
 

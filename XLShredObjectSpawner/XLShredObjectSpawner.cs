@@ -48,11 +48,11 @@ namespace XLShredObjectSpawner {
         private void OnGUI() {
 
             if (this.showSpawnMenu) {
-                spawnWindowRect = GUILayout.Window(2, spawnWindowRect, renderSpawnWindow, "Choose Object to Spawn", GUILayout.Width(330f));
+                spawnWindowRect = GUILayout.Window(GUIUtility.GetControlID(FocusType.Passive), spawnWindowRect, renderSpawnWindow, "Choose Object to Spawn", GUILayout.Width(330f));
             }
 
             if (this.showPlacementMenu) {
-                placementWindowRect = GUILayout.Window(3, placementWindowRect, renderPlacementWindow, "Refine Placement", GUILayout.Width(360f));
+                placementWindowRect = GUILayout.Window(GUIUtility.GetControlID(FocusType.Passive), placementWindowRect, renderPlacementWindow, "Refine Placement", GUILayout.Width(360f));
             }
         }
 
