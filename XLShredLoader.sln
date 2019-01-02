@@ -34,6 +34,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLShredPopForce", "XLShredP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLShredObjectSpawner", "XLShredObjectSpawner\XLShredObjectSpawner.csproj", "{E17DFAF5-5ABD-4715-98B1-19B72039E732}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLShredRealisticVert", "XLShredRealisticVert\XLShredRealisticVert.csproj", "{1ADD3FDF-4A74-4531-B14D-09926646635F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -84,6 +86,10 @@ Global
 		{E17DFAF5-5ABD-4715-98B1-19B72039E732}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E17DFAF5-5ABD-4715-98B1-19B72039E732}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E17DFAF5-5ABD-4715-98B1-19B72039E732}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ADD3FDF-4A74-4531-B14D-09926646635F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ADD3FDF-4A74-4531-B14D-09926646635F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ADD3FDF-4A74-4531-B14D-09926646635F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ADD3FDF-4A74-4531-B14D-09926646635F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
