@@ -22,6 +22,13 @@ namespace XLShredMenuMod
             modmenu = new GameObject();
             modmenu.AddComponent<ModMenu>();
             UnityEngine.Object.DontDestroyOnLoad(Main.modmenu);
+
+            UnityModManager.ModEntry replayMod = UnityModManager.FindMod("XLShredReplayEditor");
+
+            if (replayMod != null) {
+                ModMenu.Instance.gameObject.AddComponent<ReplayModMenuCompatibility>();
+            }
+
             return true;
         }
 

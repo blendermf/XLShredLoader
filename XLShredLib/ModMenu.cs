@@ -36,6 +36,9 @@ namespace XLShredLib {
 
         private static ModMenu _instance;
 
+        private bool timeScaleExclusive = false;
+        private Func<bool> timeScaleExclusiveFunc = null;
+
         static ModMenu() {
             fontLarge = new GUIStyle();
             fontMed = new GUIStyle();
@@ -68,6 +71,11 @@ namespace XLShredLib {
             public float epoch { get; set; }
         }
 
+        public void RegisterTimeScaleExclusive(Func<bool> func) {
+            timeScaleExclusiveFunc = func;
+            timeScaleExclusive = true;
+        }
+
         public void RegisterTimeScaleTarget(String modid, Func<float> func) {
             timeScaleTargets[modid] = func;
         }
@@ -98,16 +106,26 @@ namespace XLShredLib {
                 this.showMenu = !this.showMenu;
             });
 
-            if (timeScaleTargets.Any()) {
-                timeScaleTarget = Enumerable.Min<Func<float>>(timeScaleTargets.Values, (f) => f.Invoke());
+            if (timeScaleExclusive) {
+                bool timeScaleExclusiveVal = timeScaleExclusiveFunc.Invoke();
+
+                if (!timeScaleExclusiveVal) {
+                    timeScaleExclusiveFunc = null;
+                    timeScaleExclusive = false;
+                }
             } else {
-                timeScaleTarget = 1.0f;
+                if (timeScaleTargets.Any()) {
+                    timeScaleTarget = Enumerable.Min<Func<float>>(timeScaleTargets.Values, (f) => f.Invoke());
+                } else {
+                    timeScaleTarget = 1.0f;
+                }
+                if (Math.Round((double)Time.timeScale, 1) != timeScaleTarget) {
+
+                    Time.timeScale += (timeScaleTarget - Time.timeScale) * Time.deltaTime * 10f;
+                    return;
+                }
+                Time.timeScale = timeScaleTarget;
             }
-            if (Math.Round((double)Time.timeScale, 1) != timeScaleTarget) {
-                Time.timeScale += (timeScaleTarget - Time.timeScale) * Time.deltaTime * 10f;
-                return;
-            }
-            Time.timeScale = timeScaleTarget;
         }
 
         public void ShowMessage(string msg) {

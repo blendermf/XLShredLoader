@@ -45,7 +45,9 @@ In the provided Unity Mod Manager there is a config file. If you update the Mod 
 - The .NET desktop development workload for Visual Studio (installed via the Visual Studio Installer app)
 - (Optional) git to clone the repo. You can also just download the source as a zip.
 
-Follow the installation steps for installing the Mod Loader (but not any of the mods).
+Follow the installation steps for installing the Mod Loader.
+
+Install [XLShredReplayEditor](https://github.com/DanielKIWI/SkaterXL-Modding/releases/tag/0.0.2)(for temporary compatibility fixes, will not be needed in the future).
 
 Clone the repo:
 
