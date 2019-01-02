@@ -20,7 +20,6 @@ namespace XLShredRealisticVert.Patches {
                     && (MethodInfo)inst.operand == AccessTools.Method(typeof(PlayerController), "SetSkaterToMaster")) {
 
                     yield return inst;
-                    yield return new CodeInstruction(OpCodes.Ret);
                     break;
                 }
 
@@ -54,7 +53,6 @@ namespace XLShredRealisticVert.Patches {
                     && (MethodInfo)inst.operand == AccessTools.Method(typeof(PlayerController), "SetSkaterToMaster")) {
 
                     yield return inst;
-                    yield return new CodeInstruction(OpCodes.Ret);
                     break;
                 }
 
