@@ -13,6 +13,7 @@ A collection of mods for Skater XL that use the Unity Mod Manager (reworked from
 - Custom Push Speed
 - Flip Mods (realistic flip rotation and/or flipped switch flip direction)
 - Object Spawner
+- Realistic Vert (if at the top of a fully vert ramp, you'll pop up, not away from the ramp)
 
 ### Installation
 
