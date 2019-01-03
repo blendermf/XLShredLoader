@@ -3,17 +3,17 @@
 A collection of mods for Skater XL that use the Unity Mod Manager (reworked from the XLShredMenu mod)
 
 ### Available Mods
-- Menu Mod (including XLShredLib which mods hook into)
-- Dynamic Grind Camera
-- Auto Slowmo
-- Fixed Slowmo
-- Faster Spin (in air and/or on grinds)
-- Custom Pop Force (from ground)
-- Custom Pop Force (grinds and/or manuals)
-- Custom Push Speed
-- Flip Mods (realistic flip rotation and/or flipped switch flip direction)
-- Object Spawner
-- Realistic Vert (if at the top of a fully vert ramp, you'll pop up, not away from the ramp)
+- [Menu Mod v0.0.3](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.3/XLShredMenuMod.zip) (including XLShredLib which mods hook into)
+- [Dynamic Grind Camera v0.0.2](https://github.com/blendermf/XLShredLoader/releases/download/0.0.2/XLShredDynamicCamera.zip)
+- [Auto Slowmo v0.0.2](https://github.com/blendermf/XLShredLoader/releases/download/0.0.2/XLShredAutoSlowmo.zip)
+- [Fixed Slowmo v0.0.2](https://github.com/blendermf/XLShredLoader/releases/download/0.0.2/XLShredFixedSlowmo.zip)
+- [Faster Spin v0.0.2](https://github.com/blendermf/XLShredLoader/releases/download/0.0.2/XLShredFasterSpin.zip) (in air and/or on grinds)
+- [Custom Pop Force v0.0.2](https://github.com/blendermf/XLShredLoader/releases/download/0.0.2/XLShredPopForce.zip)
+- [Custom Grind/Manual Pop Force v0.0.2](https://github.com/blendermf/XLShredLoader/releases/download/0.0.2/XLShredCustomGrindManualPop.zip)
+- [Custom Push Speed v0.0.2](https://github.com/blendermf/XLShredLoader/releases/download/0.0.2/XLShredPushSpeed.zip)
+- [Flip Mods v0.0.3](https://github.com/blendermf/XLShredLoader/releases/download/xlshredflipmods-0.0.3/XLShredFlipMods.zip) (realistic flip rotation and/or flipped switch flip direction)
+- [Object Spawner v0.0.2](https://github.com/blendermf/XLShredLoader/releases/download/0.0.2/XLShredObjectSpawner.zip)
+- [Realistic Vert v0.0.1](https://github.com/blendermf/XLShredLoader/releases/download/realistic-vert-0.0.1/XLShredRealisticVert.zip) (if at the top of a fully vert ramp, you'll pop up, not away from the ramp)
 
 ### Installation
 
@@ -21,7 +21,7 @@ A collection of mods for Skater XL that use the Unity Mod Manager (reworked from
 
 *IMPORTANT NOTE:* If you have previously installed a modified Assembly-CSharp.dll, restore it to its orignal state before installing Unity Mod Manager.
 
-1. Download the latest [Unity Mod Manager for Skater XL](https://github.com/blendermf/XLShredLoader/releases/download/0.0.2/UnityModManagerSkaterXL.zip), the [Menu Mod](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.3/XLShredMenuMod.zip), and which ever of the [other mods you want](https://github.com/blendermf/XLShredLoader/releases/tag/0.0.2).
+1. Download the latest [Unity Mod Manager for Skater XL](https://github.com/blendermf/XLShredLoader/releases/download/0.0.2/UnityModManagerSkaterXL.zip), the [Menu Mod](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.3/XLShredMenuMod.zip), and which ever of the [other mods you want](https://github.com/blendermf/XLShredLoader#available-mods).
 2. Unzip Unity Mod Manager wherever is convenient for you (it doesn't matter).
 3. Open Unity Mod Manager, make sure Skater XL is selected. At this point it may have detected your installation, if not the SkaterXL button will be red, you can click that and pick the folder manually.
 4. Click the Install button. If it works it should show an installed version number. If it doesn't work check the log.
@@ -30,7 +30,7 @@ A collection of mods for Skater XL that use the Unity Mod Manager (reworked from
 
 #### Mod Manager Already Installed:
 
-1.  Download the [Menu Mod](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.3/XLShredMenuMod.zip), and which ever of the [other mods you want](https://github.com/blendermf/XLShredLoader/releases/tag/0.0.2).
+1.  Download the [Menu Mod](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.3/XLShredMenuMod.zip), and which ever of the [other mods you want](https://github.com/blendermf/XLShredLoader#available-mods).
 2. Open Unity Mod Manager, go to the Mods tab, drag all the mod zips you want to install onto the box that says "Drop zip files here". If everything works the status should say ok for each of them.
 3. Launch the game, have fun! Press F8 to bring up the menu, and the rest is explained there.
 
