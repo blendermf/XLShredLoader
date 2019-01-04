@@ -12,14 +12,14 @@ namespace XLShredPopForce {
 
         public void Update() {
             if (Main.enabled) {
-                ModMenu.Instance.KeyPress(KeyCode.Equals, 0.1f, () => {
+                ModMenu.Instance.KeyPress(KeyCode.Equals, 0.2f, () => {
                     if (Main.settings.customPopForce <= 7.8f) {
                         Main.settings.customPopForce += 0.2f;
                     }
                     ModMenu.Instance.ShowMessage("Pop Force: " + string.Format("{0:0.0}", Main.settings.customPopForce) + " Default: 3.0");
                 });
 
-                ModMenu.Instance.KeyPress(KeyCode.Minus, 0.1f, () => {
+                ModMenu.Instance.KeyPress(KeyCode.Minus, 0.2f, () => {
                     if (Main.settings.customPopForce >= 1.5f) {
                         Main.settings.customPopForce -= 0.2f;
                     }
