@@ -29,7 +29,7 @@ namespace XLShredFixedSlowmo {
 
             bool replayEditorActive;
 
-            if (!XLShredDataRegistry.TryGetData<bool>("blendermf.ReplayModMenuCompatibility", "isReplayEditorActive", out replayEditorActive)) {
+            if (!XLShredDataRegistry.TryGetData<bool>("blendermf.ReplayModMenuCompatibility", "isReplayEditorActive", out replayEditorActive, false)) {
                 replayEditorActive = false;
             }
 

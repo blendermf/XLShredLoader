@@ -17,17 +17,17 @@ namespace XLShredLib {
             _instance.modData = new Dictionary<string, Dictionary<string, object>>();
         }
 
-        public static bool TryGetData(string modid, string key, out dynamic data) {
+        public static bool TryGetData(string modid, string key, out dynamic data, bool log = true) {
             Dictionary<string, object> modDataEntries;
 
             if (!_instance.modData.TryGetValue(modid, out modDataEntries)) {
-                XLShredLogger.Log($"The mod '{modid}' does not have any data registered.", _instance.GetType());
+                if (log) XLShredLogger.Log($"The mod '{modid}' does not have any data registered.", _instance.GetType());
                 data = null;
                 return false;
             }
             object modData;
             if (!modDataEntries.TryGetValue(key, out modData)) {
-                XLShredLogger.Log($"The mod '{modid}' does not have the any data registered with key '{key}'.", _instance.GetType());
+                if (log) XLShredLogger.Log($"The mod '{modid}' does not have the any data registered with key '{key}'.", _instance.GetType());
                 data = null;
                 return false;
             }
@@ -35,17 +35,17 @@ namespace XLShredLib {
             return true;
         }
 
-        public static bool TryGetData<T>(string modid, string key, out T data) {
+        public static bool TryGetData<T>(string modid, string key, out T data, bool log = true) {
             Dictionary<string, object> modDataEntries;
 
             if (!_instance.modData.TryGetValue(modid, out modDataEntries)) {
-                XLShredLogger.Log($"The mod '{modid}' does not have any data registered.", _instance.GetType());
+                if (log) XLShredLogger.Log($"The mod '{modid}' does not have any data registered.", _instance.GetType());
                 data = default(T);
                 return false;
             }
             object modData;
             if (!modDataEntries.TryGetValue(key, out modData)) {
-                XLShredLogger.Log($"The mod '{modid}' does not have the any data registered with key '{key}'.", _instance.GetType());
+                if (log) XLShredLogger.Log($"The mod '{modid}' does not have the any data registered with key '{key}'.", _instance.GetType());
                 data = default(T);
                 return false;
             }
