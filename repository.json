@@ -1,0 +1,59 @@
+{
+  "Releases": [
+    {
+      "Id": "kubas121.XLShredAutoSlowmo",
+      "Version": "0.0.3",
+      "DownloadUrl": "https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredAutoSlowmo-0.0.3.zip"
+    },
+    {
+      "Id": "commander_klepto.XLShredCustomGrindManualPop",
+      "Version": "0.0.3",
+      "DownloadUrl": "https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredCustomGrindManualPop-0.0.3.zip"
+    },
+    {
+      "Id": "rafahel_mello.XLShredDynamicCamera",
+      "Version": "0.0.3",
+      "DownloadUrl": "https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredDynamicCamera-0.0.3.zip"
+    },
+    {
+      "Id": "rafahel_mello.XLShredFasterSpin",
+      "Version": "0.0.3",
+      "DownloadUrl": "https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredFasterSpin-0.0.3.zip"
+    },
+    {
+      "Id": "commander_klepto.XLShredFixedSlowmo",
+      "Version": "0.0.3",
+      "DownloadUrl": "https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredFixedSlowmo-0.0.3.zip"
+    },
+    {
+      "Id": "rafahel_mello.XLShredFlipMods",
+      "Version": "0.0.4",
+      "DownloadUrl": "https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredFlipMods-0.0.4.zip"
+    },
+    {
+      "Id": "blendermf.XLShredMenu",
+      "Version": "0.0.4",
+      "DownloadUrl": "https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredMenuMod-0.0.4.zip"
+    },
+    {
+      "Id": "salty.XLShredObjectSpawner",
+      "Version": "0.0.3",
+      "DownloadUrl": "https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredObjectSpawner-0.0.3.zip"
+    },
+    {
+      "Id": "figzy.XLShredPopForce",
+      "Version": "0.0.3",
+      "DownloadUrl": "https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredPopForce-0.0.3.zip"
+    },
+    {
+      "Id": "figzy.XLShredPushSpeed",
+      "Version": "0.0.3",
+      "DownloadUrl": "https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredPushSpeed-0.0.3.zip"
+    },
+    {
+      "Id": "ghfear.XLShredRealisticVert",
+      "Version": "0.0.2",
+      "DownloadUrl": "https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredRealisticVert-0.0.2.zip"
+    }
+  ]
+}

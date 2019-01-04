@@ -2,9 +2,11 @@
   "Id": "rafahel_mello.XLShredFlipMods",
   "DisplayName": "XL Shred Flip Mods",
   "Author": "Rafahel Mello (adapted by blendermf)",
-  "Version": "0.0.3",
+  "Version": "0.0.4",
   "ManagerVersion": "0.12.3",
   "Requirements": [ "blendermf.XLShredMenu-0.0.2" ],
   "AssemblyName": "XLShredFlipMods.dll",
-  "EntryMethod": "XLShredFlipMods.Main.Load"
+  "EntryMethod": "XLShredFlipMods.Main.Load",
+  "HomePage": "https://github.com/blendermf/XLShredLoader",
+  "Repository": "https://raw.githubusercontent.com/blendermf/XLShredLoader/master/repository.json"
 }
