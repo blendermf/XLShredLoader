@@ -79,13 +79,22 @@ namespace XLShredLib {
         public void RegisterTimeScaleTarget(String modid, Func<float> func) {
             timeScaleTargets[modid] = func;
         }
+        public void UnregisterTimeScaleTarget(String modid) {
+            timeScaleTargets.Remove(modid);
+        }
 
         public void RegisterShowCursor(String modid, Func<int> func) {
             shouldShowCursorFuncs[modid] = func;
         }
+        public void UnregisterShowCursor(String modid) {
+            shouldShowCursorFuncs.Remove(modid);
+        }
 
         public void RegisterTempHideMenu(String modid, Func<int> func) {
             tempHideFuncs[modid] = func;
+        }
+        public void UnregisterTempHideMenu(String modid) {
+            tempHideFuncs.Remove(modid);
         }
 
         public ModUIBox RegisterModMaker(String identifier, String name, int priority = 0) {

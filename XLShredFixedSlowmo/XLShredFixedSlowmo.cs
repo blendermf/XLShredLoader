@@ -9,9 +9,6 @@ using System.Reflection;
 
 namespace XLShredFixedSlowmo {
     class XLShredFixedSlowmo : MonoBehaviour {
-        private UnityModManager.ModEntry replayModEntry = null;
-        private object replayModInstance = null;
-        private FieldInfo replayEditorActiveField = null;
 
         public void Start() {
             ModUIBox uiBoxKlepto = ModMenu.Instance.RegisterModMaker("commander_klepto", "Commander Klepto");
@@ -29,7 +26,7 @@ namespace XLShredFixedSlowmo {
 
             bool replayEditorActive;
 
-            if (!XLShredDataRegistry.TryGetData<bool>("blendermf.ReplayModMenuCompatibility", "isReplayEditorActive", out replayEditorActive)) {
+            if (!XLShredDataRegistry.TryGetData<bool>("kiwi.XLShredReplayEditor", "isReplayEditorActive", out replayEditorActive)) {
                 replayEditorActive = false;
             }
 
