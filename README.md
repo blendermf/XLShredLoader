@@ -16,6 +16,10 @@ A collection of mods for Skater XL that use the Unity Mod Manager (reworked from
 - [Realistic Vert v0.0.2](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredRealisticVert-0.0.2.zip) (if at the top of a fully vert ramp, you'll pop up, not away from the ramp)
 - [Disable Autocatch v0.0.1](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredDisableAutocatch-0.0.1.zip)
 
+### Other Compatible Mods (not on this git)
+- [Replay Editor (Unity Mod Manager Edition) v0.0.3](https://github.com/DanielKIWI/SkaterXL-Modding/releases/tag/XLShredReplayEditor-0.0.3) [(Source)](https://github.com/DanielKIWI/SkaterXL-Modding/tree/XLShredReplayEditor-0.0.3/XLShredMods/XLShredReplayEditor)
+- [Adjust Audio Pitch v0.0.1](https://github.com/DanielKIWI/SkaterXL-Modding/releases/tag/XLShredAdjustAudioPitch-0.0.1) [(Source)](https://github.com/DanielKIWI/SkaterXL-Modding/tree/XLShredAdjustAudioPitch-0.0.1/XLShredMods/XLShredAdjustAudioPitch) (pitches audio according to timescale changes like slowmo)
+
 ### Changelog
 
 [Click here for all the changes for all the mods](https://github.com/blendermf/XLShredLoader/blob/master/CHANGELOG.md)
