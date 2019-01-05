@@ -32,7 +32,7 @@
 - changed labels to toggles
 ---
 #### XL Shred Custom Grind/Manual Pop
-###### v0.0.3
+##### v0.0.3
 - updated required version of XL Shred Menu Mod to v0.0.4 (under the hood changes)
 ---
 #### XL Shred Disable Autocatch
