@@ -9,13 +9,13 @@ namespace XLShredPushSpeed {
     [Serializable]
     public class Settings : UnityModManager.ModSettings {
 
-        private float _customPushForce = 8f;
+        private float _customPushForce = 6f;
 
         public Settings() : base() {
             PlayerController.Instance.skaterController.pushForce = _customPushForce;
         }
 
-        public float customPushForce {
+        public float CustomPushForce {
             get {
                 return this._customPushForce;
             }
@@ -24,12 +24,12 @@ namespace XLShredPushSpeed {
                     this._customPushForce = value;
                 }
                 PlayerController.Instance.skaterController.pushForce = value;
-                PlayerController.Instance.topSpeed = 7f + ((value - 8f) * 0.5f);
+                PlayerController.Instance.topSpeed = 7f + ((value - 6f) * 0.5f);
             }
         }
 
         public void RestoreCustomPushForce() {
-            customPushForce = _customPushForce;
+            CustomPushForce = _customPushForce;
         }
 
         public override void Save(UnityModManager.ModEntry modEntry) {
@@ -51,7 +51,7 @@ namespace XLShredPushSpeed {
             modEntry.OnSaveGUI = OnSaveGUI;
             modEntry.OnToggle = OnToggle;
             if (!modEntry.Enabled) {
-                Main.settings.customPushForce = 8f;
+                Main.settings.CustomPushForce = 6f;
             } else {
                 Main.settings.RestoreCustomPushForce();
             }
@@ -64,7 +64,7 @@ namespace XLShredPushSpeed {
         static bool OnToggle(UnityModManager.ModEntry modEntry, bool value) {
             enabled = value;
             if (!value) {
-                Main.settings.customPushForce = 8f;
+                Main.settings.CustomPushForce = 6f;
             } else {
                 Main.settings.RestoreCustomPushForce();
             }

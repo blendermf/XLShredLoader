@@ -2,9 +2,11 @@
   "Id": "rafahel_mello.XLShredFasterSpin",
   "DisplayName": "XL Shred Faster Spin",
   "Author": "Rafahel Mello (adapted by blendermf)",
-  "Version": "0.0.2",
+  "Version": "0.0.3",
   "ManagerVersion": "0.12.3",
   "Requirements": [ "blendermf.XLShredMenu-0.0.2" ],
   "AssemblyName": "XLShredFasterSpin.dll",
-  "EntryMethod": "XLShredFasterSpin.Main.Load"
+  "EntryMethod": "XLShredFasterSpin.Main.Load",
+  "HomePage": "https://github.com/blendermf/XLShredLoader",
+  "Repository": "https://raw.githubusercontent.com/blendermf/XLShredLoader/master/repository.json"
 }

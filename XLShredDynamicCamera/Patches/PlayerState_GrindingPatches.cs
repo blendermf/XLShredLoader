@@ -14,7 +14,7 @@ namespace XLShredDynamicCamera.Patches {
     static class PlayerState_Grinding_Enter_Patch {
 
         static void Prefix(ref float ____popForce) {
-            PlayerController.Instance.cameraController.GetExtensionComponent().adjustCameraToGrind(PlayerController.Instance.IsBacksideGrind());
+            PlayerController.Instance.cameraController.GetExtensionComponent().AdjustCameraToGrind(PlayerController.Instance.IsBacksideGrind());
         }
     }
 

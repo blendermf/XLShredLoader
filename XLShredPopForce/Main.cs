@@ -15,7 +15,7 @@ namespace XLShredPopForce {
             PlayerController.Instance.popForce = _customPopForce;
         }
 
-        public float customPopForce {
+        public float CustomPopForce {
             get {
                 return this._customPopForce;
             }
@@ -29,7 +29,7 @@ namespace XLShredPopForce {
         }
 
         public void RestoreCustomPopForce() {
-            customPopForce = _customPopForce;
+            CustomPopForce = _customPopForce;
         }
 
         public override void Save(UnityModManager.ModEntry modEntry) {
@@ -51,7 +51,7 @@ namespace XLShredPopForce {
             modEntry.OnSaveGUI = OnSaveGUI;
             modEntry.OnToggle = OnToggle;
             if (!modEntry.Enabled) {
-                Main.settings.customPopForce = 3f;
+                Main.settings.CustomPopForce = 3f;
             } else {
                 Main.settings.RestoreCustomPopForce();
             }
@@ -64,7 +64,7 @@ namespace XLShredPopForce {
         static bool OnToggle(UnityModManager.ModEntry modEntry, bool value) {
             enabled = value;
             if (!value) {
-                Main.settings.customPopForce = 3f;
+                Main.settings.CustomPopForce = 3f;
             } else {
                 Main.settings.RestoreCustomPopForce();
             }

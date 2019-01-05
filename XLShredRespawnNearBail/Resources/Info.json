@@ -1,12 +1,12 @@
 {
-  "Id": "ghfear.XLShredRealisticVert",
+  "Id": "ghfear.XLShredRespawnNearBail",
   "DisplayName": "XL Shred Realistic Vert",
   "Author": "GHFear (adapted by blendermf)",
   "Version": "0.0.2",
   "ManagerVersion": "0.12.3",
   "Requirements": [ "blendermf.XLShredMenu-0.0.2" ],
-  "AssemblyName": "XLShredRealisticVert.dll",
-  "EntryMethod": "XLShredRealisticVert.Main.Load",
+  "AssemblyName": "XLShredRespawnNearBail.dll",
+  "EntryMethod": "XLShredRespawnNearBail.Main.Load",
   "HomePage": "https://github.com/blendermf/XLShredLoader",
   "Repository": "https://raw.githubusercontent.com/blendermf/XLShredLoader/master/repository.json"
 }

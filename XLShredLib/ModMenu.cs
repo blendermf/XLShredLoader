@@ -6,9 +6,28 @@ using System.Text.RegularExpressions;
 using UnityModManagerNet;
 
 namespace XLShredLib {
-    
+    using UI;
 
     public class ModMenu : MonoBehaviour {
+        public static readonly Color windowColor;
+        private static readonly int window_margin_sides = 10;
+
+        private static readonly int window_width = 600;
+        private static readonly int spacing = 14;
+       
+        public static readonly int label_column_width = (window_width - (window_margin_sides * 2) - (spacing * 3)) / 2;
+
+        public static readonly Color largeFontColor;
+        public static readonly Color smallFontColor;
+        private static readonly int largeFontSize = 28;
+        private static readonly int medFontSize = 18;
+        private static readonly int smallFontSize = 14;
+        public static readonly GUIStyle fontLarge;
+        public static readonly GUIStyle fontMed;
+        public static readonly GUIStyle fontSmall;
+
+        private static ModMenu _instance;
+
         private bool showMenu = false;
         private ModMenu.TmpMessage tmpMessage;
 
@@ -24,31 +43,38 @@ namespace XLShredLib {
         private Dictionary<String, Func<int>> tempHideFuncs = new Dictionary<string, Func<int>>();
         private bool tempHideMenu = false;
 
-        public static readonly GUIStyle fontLarge;
-        public static readonly GUIStyle fontMed;
-        public static readonly GUIStyle fontSmall;
-
-        private Rect windowRect = new Rect(0f, 0f, 600f, 0f);
-
         private List<ModUIBox> uiBoxes = new List<ModUIBox>();
-
         private Dictionary<String, ModUIBox> modMakers = new Dictionary<String, ModUIBox>();
-
-        private static ModMenu _instance;
 
         private bool timeScaleExclusive = false;
         private Func<bool> timeScaleExclusiveFunc = null;
 
+        private Rect windowRect = new Rect(0f, 0f, 600f, 0f);
+        public GUIStyle windowStyle;
+        public GUIStyle columnLeftStyle = GUIStyle.none;
+        public GUIStyle columnStyle = GUIStyle.none;
+        public GUIStyle boxStyle;
+        public GUIStyle toggleStyle;
+
+        private bool generatedStyle = false;
+
         static ModMenu() {
-            fontLarge = new GUIStyle();
-            fontMed = new GUIStyle();
-            fontSmall = new GUIStyle();
-            fontLarge.fontSize = 28;
-            fontLarge.normal.textColor = Color.red;
-            fontMed.fontSize = 18;
-            fontMed.normal.textColor = Color.red;
-            fontSmall.fontSize = 14;
-            fontSmall.normal.textColor = Color.yellow;
+            windowColor = new Color(0.2f, 0.2f, 0.2f);
+            largeFontColor = Color.red;
+            smallFontColor = Color.yellow;
+            fontLarge = new GUIStyle() {
+                fontSize = largeFontSize
+            };
+            fontLarge.normal.textColor = largeFontColor;
+            fontMed = new GUIStyle() {
+                fontSize = medFontSize
+            };
+            fontMed.normal.textColor = largeFontColor;
+            fontSmall = new GUIStyle() {
+                fontSize = smallFontSize,
+                padding = new RectOffset(1, 0, 2, 0)
+            };
+            fontSmall.normal.textColor = smallFontColor;
         }
 
         public static ModMenu Instance {
@@ -66,9 +92,9 @@ namespace XLShredLib {
         }
 
         private class TmpMessage {
-            public string msg { get; set; }
+            public string Msg { get; set; }
 
-            public float epoch { get; set; }
+            public float Epoch { get; set; }
         }
 
         public void RegisterTimeScaleExclusive(Func<bool> func) {
@@ -141,8 +167,8 @@ namespace XLShredLib {
             Console.WriteLine(msg);
             realtimeSinceStartup = Time.realtimeSinceStartup;
             tmpMessage = new ModMenu.TmpMessage {
-                msg = msg,
-                epoch = realtimeSinceStartup
+                Msg = msg,
+                Epoch = realtimeSinceStartup
             };
         }
 
@@ -159,11 +185,43 @@ namespace XLShredLib {
         }
 
         private void OnGUI() {
+            GUI.backgroundColor = windowColor;
+
+            if (!generatedStyle) {
+                windowStyle = new GUIStyle(GUI.skin.window) {
+                    padding = new RectOffset(10, 10, 25, 10),
+                    contentOffset = new Vector2(0, -23.0f)
+                };
+
+                boxStyle = new GUIStyle(GUI.skin.box) {
+                    padding = new RectOffset(14, 14, 24, 9),
+                    contentOffset = new Vector2(0, -20f)
+                };
+
+                columnLeftStyle.margin.right = spacing;
+
+                toggleStyle = new GUIStyle(GUI.skin.toggle) {
+                    fontSize = smallFontSize,
+                    margin = new RectOffset(0, 0, 0, 0),
+                    padding = new RectOffset(20, 0, 2, 0),
+                    contentOffset = new Vector2(0, 0)
+                };
+                toggleStyle.normal.textColor = toggleStyle.active.textColor = toggleStyle.hover.textColor = largeFontColor;
+                toggleStyle.onNormal.textColor = toggleStyle.onActive.textColor = toggleStyle.onHover.textColor = smallFontColor;
+
+
+                toggleStyle.padding.left = 20;
+                toggleStyle.imagePosition = ImagePosition.TextOnly;
+
+                generatedStyle = true;
+            }
+
+
             if (this.tmpMessage != null) {
                 this.realtimeSinceStartup = Time.realtimeSinceStartup;
                 GUI.color = Color.white;
-                GUI.Label(new Rect(20f, (float)(Screen.height - 50), 600f, 100f), this.tmpMessage.msg, fontLarge);
-                if (this.realtimeSinceStartup - this.tmpMessage.epoch > 1f) {
+                GUI.Label(new Rect(20f, (float)(Screen.height - 50), 600f, 100f), this.tmpMessage.Msg, fontLarge);
+                if (this.realtimeSinceStartup - this.tmpMessage.Epoch > 1f) {
                     this.tmpMessage = null;
                 }
             }
@@ -189,95 +247,41 @@ namespace XLShredLib {
             }
 
             if (this.showMenu && !tempHideMenu) {
-                windowRect.height = 0;
-                windowRect = GUILayout.Window(GUIUtility.GetControlID(FocusType.Passive), windowRect, renderWindow, "Skater XL Shred Menu", GUILayout.Width(600));
+                windowRect = GUILayout.Window(GUIUtility.GetControlID(FocusType.Passive), windowRect, RenderWindow, "Skater XL Shred Menu", windowStyle, GUILayout.Width(600));
             }
         }
 
-        void renderWindow(int windowID) {
+        void RenderWindow(int windowID) {
+            if (Event.current.type == EventType.Repaint) windowRect.height = 0;
+
             GUI.DragWindow(new Rect(0, 0, 10000, 20));
 
             GUILayout.BeginVertical();
+            {
 
-            uiBoxes.Sort((box1, box2) => box2.priority.CompareTo(box1.priority));
+                uiBoxes.Sort((box1, box2) => box2.priority.CompareTo(box1.priority));
 
-            foreach (ModUIBox uiBox in uiBoxes) {
-                int labelLeftCount = Enumerable.Count<ModUIBox.ModUILabel>(uiBox.labelsLeft, (l) => l.isEnabled());
-                int labelRightCount = Enumerable.Count<ModUIBox.ModUILabel>(uiBox.labelsRight, (l) => l.isEnabled());
-                int customCount = Enumerable.Count<ModUIBox.ModUICustom>(uiBox.customs, (l) => l.isEnabled());
-
-                uiBox.labelsLeft.Sort((lbl1, lbl2) => lbl2.priority.CompareTo(lbl1.priority));
-                uiBox.labelsRight.Sort((lbl1, lbl2) => lbl2.priority.CompareTo(lbl1.priority));
-                uiBox.customs.Sort((ctm1, ctm2) => ctm2.priority.CompareTo(ctm1.priority));
-
-                if (labelLeftCount + labelRightCount + customCount > 0) {
-                    GUILayout.BeginVertical(String.Format("Modifications by {0}", uiBox.modMaker), "Box");
-
-                    if (labelLeftCount + labelRightCount > 0) {
-                        GUILayout.Space(20f);
-
-                        GUILayout.BeginHorizontal();
-                        GUILayout.Space(10f);
-                        GUILayout.BeginVertical(GUILayout.Width(285f));
-
-                        foreach (ModUIBox.ModUILabel uiLabel in uiBox.labelsLeft) {
-                            if (uiLabel.isEnabled()) {
-                                GUILayout.Label(uiLabel.text, fontSmall);
-                            }
-                        }
-                        if (labelLeftCount == 0) {
-                            foreach (ModUIBox.ModUILabel uiLabel in uiBox.labelsRight) {
-                                if (uiLabel.isEnabled()) {
-                                    GUILayout.Label(uiLabel.text, fontSmall);
-                                }
-                            }
-                        }
-                        GUILayout.Space(5f);
-                        GUILayout.EndVertical();
-                        GUILayout.Space(10f);
-                        GUILayout.BeginVertical(GUILayout.Width(285f));
-                        if (labelLeftCount != 0) {
-                            foreach (ModUIBox.ModUILabel uiLabel in uiBox.labelsRight) {
-                                if (uiLabel.isEnabled()) {
-                                    GUILayout.Label(uiLabel.text, fontSmall);
-                                }
-                            }
-                        }
-                        GUILayout.Space(5f);
-                        GUILayout.EndVertical();
-                        GUILayout.Space(10f);
-                        GUILayout.EndHorizontal();
-                    }
-
-                    if (uiBox.customs.Any()) {
-                        GUILayout.Space(20f);
-
-                        GUILayout.BeginHorizontal();
-                        GUILayout.Space(10f);
-                        GUILayout.BeginVertical();
-                        foreach (ModUIBox.ModUICustom uiCustom in uiBox.customs) {
-                            if (uiCustom.isEnabled()) {
-                                uiCustom.onGUI();
-                            }
-                        }
-                        GUILayout.Space(10f);
-                        GUILayout.EndVertical();
-                        GUILayout.Space(10f);
-                        GUILayout.EndHorizontal();
-                    }
-
-                    GUILayout.EndVertical();
+                foreach (ModUIBox uiBox in uiBoxes) {
+                    uiBox.Render();
                 }
-            }
-            GUILayout.BeginVertical("Discord Server", "Box");
-            GUILayout.Space(20f);
-            GUILayout.BeginHorizontal();
-            GUILayout.FlexibleSpace();
-            GUILayout.Label("discord.gg/mx2mE5h", fontMed);
-            GUILayout.FlexibleSpace();
-            GUILayout.EndHorizontal();
-            GUILayout.EndVertical();
 
+                GUILayout.BeginVertical("Discord Server", boxStyle);
+                {
+
+                    GUILayout.BeginHorizontal();
+                    {
+                        GUILayout.FlexibleSpace();
+
+                        GUILayout.Label("discord.gg/mx2mE5h", fontMed);
+
+                        GUILayout.FlexibleSpace();
+                    }
+                    GUILayout.EndHorizontal();
+
+                }
+                GUILayout.EndVertical();
+
+            }
             GUILayout.EndVertical();
         }
     }

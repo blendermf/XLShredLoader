@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		post_build.ps1 = post_build.ps1
 		pre_build.ps1 = pre_build.ps1
 		README.md = README.md
+		repository.json = repository.json
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLShredLib", "XLShredLib\XLShredLib.csproj", "{421325E5-D304-4B9B-B207-E511E4423F56}"
@@ -35,6 +36,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLShredObjectSpawner", "XLShredObjectSpawner\XLShredObjectSpawner.csproj", "{E17DFAF5-5ABD-4715-98B1-19B72039E732}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLShredRealisticVert", "XLShredRealisticVert\XLShredRealisticVert.csproj", "{1ADD3FDF-4A74-4531-B14D-09926646635F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLShredDisableAutocatch", "XLShredDisableAutocatch\XLShredDisableAutocatch.csproj", "{AE948B9B-78B3-4649-8D79-B7CB5B902CCD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLShredRespawnNearBail", "XLShredRespawnNearBail\XLShredRespawnNearBail.csproj", "{02DA1211-0F94-40D6-BF6A-B6973F159C24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -90,6 +95,14 @@ Global
 		{1ADD3FDF-4A74-4531-B14D-09926646635F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1ADD3FDF-4A74-4531-B14D-09926646635F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1ADD3FDF-4A74-4531-B14D-09926646635F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE948B9B-78B3-4649-8D79-B7CB5B902CCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE948B9B-78B3-4649-8D79-B7CB5B902CCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE948B9B-78B3-4649-8D79-B7CB5B902CCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE948B9B-78B3-4649-8D79-B7CB5B902CCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02DA1211-0F94-40D6-BF6A-B6973F159C24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02DA1211-0F94-40D6-BF6A-B6973F159C24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02DA1211-0F94-40D6-BF6A-B6973F159C24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02DA1211-0F94-40D6-BF6A-B6973F159C24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

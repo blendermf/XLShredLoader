@@ -2,9 +2,11 @@
   "Id": "salty.XLShredObjectSpawner",
   "DisplayName": "XL Shred Object Spawner",
   "Author": "Salty (adapted by blendermf)",
-  "Version": "0.0.2",
+  "Version": "0.0.3",
   "ManagerVersion": "0.12.3",
   "Requirements": [ "blendermf.XLShredMenu-0.0.2" ],
   "AssemblyName": "XLShredObjectSpawner.dll",
-  "EntryMethod": "XLShredObjectSpawner.Main.Load"
+  "EntryMethod": "XLShredObjectSpawner.Main.Load",
+  "HomePage": "https://github.com/blendermf/XLShredLoader",
+  "Repository": "https://raw.githubusercontent.com/blendermf/XLShredLoader/master/repository.json"
 }

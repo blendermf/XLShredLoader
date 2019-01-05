@@ -6,5 +6,7 @@
   "ManagerVersion": "0.12.3",
   "Requirements": [],
   "AssemblyName": "XLShredMenuMod.dll",
-  "EntryMethod": "XLShredMenuMod.Main.Load"
+  "EntryMethod": "XLShredMenuMod.Main.Load",
+  "HomePage": "https://github.com/blendermf/XLShredLoader",
+  "Repository": "https://raw.githubusercontent.com/blendermf/XLShredLoader/master/repository.json"
 }

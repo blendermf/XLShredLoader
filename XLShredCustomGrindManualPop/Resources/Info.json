@@ -2,9 +2,11 @@
   "Id": "commander_klepto.XLShredCustomGrindManualPop",
   "DisplayName": "XL Shred Custom Grind Manual Pop Force",
   "Author": "Commander Klepto (adapted by blendermf)",
-  "Version": "0.0.2",
+  "Version": "0.0.3",
   "ManagerVersion": "0.12.3",
   "Requirements": [ "blendermf.XLShredMenu-0.0.2" ],
   "AssemblyName": "XLShredCustomGrindManualPop.dll",
-  "EntryMethod": "XLShredCustomGrindManualPop.Main.Load"
+  "EntryMethod": "XLShredCustomGrindManualPop.Main.Load",
+  "HomePage": "https://github.com/blendermf/XLShredLoader",
+  "Repository": "https://raw.githubusercontent.com/blendermf/XLShredLoader/master/repository.json"
 }

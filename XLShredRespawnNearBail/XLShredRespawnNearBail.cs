@@ -4,20 +4,18 @@ using XLShredLib.UI;
 
 using System;
 
-namespace XLShredRealisticVert {
-    class XLShredRealisticVert : MonoBehaviour {
-        ModUIBox uiBox;
-        ModUILabel uiLabelRealisticVert;
+namespace XLShredRespawnNearBail {
+    class XLShredRespawnNearBail : MonoBehaviour {
+
         public void Start() {
-            uiBox = ModMenu.Instance.RegisterModMaker("ghfear", "GHFear");
-            uiLabelRealisticVert = uiBox.AddLabel(LabelType.Toggle, "Realistic Vert (V)", Side.left, () => Main.enabled, Main.settings.realisticVert && Main.enabled, (b) => Main.settings.realisticVert = b, 1);
+            ModUIBox uiBoxGHFear = ModMenu.Instance.RegisterModMaker("ghfear", "GHFear");
+            uiBoxGHFear.AddLabel("V - Realistic Vert", Side.left, () => Main.enabled, 1);
         }
 
         public void Update() {
             if (Main.enabled) {
                 ModMenu.Instance.KeyPress(KeyCode.V, 0.2f, () => {
                     Main.settings.realisticVert = !Main.settings.realisticVert;
-                    uiLabelRealisticVert.SetToggleValue(Main.settings.realisticVert);
                     if (Main.settings.realisticVert) {
                         ModMenu.Instance.ShowMessage("Realistic Vert: ON");
                     } else {

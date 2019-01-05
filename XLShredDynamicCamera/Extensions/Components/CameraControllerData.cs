@@ -32,9 +32,9 @@ namespace XLShredDynamicCamera.Extensions.Components {
             _right = cObj.Field<bool>("_right");
         }
 
-        public void adjustCameraToGrind(bool backside) {
+        public void AdjustCameraToGrind(bool backside) {
             
-            if (!Main.settings.GetCameraModActive() || !Main.enabled) {
+            if (!Main.settings.CameraModActive || !Main.enabled) {
                 return;
             }
             
@@ -90,7 +90,7 @@ namespace XLShredDynamicCamera.Extensions.Components {
 
         public void ResetGrindCamera() {
          
-            if (!Main.settings.GetCameraModActive() || !Main.enabled) {
+            if (!Main.settings.CameraModActive || !Main.enabled) {
                 return;
             }
 
@@ -120,7 +120,7 @@ namespace XLShredDynamicCamera.Extensions.Components {
         }
 
         public void ChangeCameraToFront() {
-            if (!this.inGrindCamera && Main.settings.GetCameraModActive() && Main.enabled) {
+            if (!this.inGrindCamera && Main.settings.CameraModActive && Main.enabled) {
 
                 if (PlayerController.Instance.IsSwitch && SettingsManager.Instance.stance == SettingsManager.Stance.Goofy) {
                     _actualCam_pos.Value = Vector3.Lerp(_actualCam_pos.Value, _rightTopPos_pos.Value, Time.fixedDeltaTime * 2f);

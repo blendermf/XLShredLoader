@@ -1,20 +1,27 @@
-﻿using UnityEngine;
-using Harmony12;
+﻿using Harmony12;
 using System;
-using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Emit;
 
+using XLShredFlipMods.Extensions;
+
 namespace XLShredFlipMods.Patches {
-    [HarmonyPatch(typeof(PlayerController), "AnimSetFlip")]
-    static class PlayerController_AnimSetFlip_Patch {
-        static bool Prefix(PlayerController __instance, float p_value, ref float ____flipAxisTarget) {
-            if (Main.settings.fixedSwitchFlipPositions && PlayerController.Instance.IsSwitch && Main.enabled) {
-                ____flipAxisTarget = -p_value;
-                return false;
+    [HarmonyPatch(typeof(PlayerController), "OnFlipStickUpdate")]
+    static class PlayerController_OnFlipStickUpdate_Patch {
+
+        static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) {
+            var codes = instructions.ToList();
+            for (int i = 0; i < codes.Count; i++) {
+                var inst = codes[i];
+                if (inst.opcode == OpCodes.Call
+                     && (MethodInfo)inst.operand == AccessTools.Method(typeof(PlayerController), "AnimSetFlip")) {
+                    yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(PlayerControllerExtensions), nameof(PlayerControllerExtensions.FixedSwitchFlipPositions)));
+                    continue;
+                }
+                yield return inst;
             }
-            return true;
         }
     }
 }

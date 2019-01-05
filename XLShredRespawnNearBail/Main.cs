@@ -5,33 +5,12 @@ using UnityModManagerNet;
 using System;
 using XLShredLib;
 
-namespace XLShredDynamicCamera {
-
-    using Extensions;
-    using Extensions.Components;
+namespace XLShredRespawnNearBail {
 
     [Serializable]
     public class Settings : UnityModManager.ModSettings {
 
-        private bool _cameraModActive = false;
-
-        public bool CameraModActive {
-            get {
-                return this._cameraModActive;
-            }
-            set {
-                _cameraModActive = value;
-                if (!_cameraModActive) {
-                    if (PlayerController.Instance != null) {
-                        PlayerController.Instance.cameraController.GetExtensionComponent().inGrindCamera = false;
-                    }
-                }
-            }
-        }
-
-        public void ToggleCameraModActive() {
-            CameraModActive = !CameraModActive;
-        }
+        public bool realisticVert;
 
         public override void Save(UnityModManager.ModEntry modEntry) {
             UnityModManager.ModSettings.Save<Settings>(this, modEntry);
@@ -51,10 +30,7 @@ namespace XLShredDynamicCamera {
             modEntry.OnSaveGUI = OnSaveGUI;
             modEntry.OnToggle = OnToggle;
             
-            ModMenu.Instance.gameObject.AddComponent<XLShredDynamicCamera>();
-
-            CameraControllerData cameraControllerData = PlayerController.Instance.cameraController.gameObject.AddComponent<CameraControllerData>();
-            cameraControllerData.cameraController = PlayerController.Instance.cameraController;
+            //ModMenu.Instance.gameObject.AddComponent<XLShredRespawnNearBail>();
 
             return true;
         }
