@@ -83,9 +83,6 @@
       <HintPath>..\references\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="XLShredReplayEditor">
-      <HintPath>..\references\XLShredReplayEditor.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />

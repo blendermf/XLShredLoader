@@ -4,7 +4,7 @@
   "Author": "Salty (adapted by blendermf)",
   "Version": "0.0.3",
   "ManagerVersion": "0.12.3",
-  "Requirements": [ "blendermf.XLShredMenu-0.0.2" ],
+  "Requirements": [ "blendermf.XLShredMenu-0.0.4" ],
   "AssemblyName": "XLShredObjectSpawner.dll",
   "EntryMethod": "XLShredObjectSpawner.Main.Load",
   "HomePage": "https://github.com/blendermf/XLShredLoader",

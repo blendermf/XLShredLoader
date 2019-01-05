@@ -3,17 +3,18 @@
 A collection of mods for Skater XL that use the Unity Mod Manager (reworked from the XLShredMenu mod)
 
 ### Available Mods
-- [Menu Mod v0.0.3](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.3/XLShredMenuMod.zip) (including XLShredLib which mods hook into)
-- [Dynamic Grind Camera v0.0.2](https://github.com/blendermf/XLShredLoader/releases/download/0.0.2/XLShredDynamicCamera.zip)
-- [Auto Slowmo v0.0.2](https://github.com/blendermf/XLShredLoader/releases/download/0.0.2/XLShredAutoSlowmo.zip)
-- [Fixed Slowmo v0.0.2](https://github.com/blendermf/XLShredLoader/releases/download/0.0.2/XLShredFixedSlowmo.zip)
-- [Faster Spin v0.0.2](https://github.com/blendermf/XLShredLoader/releases/download/0.0.2/XLShredFasterSpin.zip) (in air and/or on grinds)
-- [Custom Pop Force v0.0.2](https://github.com/blendermf/XLShredLoader/releases/download/0.0.2/XLShredPopForce.zip)
-- [Custom Grind/Manual Pop Force v0.0.2](https://github.com/blendermf/XLShredLoader/releases/download/0.0.2/XLShredCustomGrindManualPop.zip)
-- [Custom Push Speed v0.0.2](https://github.com/blendermf/XLShredLoader/releases/download/0.0.2/XLShredPushSpeed.zip)
-- [Flip Mods v0.0.3](https://github.com/blendermf/XLShredLoader/releases/download/xlshredflipmods-0.0.3/XLShredFlipMods.zip) (realistic flip rotation and/or flipped switch flip direction)
-- [Object Spawner v0.0.2](https://github.com/blendermf/XLShredLoader/releases/download/0.0.2/XLShredObjectSpawner.zip)
-- [Realistic Vert v0.0.1](https://github.com/blendermf/XLShredLoader/releases/download/realistic-vert-0.0.1/XLShredRealisticVert.zip) (if at the top of a fully vert ramp, you'll pop up, not away from the ramp)
+- [Menu Mod v0.0.4](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredMenuMod-0.0.4.zip) (including XLShredLib which mods hook into)
+- [Dynamic Grind Camera v0.0.3](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredDynamicCamera-0.0.3.zip)
+- [Auto Slowmo v0.0.3](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredAutoSlowmo-0.0.3.zip)
+- [Fixed Slowmo v0.0.3](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredFixedSlowmo-0.0.3.zip)
+- [Faster Spin v0.0.3](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredFasterSpin-0.0.3.zip) (in air and/or on grinds)
+- [Custom Pop Force v0.0.3](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredPopForce-0.0.3.zip)
+- [Custom Grind/Manual Pop Force v0.0.3](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredCustomGrindManualPop-0.0.3.zip)
+- [Custom Push Speed v0.0.3](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredPushSpeed-0.0.3.zip)
+- [Flip Mods v0.0.4](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredFlipMods-0.0.4.zip) (realistic flip rotation and/or flipped switch flip direction)
+- [Object Spawner v0.0.3](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredObjectSpawner-0.0.3.zip)
+- [Realistic Vert v0.0.2](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredRealisticVert-0.0.2.zip) (if at the top of a fully vert ramp, you'll pop up, not away from the ramp)
+- [Disable Autocatch v0.0.1](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredDisableAutocatch-0.0.1.zip)
 
 ### Installation
 
@@ -47,8 +48,6 @@ In the provided Unity Mod Manager there is a config file. If you update the Mod 
 - (Optional) git to clone the repo. You can also just download the source as a zip.
 
 Follow the installation steps for installing the Mod Loader.
-
-Install [XLShredReplayEditor](https://github.com/DanielKIWI/SkaterXL-Modding/releases/tag/0.0.2)(for temporary compatibility fixes, will not be needed in the future).
 
 Clone the repo:
 
