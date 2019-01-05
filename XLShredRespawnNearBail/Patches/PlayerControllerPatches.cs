@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection.Emit;
 
 namespace XLShredRespawnNearBail.Patches {
+    /*
     [HarmonyPatch(typeof(PlayerController), "OnPop")]
     [HarmonyPatch(new [] { typeof(float), typeof(float)})]
     static class PlayerController_Pop_Patch {
@@ -71,5 +72,5 @@ namespace XLShredRespawnNearBail.Patches {
                 __instance.comController.popForce = (__instance.skaterController.skaterTransform.up + p_popOutDir) * p_pop;
             }
         }
-    }
+    }*/
 }

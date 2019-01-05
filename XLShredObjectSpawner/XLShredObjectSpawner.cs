@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using XLShredLib;
+using XLShredLib.UI;
 
 using System;
 using System.Text.RegularExpressions;

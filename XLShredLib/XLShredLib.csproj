@@ -81,7 +81,7 @@
   <ItemGroup>
     <Compile Include="Utils.cs" />
     <Compile Include="ModMenu.cs" />
-    <Compile Include="ModUIBox.cs" />
+    <Compile Include="UI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

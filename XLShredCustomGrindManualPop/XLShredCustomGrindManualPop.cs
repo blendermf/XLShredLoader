@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using XLShredLib;
+using XLShredLib.UI;
 
 using System;
 
@@ -8,8 +9,8 @@ namespace XLShredCustomGrindManualPop {
 
         public void Start() {
             ModUIBox uiBoxKlepto = ModMenu.Instance.RegisterModMaker("commander_klepto", "Commander Klepto");
-            uiBoxKlepto.AddLabel("UP/DOWN - Adjust Grind Pop Force", ModUIBox.Side.left, () => { return Main.enabled; });
-            uiBoxKlepto.AddLabel("LEFT/RIGHT - Adjust Manual Pop Force", ModUIBox.Side.left, () => { return Main.enabled; });
+            uiBoxKlepto.AddLabel("UP/DOWN - Adjust Grind Pop Force", Side.left, () => { return Main.enabled; });
+            uiBoxKlepto.AddLabel("LEFT/RIGHT - Adjust Manual Pop Force", Side.left, () => { return Main.enabled; });
         }
 
         public void Update() {

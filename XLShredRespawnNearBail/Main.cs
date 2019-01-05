@@ -30,7 +30,7 @@ namespace XLShredRespawnNearBail {
             modEntry.OnSaveGUI = OnSaveGUI;
             modEntry.OnToggle = OnToggle;
             
-            ModMenu.Instance.gameObject.AddComponent<XLShredRespawnNearBail>();
+            //ModMenu.Instance.gameObject.AddComponent<XLShredRespawnNearBail>();
 
             return true;
         }

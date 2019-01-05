@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using XLShredLib;
+using XLShredLib.UI;
 
 using System;
 
@@ -8,7 +9,7 @@ namespace XLShredRespawnNearBail {
 
         public void Start() {
             ModUIBox uiBoxGHFear = ModMenu.Instance.RegisterModMaker("ghfear", "GHFear");
-            uiBoxGHFear.AddLabel("V - Realistic Vert", ModUIBox.Side.left, () => Main.enabled, 1);
+            uiBoxGHFear.AddLabel("V - Realistic Vert", Side.left, () => Main.enabled, 1);
         }
 
         public void Update() {

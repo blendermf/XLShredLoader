@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using XLShredLib;
+using XLShredLib.UI;
 
 using System;
 using System.Linq;
@@ -9,9 +10,12 @@ using System.Reflection;
 
 namespace XLShredFixedSlowmo {
     class XLShredFixedSlowmo : MonoBehaviour {
+        private ModUIBox uiBox;
+        private ModUILabel uiLabelSlowMotion;
+
         public void Start() {
-            ModUIBox uiBoxKlepto = ModMenu.Instance.RegisterModMaker("commander_klepto", "Commander Klepto");
-            uiBoxKlepto.AddLabel("LB - Enable Slow Motion", ModUIBox.Side.right, () => Main.enabled);
+            uiBox = ModMenu.Instance.RegisterModMaker("commander_klepto", "Commander Klepto");
+            uiLabelSlowMotion = uiBox.AddLabel(LabelType.Toggle, "Slow Motion (LB)", Side.right, () => Main.enabled, Main.settings.fixedSlowmo && Main.enabled, (b) => Main.settings.fixedSlowmo = b);
 
             ModMenu.Instance.RegisterTimeScaleTarget(Main.modId, () => {
                 if (Main.enabled && Main.settings.fixedSlowmo) {
@@ -32,6 +36,13 @@ namespace XLShredFixedSlowmo {
                 if (PlayerController.Instance.inputController.player.GetButtonSinglePressDown("LB")) {
                     if (Main.enabled) {
                         Main.settings.fixedSlowmo = !Main.settings.fixedSlowmo;
+                        uiLabelSlowMotion.SetToggleValue(Main.settings.fixedSlowmo);
+
+                        if (Main.settings.fixedSlowmo) {
+                            ModMenu.Instance.ShowMessage("Slowmo: ON");
+                        } else {
+                            ModMenu.Instance.ShowMessage("Slowmo: OFF");
+                        }
                     }
                 }
             }

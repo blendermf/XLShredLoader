@@ -15,17 +15,22 @@ namespace XLShredDynamicCamera {
 
         private bool _cameraModActive = false;
 
-        public bool GetCameraModActive() {
-            return _cameraModActive;
+        public bool CameraModActive {
+            get {
+                return this._cameraModActive;
+            }
+            set {
+                _cameraModActive = value;
+                if (!_cameraModActive) {
+                    if (PlayerController.Instance != null) {
+                        PlayerController.Instance.cameraController.GetExtensionComponent().inGrindCamera = false;
+                    }
+                }
+            }
         }
 
         public void ToggleCameraModActive() {
-            _cameraModActive = !_cameraModActive;
-            if (!_cameraModActive) {
-                if (PlayerController.Instance != null) {
-                    PlayerController.Instance.cameraController.GetExtensionComponent().inGrindCamera = false;
-                }
-            }
+            CameraModActive = !CameraModActive;
         }
 
         public override void Save(UnityModManager.ModEntry modEntry) {

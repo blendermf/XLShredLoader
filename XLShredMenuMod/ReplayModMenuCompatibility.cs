@@ -6,6 +6,7 @@ using Harmony12;
 using UnityModManagerNet;
 
 using XLShredLib;
+using XLShredLib.UI;
 using XLShredReplayEditor;
 
 namespace XLShredMenuMod {
@@ -16,7 +17,7 @@ namespace XLShredMenuMod {
 
         public void Start() {
             ModUIBox uiBoxKiwi = ModMenu.Instance.RegisterModMaker("com.kiwi", "Kiwi");
-            uiBoxKiwi.AddLabel("Start - Replay Editor", ModUIBox.Side.right, () => UnityModManager.FindMod("XLShredReplayEditor").Enabled);
+            uiBoxKiwi.AddLabel("Start - Replay Editor", Side.right, () => UnityModManager.FindMod("XLShredReplayEditor").Enabled);
 
             ModMenu.Instance.RegisterShowCursor("XLShredReplayEditor", () => {
                 if (replayModActiveField != null) {

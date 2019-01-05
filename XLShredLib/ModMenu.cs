@@ -6,9 +6,10 @@ using System.Text.RegularExpressions;
 using UnityModManagerNet;
 
 namespace XLShredLib {
-    
+    using UI;
 
     public class ModMenu : MonoBehaviour {
+        public static readonly Color windowColor;
         private static readonly int window_margin_sides = 10;
 
         private static readonly int window_width = 600;
@@ -16,10 +17,14 @@ namespace XLShredLib {
        
         public static readonly int label_column_width = (window_width - (window_margin_sides * 2) - (spacing * 3)) / 2;
 
+        public static readonly Color largeFontColor;
+        public static readonly Color smallFontColor;
+        private static readonly int largeFontSize = 28;
+        private static readonly int medFontSize = 18;
+        private static readonly int smallFontSize = 14;
         public static readonly GUIStyle fontLarge;
         public static readonly GUIStyle fontMed;
         public static readonly GUIStyle fontSmall;
-        public static readonly Color windowColor;
 
         private static ModMenu _instance;
 
@@ -46,22 +51,30 @@ namespace XLShredLib {
 
         private Rect windowRect = new Rect(0f, 0f, 600f, 0f);
         public GUIStyle windowStyle;
-        public GUIStyle columnLeftStyle;
+        public GUIStyle columnLeftStyle = GUIStyle.none;
+        public GUIStyle columnStyle = GUIStyle.none;
         public GUIStyle boxStyle;
+        public GUIStyle toggleStyle;
 
         private bool generatedStyle = false;
 
         static ModMenu() {
-            fontLarge = new GUIStyle();
-            fontMed = new GUIStyle();
-            fontSmall = new GUIStyle();
-            fontLarge.fontSize = 28;
-            fontLarge.normal.textColor = Color.red;
-            fontMed.fontSize = 18;
-            fontMed.normal.textColor = Color.red;
-            fontSmall.fontSize = 14;
-            fontSmall.normal.textColor = Color.yellow;
             windowColor = new Color(0.2f, 0.2f, 0.2f);
+            largeFontColor = Color.red;
+            smallFontColor = Color.yellow;
+            fontLarge = new GUIStyle() {
+                fontSize = largeFontSize
+            };
+            fontLarge.normal.textColor = largeFontColor;
+            fontMed = new GUIStyle() {
+                fontSize = medFontSize
+            };
+            fontMed.normal.textColor = largeFontColor;
+            fontSmall = new GUIStyle() {
+                fontSize = smallFontSize,
+                padding = new RectOffset(1, 0, 2, 0)
+            };
+            fontSmall.normal.textColor = smallFontColor;
         }
 
         public static ModMenu Instance {
@@ -176,13 +189,20 @@ namespace XLShredLib {
                     contentOffset = new Vector2(0, -20f)
                 };
 
-                columnLeftStyle = new GUIStyle {
-                    contentOffset = new Vector2(0f, 0f),
-                    padding = new RectOffset(0, 0, 0, 0),
-                    margin = new RectOffset(0, 0, 0, 0) {
-                        right = spacing
-                    }
+                columnLeftStyle.margin.right = spacing;
+
+                toggleStyle = new GUIStyle(GUI.skin.toggle) {
+                    fontSize = smallFontSize,
+                    margin = new RectOffset(0, 0, 0, 0),
+                    padding = new RectOffset(20, 0, 2, 0),
+                    contentOffset = new Vector2(0, 0)
                 };
+                toggleStyle.normal.textColor = toggleStyle.active.textColor = toggleStyle.hover.textColor = largeFontColor;
+                toggleStyle.onNormal.textColor = toggleStyle.onActive.textColor = toggleStyle.onHover.textColor = smallFontColor;
+
+
+                toggleStyle.padding.left = 20;
+                toggleStyle.imagePosition = ImagePosition.TextOnly;
 
                 generatedStyle = true;
             }
