@@ -5,7 +5,7 @@
 - [XL Shred Menu Mod](#xl-shred-menu-mod)
 ##### Mods for the Menu
 - [XL Shred Auto Slowmo](#xl-shred-auto-slowmo)
-- [XL Shred Custom Grind/Manual Pop](#xl-shred-custom-grind-manual-pop)
+- [XL Shred Custom Grind/Manual Pop](#xl-shred-custom-grindmanual-pop)
 - [XL Shred Disable Autocatch](#xl-shred-disable-autocatch)
 - [XL Shred Dynamic Grind Camera](#xl-shred-dynamic-grind-camera)
 - [XL Shred Faster Spin](#xl-shred-faster-spin)
