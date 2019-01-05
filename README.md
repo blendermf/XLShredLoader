@@ -22,7 +22,7 @@ A collection of mods for Skater XL that use the Unity Mod Manager (reworked from
 
 *IMPORTANT NOTE:* If you have previously installed a modified Assembly-CSharp.dll, restore it to its orignal state before installing Unity Mod Manager.
 
-1. Download the latest [Unity Mod Manager for Skater XL](https://github.com/blendermf/XLShredLoader/releases/download/0.0.2/UnityModManagerSkaterXL.zip), the [Menu Mod](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.3/XLShredMenuMod.zip), and which ever of the [other mods you want](https://github.com/blendermf/XLShredLoader#available-mods).
+1. Download the latest [Unity Mod Manager for Skater XL](https://github.com/blendermf/XLShredLoader/releases/download/0.0.2/UnityModManagerSkaterXL.zip), the [Menu Mod](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredMenuMod-0.0.4.zip), and which ever of the [other mods you want](https://github.com/blendermf/XLShredLoader#available-mods).
 2. Unzip Unity Mod Manager wherever is convenient for you (it doesn't matter).
 3. Open Unity Mod Manager, make sure Skater XL is selected. At this point it may have detected your installation, if not the SkaterXL button will be red, you can click that and pick the folder manually.
 4. Click the Install button. If it works it should show an installed version number. If it doesn't work check the log.
@@ -31,7 +31,7 @@ A collection of mods for Skater XL that use the Unity Mod Manager (reworked from
 
 #### Mod Manager Already Installed:
 
-1.  Download the [Menu Mod](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.3/XLShredMenuMod.zip), and which ever of the [other mods you want](https://github.com/blendermf/XLShredLoader#available-mods).
+1.  Download the [Menu Mod](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredMenuMod-0.0.4.zip), and which ever of the [other mods you want](https://github.com/blendermf/XLShredLoader#available-mods).
 2. Open Unity Mod Manager, go to the Mods tab, drag all the mod zips you want to install onto the box that says "Drop zip files here". If everything works the status should say ok for each of them.
 3. Launch the game, have fun! Press F8 to bring up the menu, and the rest is explained there.
 
