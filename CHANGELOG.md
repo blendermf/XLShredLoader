@@ -23,6 +23,7 @@
 - Removed the Replay Mod Menu Compatibility Mod. (integrated in Replay Mod now)
 - Added LabelType and Toggles for mods that support it.
 - Added some convenience methods in both ModMenu and XLShredLib.UI
+- Added repository link so the mod can auto check for updates (and potentially install them for you not sure)
 
 ---
 ### Mods for the Menu
@@ -30,10 +31,12 @@
 ##### v0.0.3
 - updated required version of XL Shred Menu Mod to v0.0.4
 - changed labels to toggles
+- Added repository link so the mod can auto check for updates (and potentially install them for you not sure)
 ---
 #### XL Shred Custom Grind/Manual Pop
 ##### v0.0.3
 - updated required version of XL Shred Menu Mod to v0.0.4 (under the hood changes)
+- Added repository link so the mod can auto check for updates (and potentially install them for you not sure)
 ---
 #### XL Shred Disable Autocatch
 ##### v0.0.1
@@ -43,16 +46,19 @@
 ##### v0.0.3
 - updated required version of XL Shred Menu Mod to v0.0.4
 - changed labels to toggles
+- Added repository link so the mod can auto check for updates (and potentially install them for you not sure)
 ---
 #### XL Shred Faster Spin
 ##### v0.0.3
 - updated required version of XL Shred Menu Mod to v0.0.4
 - changed labels to toggles
+- Added repository link so the mod can auto check for updates (and potentially install them for you not sure)
 ---
 #### XL Shred Fixed Slowmo
 ##### v0.0.3
 - Integrated with the latest version of the Replay Menu (no longer using the compatibility mod)
 - updated required version of XL Shred Menu Mod to v0.0.4
+- Added repository link so the mod can auto check for updates (and potentially install them for you not sure)
 ##### v0.0.2
 - Integrated with Replay Mod Menu Compatibility Mod
 ---
@@ -60,6 +66,7 @@
 ##### v0.0.4
 - updated required version of XL Shred Menu Mod to v0.0.4
 - changed labels to toggles
+- Added repository link so the mod can auto check for updates (and potentially install them for you not sure)
 ##### v0.0.3
 - Fixed issue with player animation not properly flipping with change in flip direction.
 ---
@@ -67,19 +74,23 @@
 ##### v0.0.3
 - Minor updates to the UI, mostly behind the scenes.
 - updated required version of XL Shred Menu Mod to v0.0.4 (needed for some of those changes)
+- Added repository link so the mod can auto check for updates (and potentially install them for you not sure)
 ---
 #### XL Shred Custom Pop Force
 ##### v0.0.3
 - Added alternative +/- minus bindings (num pad, and dedicated +/- keys)
 - updated required version of XL Shred Menu Mod to v0.0.4 (under the hood changes)
+- Added repository link so the mod can auto check for updates (and potentially install them for you not sure)
 ---
 #### XL Shred Custom Push Speed
 ##### v0.0.3
 - Set the default push speed to that of the vanilla games.
 - updated required version of XL Shred Menu Mod to v0.0.4 (under the hood changes)
+- Added repository link so the mod can auto check for updates (and potentially install them for you not sure)
 ---
 #### XL Shred Realstic Vert
 ##### v0.0.2
 - updated required version of XL Shred Menu Mod to v0.0.4 (under the hood changes)
+- Added repository link so the mod can auto check for updates (and potentially install them for you not sure)
 ##### v0.0.1
 - **RELEASED:** if at the top of a fully vert ramp, you'll pop up, not away from the ramp
