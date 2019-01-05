@@ -124,6 +124,13 @@ namespace XLShredLib.UI {
 
             return uiLabel;
         }
+        public ModUILabel AddToggle(String text, Side side, Func<bool> isEnabled, bool initToggle = false, Action<bool> action = null, int priority = 0) {
+            ModUILabel uiLabel = new ModUILabel(LabelType.Toggle, text, side, isEnabled, initToggle, action, priority);
+            AddLabel(uiLabel);
+            UpdateSort();
+
+            return uiLabel;
+        }
 
         public void AddCustom(ModUICustom uiCustom) {
             customs.Add(uiCustom);

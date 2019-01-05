@@ -27,10 +27,8 @@ namespace XLShredFixedSlowmo {
         }
 
         public void Update() {
-            
-            if (!XLShredDataRegistry.TryGetData<bool>("kiwi.XLShredReplayEditor", "isReplayEditorActive", out bool replayEditorActive, false)) {
-                replayEditorActive = false;
-            }
+
+            bool replayEditorActive = XLShredDataRegistry.GetDataOrDefault<bool>("kiwi.XLShredReplayEditor", "isReplayEditorActive", false);
 
             if (!replayEditorActive) {
                 if (PlayerController.Instance.inputController.player.GetButtonSinglePressDown("LB")) {

@@ -51,6 +51,32 @@ namespace XLShredLib {
             return true;
         }
 
+        public static dynamic GetDataOrDefault(string modid, string key, dynamic defaultValue, bool log = true) {
+
+            if (!_instance.modData.TryGetValue(modid, out Dictionary<string, object> modDataEntries)) {
+                if (log) XLShredLogger.Log($"The mod '{modid}' does not have any data registered.", _instance.GetType());
+                return defaultValue;
+            }
+            if (!modDataEntries.TryGetValue(key, out object modData)) {
+                if (log) XLShredLogger.Log($"The mod '{modid}' does not have the any data registered with key '{key}'.", _instance.GetType());
+                return defaultValue;
+            }
+            return modData;
+        }
+
+        public static T GetDataOrDefault<T>(string modid, string key, T defaultValue, bool log = true) {
+
+            if (!_instance.modData.TryGetValue(modid, out Dictionary<string, object> modDataEntries)) {
+                if (log) XLShredLogger.Log($"The mod '{modid}' does not have any data registered.", _instance.GetType());
+                return defaultValue;
+            }
+            if (!modDataEntries.TryGetValue(key, out object modData)) {
+                if (log) XLShredLogger.Log($"The mod '{modid}' does not have the any data registered with key '{key}'.", _instance.GetType());
+                return defaultValue;
+            }
+            return (T)modData;
+        }
+
         public static void SetData(string modid, string key, object data) {
 
             if (!_instance.modData.TryGetValue(modid, out Dictionary<string, object> modDataEntries)) {
