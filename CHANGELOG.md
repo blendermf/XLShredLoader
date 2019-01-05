@@ -44,6 +44,7 @@
 ---
 #### XL Shred Dynamic Grind Camera
 ##### v0.0.3
+- fixed a bug that caused the mod to not save wether or not the dynamic camera is on
 - updated required version of XL Shred Menu Mod to v0.0.4
 - changed labels to toggles
 - Added repository link so the mod can auto check for updates (and potentially install them for you not sure)
