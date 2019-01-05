@@ -9,10 +9,6 @@ using System.Reflection;
 
 namespace XLShredFixedSlowmo {
     class XLShredFixedSlowmo : MonoBehaviour {
-        private UnityModManager.ModEntry replayModEntry = null;
-        private object replayModInstance = null;
-        private FieldInfo replayEditorActiveField = null;
-
         public void Start() {
             ModUIBox uiBoxKlepto = ModMenu.Instance.RegisterModMaker("commander_klepto", "Commander Klepto");
             uiBoxKlepto.AddLabel("LB - Enable Slow Motion", ModUIBox.Side.right, () => Main.enabled);
@@ -27,9 +23,8 @@ namespace XLShredFixedSlowmo {
 
         public void Update() {
 
-            bool replayEditorActive;
 
-            if (!XLShredDataRegistry.TryGetData<bool>("blendermf.ReplayModMenuCompatibility", "isReplayEditorActive", out replayEditorActive, false)) {
+            if (!XLShredDataRegistry.TryGetData<bool>("blendermf.ReplayModMenuCompatibility", "isReplayEditorActive", out bool replayEditorActive, false)) {
                 replayEditorActive = false;
             }
 
