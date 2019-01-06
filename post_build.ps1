@@ -31,5 +31,5 @@ If ($LoadLib) {
 
 if ($ConfigurationName -eq "Release") {
     $infoContent = Get-Content ([io.path]::combine($ProjectDir, 'Resources\Info.json')) | ConvertFrom-Json;
-    Compress-Archive -Update -Path $modTargetDir -DestinationPath ([io.path]::combine( $modTargetDir + '-' + $infoContent.version + '.zip' ));
+    Compress-Archive -Force -Path $modTargetDir -DestinationPath ([io.path]::combine( $modTargetDir + '-' + $infoContent.version + '.zip' ));
 }

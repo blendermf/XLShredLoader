@@ -2,7 +2,7 @@
   "Id": "rafahel_mello.XLShredDynamicCamera",
   "DisplayName": "XL Shred Dynamic Camera",
   "Author": "Rafahel Mello (adapted by blendermf)",
-  "Version": "0.0.3",
+  "Version": "0.0.4",
   "ManagerVersion": "0.12.3",
   "Requirements": [ "blendermf.XLShredMenu-0.0.4" ],
   "AssemblyName": "XLShredDynamicCamera.dll",

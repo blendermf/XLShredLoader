@@ -23,7 +23,10 @@ namespace XLShredDynamicCamera {
                 _cameraModActive = value;
                 if (!_cameraModActive) {
                     if (PlayerController.Instance != null) {
-                        PlayerController.Instance.cameraController.GetExtensionComponent().inGrindCamera = false;
+                        CameraControllerData cameraControllerData = PlayerController.Instance.cameraController.GetExtensionComponent();
+                        if (cameraControllerData != null) {
+                            cameraControllerData.inGrindCamera = false;
+                        }
                     }
                 }
             }
@@ -45,7 +48,6 @@ namespace XLShredDynamicCamera {
 
         static bool Load(UnityModManager.ModEntry modEntry) {
             settings = Settings.Load<Settings>(modEntry);
-            
             var harmony = HarmonyInstance.Create(modEntry.Info.Id);
             harmony.PatchAll(Assembly.GetExecutingAssembly());
             modEntry.OnSaveGUI = OnSaveGUI;
@@ -54,6 +56,7 @@ namespace XLShredDynamicCamera {
             ModMenu.Instance.gameObject.AddComponent<XLShredDynamicCamera>();
 
             CameraControllerData cameraControllerData = PlayerController.Instance.cameraController.gameObject.AddComponent<CameraControllerData>();
+            
             cameraControllerData.cameraController = PlayerController.Instance.cameraController;
 
             return true;

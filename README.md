@@ -4,7 +4,7 @@ A collection of mods for Skater XL that use the Unity Mod Manager (reworked from
 
 ### Available Mods
 - [Menu Mod v0.0.4](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredMenuMod-0.0.4.zip) (including XLShredLib which mods hook into)
-- [Dynamic Grind Camera v0.0.3](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredDynamicCamera-0.0.3.zip)
+- [Dynamic Grind Camera v0.0.4](https://github.com/blendermf/XLShredLoader/releases/download/dynamic-camera-0.0.4/XLShredDynamicCamera-0.0.4.zip)
 - [Auto Slowmo v0.0.3](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredAutoSlowmo-0.0.3.zip)
 - [Fixed Slowmo v0.0.3](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredFixedSlowmo-0.0.3.zip)
 - [Faster Spin v0.0.3](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredFasterSpin-0.0.3.zip) (in air and/or on grinds)

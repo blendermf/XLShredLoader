@@ -43,6 +43,8 @@
 - **RELEASED:** Allows you to disable autocatch
 ---
 #### XL Shred Dynamic Grind Camera
+##### v0.0.4
+- Fixed a bug that was stopping the settings from saving.
 ##### v0.0.3
 - fixed a bug that caused the mod to not save whether or not the dynamic camera is on
 - updated required version of XL Shred Menu Mod to v0.0.4
