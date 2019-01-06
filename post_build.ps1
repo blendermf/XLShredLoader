@@ -11,22 +11,25 @@ param(
 $configContent = Get-Content ([io.path]::combine($SolutionDir, "config.json")) | ConvertFrom-Json;
 
 $gameDirectory = $configContent.game_directory;
+$modTargetDir = ([io.path]::combine( $gameDirectory, "Mods\", $TargetName))
 
-New-Item -ItemType directory -Path ([io.path]::combine( $gameDirectory, "Mods\", $TargetName + "\" )) -Force;
+Get-ChildItem $modTargetDir -Recurse | Remove-Item
 
-copy-item $TargetPath ([io.path]::combine( $gameDirectory, "Mods\", $TargetName)) -force;
+New-Item -ItemType directory -Path $modTargetDir -Force;
+
+copy-item $TargetPath $modTargetDir -force;
 if ($ConfigurationName -eq "Debug") {
-    copy-item ([io.path]::combine( $TargetDir, $TargetName + ".pdb" )) ([io.path]::combine( $gameDirectory, "Mods\", $TargetName )) -force;
+    copy-item ([io.path]::combine( $TargetDir, $TargetName + ".pdb" )) $modTargetDir -force;
 }
-copy-item ([io.path]::combine( $ProjectDir, "Resources\Info.json" )) ([io.path]::combine( $gameDirectory, "Mods\", $TargetName )) -force;
+copy-item ([io.path]::combine( $ProjectDir, "Resources\Info.json" )) $modTargetDir -force;
 If ($LoadLib) {
-    copy-item ([io.path]::combine( $TargetDir, "XLShredLib.dll" )) ([io.path]::combine( $gameDirectory, "Mods\", $TargetName ))  -force;
+    copy-item ([io.path]::combine( $TargetDir, "XLShredLib.dll" )) $modTargetDir  -force;
     if ($ConfigurationName -eq "Debug") {
-        copy-item ([io.path]::combine( $TargetDir, "XLShredLib.pdb" )) ([io.path]::combine( $gameDirectory, "Mods\", $TargetName )) -force;
+        copy-item ([io.path]::combine( $TargetDir, "XLShredLib.pdb" )) $modTargetDir -force;
     }
 }
 
 if ($ConfigurationName -eq "Release") {
     $infoContent = Get-Content ([io.path]::combine($ProjectDir, 'Resources\Info.json')) | ConvertFrom-Json;
-    Compress-Archive -Update -Path ([io.path]::combine( $gameDirectory, "Mods\", $TargetName )) -DestinationPath ([io.path]::combine( $gameDirectory, "Mods\", $TargetName + '-' + $infoContent.version + '.zip' ));
+    Compress-Archive -Update -Path $modTargetDir -DestinationPath ([io.path]::combine( $modTargetDir + '-' + $infoContent.version + '.zip' ));
 }
