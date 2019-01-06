@@ -93,8 +93,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetPath)" "d:\Steam\steamapps\common\Skater XL\Mods\$(TargetName)\" /Y
-xcopy "$(TargetDir)$(TargetName).pdb" "d:\Steam\steamapps\common\Skater XL\Mods\$(TargetName)\" /Y
-xcopy "$(ProjectDir)Resources\Info.json" "d:\Steam\steamapps\common\Skater XL\Mods\$(TargetName)\" /Y</PostBuildEvent>
+    <PostBuildEvent>powershell.exe -ExecutionPolicy Unrestricted -File "$(SolutionDir)post_build.ps1" -TargetName "$(TargetName)" -TargetPath "$(TargetPath)" -TargetDir "$(TargetDir)\" -ProjectDir "$(ProjectDir)\" -SolutionDir "$(SolutionDir)\" -ConfigurationName "$(ConfigurationName)"</PostBuildEvent>
   </PropertyGroup>
 </Project>

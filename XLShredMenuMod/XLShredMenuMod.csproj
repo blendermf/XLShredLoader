@@ -100,7 +100,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>powershell.exe -ExecutionPolicy Unrestricted -File "$(SolutionDir)post_build.ps1" -LoadLib -TargetName "$(TargetName)" -TargetPath "$(TargetPath)" -TargetDir "$(TargetDir)\" -ProjectDir "$(ProjectDir)\" -SolutionDir "$(SolutionDir)\"</PostBuildEvent>
+    <PostBuildEvent>powershell.exe -ExecutionPolicy Unrestricted -File "$(SolutionDir)post_build.ps1" -LoadLib -TargetName "$(TargetName)" -TargetPath "$(TargetPath)" -TargetDir "$(TargetDir)\" -ProjectDir "$(ProjectDir)\" -SolutionDir "$(SolutionDir)\" -ConfigurationName "$(ConfigurationName)"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>

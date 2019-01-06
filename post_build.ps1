@@ -4,6 +4,7 @@ param(
     [String]$TargetDir = $(throw "-TargetDir is required."),
     [String]$ProjectDir = $(throw "-ProjectDir is required."),
     [String]$SolutionDir = $(throw "-SolutionDir is required."),
+    [String]$ConfigurationName = $(throw "-ConfigurationName is required."),
     [Switch]$LoadLib
 )
 
@@ -14,9 +15,18 @@ $gameDirectory = $configContent.game_directory;
 New-Item -ItemType directory -Path ([io.path]::combine( $gameDirectory, "Mods\", $TargetName + "\" )) -Force;
 
 copy-item $TargetPath ([io.path]::combine( $gameDirectory, "Mods\", $TargetName)) -force;
-copy-item ([io.path]::combine( $TargetDir, $TargetName + ".pdb" )) ([io.path]::combine( $gameDirectory, "Mods\", $TargetName )) -force;
+if ($ConfigurationName -eq "Debug") {
+    copy-item ([io.path]::combine( $TargetDir, $TargetName + ".pdb" )) ([io.path]::combine( $gameDirectory, "Mods\", $TargetName )) -force;
+}
 copy-item ([io.path]::combine( $ProjectDir, "Resources\Info.json" )) ([io.path]::combine( $gameDirectory, "Mods\", $TargetName )) -force;
 If ($LoadLib) {
-    copy-item ([io.path]::combine( $TargetDir, "XLShredLib.dll" )) ([io.path]::combine( $gameDirectory, "Mods\", $TargetName )) -force;
-    copy-item ([io.path]::combine( $TargetDir, "XLShredLib.pdb" )) ([io.path]::combine( $gameDirectory, "Mods\", $TargetName )) -force;
+    copy-item ([io.path]::combine( $TargetDir, "XLShredLib.dll" )) ([io.path]::combine( $gameDirectory, "Mods\", $TargetName ))  -force;
+    if ($ConfigurationName -eq "Debug") {
+        copy-item ([io.path]::combine( $TargetDir, "XLShredLib.pdb" )) ([io.path]::combine( $gameDirectory, "Mods\", $TargetName )) -force;
+    }
+}
+
+if ($ConfigurationName -eq "Release") {
+    $infoContent = Get-Content ([io.path]::combine($ProjectDir, 'Resources\Info.json')) | ConvertFrom-Json;
+    Compress-Archive -Update -Path ([io.path]::combine( $gameDirectory, "Mods\", $TargetName )) -DestinationPath ([io.path]::combine( $gameDirectory, "Mods\", $TargetName + '-' + $infoContent.version + '.zip' ));
 }
