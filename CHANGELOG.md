@@ -7,7 +7,7 @@
 - [XL Shred Auto Slowmo](#xl-shred-auto-slowmo)
 - [XL Shred Custom Grind/Manual Pop](#xl-shred-custom-grindmanual-pop)
 - [XL Shred Disable Autocatch](#xl-shred-disable-autocatch)
-- [XL Shred Dynamic Grind Camera](#xl-shred-dynamic-grind-camera)
+- [XL Shred Dynamic Camera](#xl-shred-dynamic-camera)
 - [XL Shred Faster Spin](#xl-shred-faster-spin)
 - [XL Shred Fixed Slowmo](#xl-shred-fixed-slowmo)
 - [XL Shred Flip Mods](#xl-shred-flip-mods)
