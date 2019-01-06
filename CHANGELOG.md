@@ -42,7 +42,10 @@
 ##### v0.0.1
 - **RELEASED:** Allows you to disable autocatch
 ---
-#### XL Shred Dynamic Grind Camera
+#### XL Shred Dynamic Camera
+##### v0.0.5
+- Fixed bug causing the camera to not switch sides back and forth when going into switch / out of it after grinding something.
+- Removed references to it just being dynamic grind camera (a misunderstanding from me I think? I dont remember if an old version called it just a dynamic grind cam). Although before the bug fix that's all it really was.
 ##### v0.0.4
 - Fixed a bug that was stopping the settings from saving.
 ##### v0.0.3

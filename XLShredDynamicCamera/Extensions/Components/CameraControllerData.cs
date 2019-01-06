@@ -7,8 +7,7 @@ namespace XLShredDynamicCamera.Extensions.Components {
 
     public class CameraControllerData : MonoBehaviour {
 
-        public float bloom;
-        public bool inGrindCamera;
+        public bool inGrindCamera = false;
 
         private Traverse cObj;
         private Traverse<Vector3> _actualCam_pos;
@@ -39,6 +38,7 @@ namespace XLShredDynamicCamera.Extensions.Components {
             }
             
             this.inGrindCamera = true;
+
             if (SettingsManager.Instance.stance == SettingsManager.Stance.Goofy) {
                 if (PlayerController.Instance.IsSwitch) {
                     if (backside) {
@@ -89,39 +89,30 @@ namespace XLShredDynamicCamera.Extensions.Components {
         }
 
         public void ResetGrindCamera() {
-         
+
             if (!Main.settings.CameraModActive || !Main.enabled) {
                 return;
             }
 
-            if (PlayerController.Instance.IsSwitch && SettingsManager.Instance.stance == SettingsManager.Stance.Goofy) {
-                _actualCam_pos.Value = Vector3.Lerp(_actualCam_pos.Value, _rightTopPos_pos.Value, Time.fixedDeltaTime * 2f);
-                _actualCam_rot.Value = Quaternion.Slerp(_actualCam_rot.Value, _rightTopPos_rot.Value, Time.fixedDeltaTime * 2f);
-                _right.Value = true;
-            }
-
-            if (!PlayerController.Instance.IsSwitch && SettingsManager.Instance.stance == SettingsManager.Stance.Goofy) {
-                _actualCam_pos.Value = Vector3.Lerp(_actualCam_pos.Value, _leftTopPos_pos.Value, Time.fixedDeltaTime * 2f);
-                _actualCam_rot.Value = Quaternion.Slerp(_actualCam_rot.Value, _leftTopPos_rot.Value, Time.fixedDeltaTime * 2f);
+            if (SettingsManager.Instance.stance == SettingsManager.Stance.Goofy && _right.Value) {
+                _actualCam_pos.Value = Vector3.Lerp(_actualCam_pos.Value, _leftTopPos_pos.Value, Time.fixedDeltaTime * 1f);
+                _actualCam_rot.Value = Quaternion.Slerp(_actualCam_rot.Value, _leftTopPos_rot.Value, Time.fixedDeltaTime * 1f);
                 _right.Value = false;
+                inGrindCamera = false;
+                return;
             }
 
-            if (PlayerController.Instance.IsSwitch && SettingsManager.Instance.stance == SettingsManager.Stance.Regular) {
-                _actualCam_pos.Value = Vector3.Lerp(_actualCam_pos.Value, _leftTopPos_pos.Value, Time.fixedDeltaTime * 2f);
-                _actualCam_rot.Value = Quaternion.Slerp(_actualCam_rot.Value, _leftTopPos_rot.Value, Time.fixedDeltaTime * 2f);
-                _right.Value = false;
-            }
-
-            if (!PlayerController.Instance.IsSwitch && SettingsManager.Instance.stance == SettingsManager.Stance.Regular) {
-                _actualCam_pos.Value = Vector3.Lerp(_actualCam_pos.Value, _rightTopPos_pos.Value, Time.fixedDeltaTime * 2f);
-                _actualCam_rot.Value = Quaternion.Slerp(_actualCam_rot.Value, _rightTopPos_rot.Value, Time.fixedDeltaTime * 2f);
+            if (!_right.Value) {
+                _actualCam_pos.Value = Vector3.Lerp(_actualCam_pos.Value, _rightTopPos_pos.Value, Time.fixedDeltaTime * 1f);
+                _actualCam_rot.Value = Quaternion.Slerp(_actualCam_rot.Value, _rightTopPos_rot.Value, Time.fixedDeltaTime * 1f);
                 _right.Value = true;
+                inGrindCamera = false;
+                return;
             }
         }
 
         public void ChangeCameraToFront() {
-            if (!this.inGrindCamera && Main.settings.CameraModActive && Main.enabled) {
-
+            if (!inGrindCamera && Main.settings.CameraModActive && Main.enabled) {
                 if (PlayerController.Instance.IsSwitch && SettingsManager.Instance.stance == SettingsManager.Stance.Goofy) {
                     _actualCam_pos.Value = Vector3.Lerp(_actualCam_pos.Value, _rightTopPos_pos.Value, Time.fixedDeltaTime * 2f);
                     _actualCam_rot.Value = Quaternion.Slerp(_actualCam_rot.Value, _rightTopPos_rot.Value, Time.fixedDeltaTime * 2f);
