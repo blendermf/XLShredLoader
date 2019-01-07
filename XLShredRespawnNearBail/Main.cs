@@ -10,7 +10,7 @@ namespace XLShredRespawnNearBail {
     [Serializable]
     public class Settings : UnityModManager.ModSettings {
 
-        public bool realisticVert;
+        public bool respawnNearBail = false;
 
         public override void Save(UnityModManager.ModEntry modEntry) {
             UnityModManager.ModSettings.Save<Settings>(this, modEntry);
@@ -30,7 +30,7 @@ namespace XLShredRespawnNearBail {
             modEntry.OnSaveGUI = OnSaveGUI;
             modEntry.OnToggle = OnToggle;
             
-            //ModMenu.Instance.gameObject.AddComponent<XLShredRespawnNearBail>();
+            ModMenu.Instance.gameObject.AddComponent<XLShredRespawnNearBail>();
 
             return true;
         }

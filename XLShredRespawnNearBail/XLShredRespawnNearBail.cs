@@ -6,20 +6,22 @@ using System;
 
 namespace XLShredRespawnNearBail {
     class XLShredRespawnNearBail : MonoBehaviour {
-
+        ModUIBox uiBox;
+        ModUILabel uiLabelRespawnNearBail;
         public void Start() {
-            ModUIBox uiBoxGHFear = ModMenu.Instance.RegisterModMaker("ghfear", "GHFear");
-            uiBoxGHFear.AddLabel("V - Realistic Vert", Side.left, () => Main.enabled, 1);
+            uiBox = ModMenu.Instance.RegisterModMaker("com.kiwi", "Kiwi");
+            uiLabelRespawnNearBail = uiBox.AddLabel(LabelType.Toggle, "Respawn Near Bail (R)", Side.left, () => Main.enabled, Main.settings.respawnNearBail && Main.enabled, (b) => Main.settings.respawnNearBail = b);
         }
 
         public void Update() {
             if (Main.enabled) {
-                ModMenu.Instance.KeyPress(KeyCode.V, 0.2f, () => {
-                    Main.settings.realisticVert = !Main.settings.realisticVert;
-                    if (Main.settings.realisticVert) {
-                        ModMenu.Instance.ShowMessage("Realistic Vert: ON");
+                ModMenu.Instance.KeyPress(KeyCode.R, 0.2f, () => {
+                    Main.settings.respawnNearBail = !Main.settings.respawnNearBail;
+                    uiLabelRespawnNearBail.SetToggleValue(Main.settings.respawnNearBail);
+                    if (Main.settings.respawnNearBail) {
+                        ModMenu.Instance.ShowMessage("Respawn Near Bail: ON");
                     } else {
-                        ModMenu.Instance.ShowMessage("Realistic Vert: OFF");
+                        ModMenu.Instance.ShowMessage("Respawn Near Bail: OFF");
                     }
                 });
             }

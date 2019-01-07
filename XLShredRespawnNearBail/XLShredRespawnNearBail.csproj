@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Extensions\Components\RespawnData.cs" />
+    <Compile Include="Extensions\PlayerControllerExtensions.cs" />
+    <Compile Include="Extensions\RespawnExtensions.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Patches\PlayerControllerPatches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,6 +91,7 @@
       <Private>False</Private>
     </Reference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>powershell.exe -ExecutionPolicy Unrestricted -File "$(SolutionDir)post_build.ps1" -TargetName "$(TargetName)" -TargetPath "$(TargetPath)" -TargetDir "$(TargetDir)\" -ProjectDir "$(ProjectDir)\" -SolutionDir "$(SolutionDir)\" -ConfigurationName "$(ConfigurationName)"</PostBuildEvent>
