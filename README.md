@@ -19,6 +19,7 @@ A collection of mods for Skater XL that use the Unity Mod Manager (reworked from
 ### Other Compatible Mods (not on this git)
 - [Replay Editor (Unity Mod Manager Edition) v0.0.3](https://github.com/DanielKIWI/SkaterXL-Modding/releases/tag/XLShredReplayEditor-0.0.3) [(Source)](https://github.com/DanielKIWI/SkaterXL-Modding/tree/XLShredReplayEditor-0.0.3/XLShredMods/XLShredReplayEditor)
 - [Adjust Audio Pitch v0.0.1](https://github.com/DanielKIWI/SkaterXL-Modding/releases/tag/XLShredAdjustAudioPitch-0.0.1) [(Source)](https://github.com/DanielKIWI/SkaterXL-Modding/tree/XLShredAdjustAudioPitch-0.0.1/XLShredMods/XLShredAdjustAudioPitch) (pitches audio according to timescale changes like slowmo)
+- [Session Marker Manager](https://github.com/DanielKIWI/SkaterXL-Modding/releases/tag/XLShredSessionMarkerManager-0.0.1) [(Source)](https://github.com/DanielKIWI/SkaterXL-Modding/tree/XLShredSessionMarkerManager-0.0.1/XLShredMods/XLShredSessionMarkerManager) (saves manages and restores session markers)
 
 ### Changelog
 
