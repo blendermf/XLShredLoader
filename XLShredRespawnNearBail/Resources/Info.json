@@ -2,7 +2,7 @@
   "Id": "kiwi.XLShredRespawnNearBail",
   "DisplayName": "XL Shred Respawn Near Bail",
   "Author": "Kiwi (adapted by blendermf)",
-  "Version": "0.0.1",
+  "Version": "0.0.2",
   "ManagerVersion": "0.12.3",
   "Requirements": [ "blendermf.XLShredMenu-0.0.4" ],
   "AssemblyName": "XLShredRespawnNearBail.dll",

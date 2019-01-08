@@ -107,5 +107,7 @@
 - **RELEASED:** if at the top of a fully vert ramp, you'll pop up, not away from the ramp
 ---
 #### XL Shred Respawn Near Bail
+##### v0.0.2
+- Fixed problem where if you manually went back to a marker while bailing you would reset twice, once for the manual reset and then once for the reset from the bail.
 ##### v0.0.1
 - **RELEASED:** Respawns you near your bail, so you don't have to set markers all the time.
