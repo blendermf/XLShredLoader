@@ -13,6 +13,8 @@ namespace XLShredRespawnNearBail.Extensions.Components {
 
         public float lastTmpSave;
 
+        public Coroutine DoBailTmpCoroutine = null;
+
         private Traverse cObj;
         private Traverse<bool> _canPressField;
         private Traverse<BehaviourPuppet> _behaviourPuppetField;

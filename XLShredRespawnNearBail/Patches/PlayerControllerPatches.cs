@@ -15,7 +15,7 @@ namespace XLShredRespawnNearBail.Patches {
 
         static bool Prefix(PlayerController __instance) {
             if (Main.settings.respawnNearBail && Main.enabled) {
-                __instance.StartCoroutine(__instance.DoBailTmp());
+                __instance.respawn.GetExtensionComponent().DoBailTmpCoroutine = __instance.StartCoroutine(__instance.DoBailTmp());
                 return false;
             } else return true;
         }

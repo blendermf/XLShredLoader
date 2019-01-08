@@ -28,7 +28,7 @@ namespace XLShredRespawnNearBail.Patches {
                 yield return inst;
             }
         }
-        
+
         static void Prefix(Respawn __instance, ref bool ____init) {
             RespawnData respawnData = PlayerController.Instance.respawn.GetExtensionComponent();
 
@@ -39,6 +39,20 @@ namespace XLShredRespawnNearBail.Patches {
             if (Main.enabled && Main.settings.respawnNearBail && !__instance.respawning && !__instance.puppetMaster.isBlending && Time.time - respawnData.lastTmpSave > 0.5f && PlayerController.Instance.IsGrounded() && !__instance.bail.bailed && Time.timeScale != 0f) {
                 respawnData.lastTmpSave = Time.time;
                 respawnData.SetTmpSpawnPos();
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(Respawn), "DoRespawn")]
+    static class Respawn_DoRespawn_Patch {
+        static void Prefix(Respawn __instance, ref bool ____canPress) {
+            
+            if (Main.enabled && Main.settings.respawnNearBail && ____canPress) {
+                Coroutine doBailTmpCoroutine = __instance.GetExtensionComponent().DoBailTmpCoroutine;
+
+                if (doBailTmpCoroutine != null) {
+                    ((MonoBehaviour)PlayerController.Instance).StopCoroutine(doBailTmpCoroutine);
+                }
             }
         }
     }
