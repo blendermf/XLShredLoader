@@ -7,6 +7,7 @@
 - [XL Shred Auto Slowmo](#xl-shred-auto-slowmo)
 - [XL Shred Custom Grind/Manual Pop](#xl-shred-custom-grindmanual-pop)
 - [XL Shred Disable Autocatch](#xl-shred-disable-autocatch)
+- [XL Shred Disable Push Reduction](#xl-shred-disable-push-reduction)
 - [XL Shred Dynamic Camera](#xl-shred-dynamic-camera)
 - [XL Shred Faster Spin](#xl-shred-faster-spin)
 - [XL Shred Fixed Slowmo](#xl-shred-fixed-slowmo)
@@ -41,6 +42,10 @@
 #### XL Shred Disable Autocatch
 ##### v0.0.1
 - **RELEASED:** Allows you to disable autocatch
+---
+#### XL Shred Disable Push Reduction
+##### v0.0.1
+- **RELEASED:** Allows you to disable the reduction of push force that happens on the first two pushes.
 ---
 #### XL Shred Dynamic Camera
 ##### v0.0.5

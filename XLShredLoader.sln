@@ -42,6 +42,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLShredDisableAutocatch", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLShredRespawnNearBail", "XLShredRespawnNearBail\XLShredRespawnNearBail.csproj", "{02DA1211-0F94-40D6-BF6A-B6973F159C24}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLShredDisablePushReduction", "XLShredDisablePushReduction\XLShredDisablePushReduction.csproj", "{19BD7D19-9D53-4F28-8301-1F09EF82CF67}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +106,10 @@ Global
 		{02DA1211-0F94-40D6-BF6A-B6973F159C24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02DA1211-0F94-40D6-BF6A-B6973F159C24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02DA1211-0F94-40D6-BF6A-B6973F159C24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19BD7D19-9D53-4F28-8301-1F09EF82CF67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19BD7D19-9D53-4F28-8301-1F09EF82CF67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19BD7D19-9D53-4F28-8301-1F09EF82CF67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19BD7D19-9D53-4F28-8301-1F09EF82CF67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

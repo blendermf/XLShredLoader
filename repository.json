@@ -64,6 +64,11 @@
       "Id": "kiwi.XLShredRespawnNearBail",
       "Version": "0.0.1",
       "DownloadUrl": "https://github.com/blendermf/XLShredLoader/releases/download/respawn-near-bail-0.0.1/XLShredRespawnNearBail-0.0.1.zip"
+    },
+    {
+      "Id": "kiwi.XLShredDisablePushReduction",
+      "Version": "0.0.1",
+      "DownloadUrl": "https://github.com/blendermf/XLShredLoader/releases/download/disable-push-reduction-0.0.1/XLShredDisablePushReduction-0.0.1.zip"
     }
   ]
 }
