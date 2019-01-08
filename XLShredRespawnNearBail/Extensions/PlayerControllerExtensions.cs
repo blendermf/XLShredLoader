@@ -9,7 +9,7 @@ namespace XLShredRespawnNearBail.Extensions {
     public static class PlayerControllerExtensions {
         public static IEnumerator DoBailTmp(this PlayerController ob) {
             yield return new WaitForSeconds(2.5f);
-            Console.WriteLine("respawnNearBail");
+            PlayerController.Instance.respawn.GetExtensionComponent().DoTmpRespawn();
         }
     }
 }

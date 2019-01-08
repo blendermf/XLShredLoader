@@ -7,6 +7,8 @@ using XLShredLib;
 
 namespace XLShredRespawnNearBail {
 
+    using Extensions.Components;
+
     [Serializable]
     public class Settings : UnityModManager.ModSettings {
 
@@ -31,6 +33,9 @@ namespace XLShredRespawnNearBail {
             modEntry.OnToggle = OnToggle;
             
             ModMenu.Instance.gameObject.AddComponent<XLShredRespawnNearBail>();
+
+            RespawnData respawnData = PlayerController.Instance.respawn.gameObject.AddComponent<RespawnData>();
+            respawnData.RespawnComponent = PlayerController.Instance.respawn;
 
             return true;
         }

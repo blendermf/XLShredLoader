@@ -15,8 +15,8 @@
 - [XL Shred Custom Pop Force](#xl-shred-custom-pop-force)
 - [XL Shred Custom Push Speed](#xl-shred-custom-push-speed)
 - [XL Shred Realstic Vert](#xl-shred-realistic-vert)
+- [XL Shred Respawn Near Bail](#xl-shred-respawn-near-bail)
 ---
-
 ### XL Shred Menu Mod
 ##### v0.0.4
 - Bumped the version number, you need to update the other mods to the latest versions if you install this.
@@ -100,3 +100,7 @@
 - Added repository link so the mod can auto check for updates (and potentially install them for you not sure)
 ##### v0.0.1
 - **RELEASED:** if at the top of a fully vert ramp, you'll pop up, not away from the ramp
+---
+#### XL Shred Respawn Near Bail
+##### v0.0.1
+- **RELEASED:** Respawns you near your bail, so you don't have to set markers all the time.

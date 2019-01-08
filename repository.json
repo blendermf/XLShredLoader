@@ -59,6 +59,11 @@
       "Id": "ghfear.XLShredRealisticVert",
       "Version": "0.0.2",
       "DownloadUrl": "https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredRealisticVert-0.0.2.zip"
+    },
+    {
+      "Id": "kiwi.XLShredRespawnNearBail",
+      "Version": "0.0.1",
+      "DownloadUrl": "https://github.com/blendermf/XLShredLoader/releases/download/respawn-near-bail-0.0.1/XLShredRespawnNearBail-0.0.1.zip"
     }
   ]
 }

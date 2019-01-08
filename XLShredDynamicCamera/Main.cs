@@ -57,7 +57,7 @@ namespace XLShredDynamicCamera {
 
             CameraControllerData cameraControllerData = PlayerController.Instance.cameraController.gameObject.AddComponent<CameraControllerData>();
             
-            cameraControllerData.cameraController = PlayerController.Instance.cameraController;
+            cameraControllerData.CameraControllerComponent = PlayerController.Instance.cameraController;
 
             return true;
         }

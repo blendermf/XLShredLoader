@@ -15,6 +15,7 @@ A collection of mods for Skater XL that use the Unity Mod Manager (reworked from
 - [Object Spawner v0.0.3](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredObjectSpawner-0.0.3.zip)
 - [Realistic Vert v0.0.2](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredRealisticVert-0.0.2.zip) (if at the top of a fully vert ramp, you'll pop up, not away from the ramp)
 - [Disable Autocatch v0.0.1](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredDisableAutocatch-0.0.1.zip)
+- [Respawn Near Bail v0.0.1](https://github.com/blendermf/XLShredLoader/releases/download/respawn-near-bail-0.0.1/XLShredRespawnNearBail-0.0.1.zip)
 
 ### Other Compatible Mods (not on this git)
 - [Replay Editor (Unity Mod Manager Edition) v0.0.3](https://github.com/DanielKIWI/SkaterXL-Modding/releases/tag/XLShredReplayEditor-0.0.3) [(Source)](https://github.com/DanielKIWI/SkaterXL-Modding/tree/XLShredReplayEditor-0.0.3/XLShredMods/XLShredReplayEditor)

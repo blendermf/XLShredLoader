@@ -36,6 +36,7 @@
     <Compile Include="Extensions\RespawnExtensions.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Patches\PlayerControllerPatches.cs" />
+    <Compile Include="Patches\RespawnPatches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XLShredRespawnNearBail.cs" />
   </ItemGroup>

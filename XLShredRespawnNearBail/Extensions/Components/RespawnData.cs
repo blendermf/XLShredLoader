@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Harmony12;
 using RootMotion.Dynamics;
 using RootMotion.FinalIK;
@@ -24,6 +21,7 @@ namespace XLShredRespawnNearBail.Extensions.Components {
         private Traverse<Vector3> _playerOffsetField;
         private Traverse<string> _idleAnimationField;
         private Traverse<bool> _retryRespawnField;
+        private Traverse SetSpawnPosMethod;
 
         private Respawn _respawnComponent;
 
@@ -39,6 +37,7 @@ namespace XLShredRespawnNearBail.Extensions.Components {
                 _playerOffsetField = cObj.Field<Vector3>("_playerOffset");
                 _idleAnimationField = cObj.Field<string>("_idleAnimation");
                 _retryRespawnField = cObj.Field<bool>("_retryRespawnField");
+                SetSpawnPosMethod = cObj.Method("SetSpawnPos");
             }
         }
 
@@ -84,15 +83,19 @@ namespace XLShredRespawnNearBail.Extensions.Components {
                 CanPress = false;
                 GetTmpSpawnPos();
                 PlayerController.Instance.CancelInvoke("DoBail");
-                base.CancelInvoke("DelayPress");
-                base.CancelInvoke("EndRespawning");
-                base.Invoke("DelayPress", 0.4f);
-                base.Invoke("EndRespawning", 0.25f);
+                ((MonoBehaviour) _respawnComponent).CancelInvoke("DelayPress");
+                ((MonoBehaviour) _respawnComponent).CancelInvoke("EndRespawning");
+                ((MonoBehaviour) _respawnComponent).Invoke("DelayPress", 0.4f);
+                ((MonoBehaviour) _respawnComponent).Invoke("EndRespawning", 0.25f);
             }
         }
 
+        public void SetSpawnPos() {
+            SetSpawnPosMethod.GetValue();
+        }
+
         public void GetTmpSpawnPos() {
-            base.CancelInvoke("DoRespawn");
+            ((MonoBehaviour) _respawnComponent).CancelInvoke("DoRespawn");
             PlayerController.Instance.CancelRespawnInvoke();
             RespawnComponent.puppetMaster.FixTargetToSampledState(1f);
             RespawnComponent.puppetMaster.FixMusclePositions();
@@ -146,7 +149,7 @@ namespace XLShredRespawnNearBail.Extensions.Components {
             FinalIk.enabled = true;
             RetryRespawn = false;
         }
-
+        
         public void SetTmpSpawnPos() {
             Quaternion quaternion = Quaternion.LookRotation(RespawnComponent.getSpawn[0].rotation * Vector3.forward, Vector3.up);
             Backwards = PlayerController.Instance.GetBoardBackwards();
