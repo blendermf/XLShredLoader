@@ -46,10 +46,6 @@ A collection of mods for Skater XL that use the Unity Mod Manager (reworked from
 2. Open Unity Mod Manager, go to the Mods tab, drag all the mod zips you want to install onto the box that says "Drop zip files here". If everything works the status should say ok for each of them.
 3. Launch the game, have fun! Press F8 to bring up the menu, and the rest is explained there.
 
-### Useful tips
-
-In the provided Unity Mod Manager there is a config file. If you update the Mod Manager, the config file will be replaced. You will lose the config file that includes Skater XL, so I included a backup file you can copy and rename.
-
 ### Building
 
 #### Requirements
