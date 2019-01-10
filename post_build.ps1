@@ -9,11 +9,13 @@ param(
 )
 
 $configContent = Get-Content ([io.path]::combine($SolutionDir, "config.json")) | ConvertFrom-Json;
+$infoContent = Get-Content ([io.path]::combine($ProjectDir, 'Resources\Info.json')) | ConvertFrom-Json;
 
 $gameDirectory = $configContent.game_directory;
-$modTargetDir = [io.path]::combine( $gameDirectory, "Mods\", $TargetName);
+$targetModName = $infoContent.Id;
+$modTargetDir = [io.path]::combine( $gameDirectory, "Mods\", $targetModName);
 $modTargetDirTmpParent = $modTargetDir + 'Tmp'
-$modTargetDirTmp = $modTargetDirTmpParent + '\' + $TargetName;
+$modTargetDirTmp = $modTargetDirTmpParent + '\' + $targetModName;
 
 Get-ChildItem $modTargetDir -Recurse -Exclude 'Settings.xml' | Remove-Item;
 
@@ -32,8 +34,8 @@ If ($LoadLib) {
 }
 
 if ($ConfigurationName -eq "Release") {
-    $infoContent = Get-Content ([io.path]::combine($ProjectDir, 'Resources\Info.json')) | ConvertFrom-Json;
+    
     copy-item -Recurse -Force $modTargetDir $modTargetDirTmp -Exclude Settings.xml;
-    Compress-Archive -Force -Path $modTargetDirTmp -DestinationPath ([io.path]::combine( $modTargetDir + '-' + $infoContent.version + '.zip' ));
+    Compress-Archive -Force -Path $modTargetDirTmp -DestinationPath ([io.path]::combine($gameDirectory, "Mods\" + $TargetName + '-' + $infoContent.version + '.zip' ));
     Remove-Item -Recurse -Force $modTargetDirTmpParent; 
 }
