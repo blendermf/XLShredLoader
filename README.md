@@ -12,7 +12,7 @@ A collection of mods for Skater XL that use the Unity Mod Manager (reworked from
 - [Custom Grind/Manual Pop Force v0.0.3](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredCustomGrindManualPop-0.0.3.zip)
 - [Custom Push Speed v0.0.3](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredPushSpeed-0.0.3.zip)
 - [Flip Mods v0.0.4](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredFlipMods-0.0.4.zip) (realistic flip rotation and/or flipped switch flip direction)
-- [Object Spawner v0.0.3](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredObjectSpawner-0.0.3.zip)
+- [Object Spawner v0.0.4](https://github.com/blendermf/XLShredLoader/releases/download/object-spawner-0.0.4/XLShredObjectSpawner-0.0.4.zip)
 - [Realistic Vert v0.0.2](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredRealisticVert-0.0.2.zip) (if at the top of a fully vert ramp, you'll pop up, not away from the ramp)
 - [Disable Autocatch v0.0.1](https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredDisableAutocatch-0.0.1.zip)
 - [Respawn Near Bail v0.0.2](https://github.com/blendermf/XLShredLoader/releases/download/respawn-near-bail-0.0.2/XLShredRespawnNearBail-0.0.2.zip)

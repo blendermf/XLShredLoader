@@ -47,8 +47,8 @@
     },
     {
       "Id": "salty.XLShredObjectSpawner",
-      "Version": "0.0.3",
-      "DownloadUrl": "https://github.com/blendermf/XLShredLoader/releases/download/menu-mod-0.0.4/XLShredObjectSpawner-0.0.3.zip"
+      "Version": "0.0.4",
+      "DownloadUrl": "https://github.com/blendermf/XLShredLoader/releases/download/object-spawner-0.0.4/XLShredObjectSpawner-0.0.4.zip"
     },
     {
       "Id": "figzy.XLShredPopForce",

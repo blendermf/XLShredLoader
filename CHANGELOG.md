@@ -82,6 +82,11 @@
 - Fixed issue with player animation not properly flipping with change in flip direction.
 ---
 #### XL Shred Object Spawner
+##### v0.0.4
+- Added positioning sensitivity setting.
+- Added ability to roll objects (now allowing rotation in all axis)
+- Reorganized placement positioning buttons.
+- Allow editing of placed objects.
 ##### v0.0.3
 - Minor updates to the UI, mostly behind the scenes.
 - updated required version of XL Shred Menu Mod to v0.0.4 (needed for some of those changes)
