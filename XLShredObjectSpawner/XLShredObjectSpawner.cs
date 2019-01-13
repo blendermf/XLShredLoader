@@ -20,11 +20,11 @@ namespace XLShredObjectSpawner {
         private static readonly int spawn_column_width = (spawn_window_width - (window_margin_sides * 2) - spawn_middle_spacing) / 2;
         private static readonly int spawn_middle_spacing_no_margin = spawn_middle_spacing - (button_margin_sides * 2);
 
-        private static readonly int placement_window_width = 362;
+        private static readonly int placement_window_width = 440;
         private static readonly int placement_middle_spacing = 12;
         private static readonly int placement_button_height = 50;
 
-        private static readonly int placement_column_width = (placement_window_width - (window_margin_sides * 2) - placement_middle_spacing - (button_margin_sides * 2)) / 3;
+        private static readonly int placement_column_width = (placement_window_width - (window_margin_sides * 2) - (placement_middle_spacing * 2) - (button_margin_sides * 4)) / 3;
         private static readonly int placement_small_button_width = (placement_column_width / 2) - button_margin_sides;
         private static readonly int placement_middle_spacing_no_margin = placement_middle_spacing - (button_margin_sides * 2);
 
@@ -229,9 +229,33 @@ namespace XLShredObjectSpawner {
                     GUILayout.BeginVertical(GUILayout.Width(placement_column_width));
                     {
 
+                        if (GUILayout.Button("UP", GUILayout.Height(placement_button_height))) {
+                            objectBeingPlaced.transform.position = new Vector3(objectBeingPlaced.transform.position.x, objectBeingPlaced.transform.position.y + 0.1f * placementSensitivity, objectBeingPlaced.transform.position.z);
+                        }
+
+                        GUILayout.BeginHorizontal();
+                        {
+                            if (GUILayout.Button("SIZE-", GUILayout.Height(placement_button_height), GUILayout.Width(placement_small_button_width))) {
+                                objectBeingPlaced.transform.localScale /= 1f + 0.05f * placementSensitivity;
+                            }
+                            if (GUILayout.Button("SIZE+", GUILayout.Height(placement_button_height), GUILayout.Width(placement_small_button_width))) {
+                                objectBeingPlaced.transform.localScale *= 1f + 0.05f * placementSensitivity;
+                            }
+
+                        }
+                        GUILayout.EndHorizontal();
+
                         if (GUILayout.Button("DOWN", GUILayout.Height(placement_button_height))) {
                             objectBeingPlaced.transform.position = new Vector3(objectBeingPlaced.transform.position.x, objectBeingPlaced.transform.position.y - 0.1f * placementSensitivity, objectBeingPlaced.transform.position.z);
                         }
+
+                    }
+                    GUILayout.EndVertical();
+
+                    GUILayout.Space(placement_middle_spacing_no_margin);
+
+                    GUILayout.BeginVertical(GUILayout.Width(placement_column_width));
+                    {
 
                         GUILayout.BeginHorizontal();
                         {
@@ -246,36 +270,31 @@ namespace XLShredObjectSpawner {
                         }
                         GUILayout.EndHorizontal();
 
-                        if (GUILayout.Button("SIZE-", GUILayout.Height(placement_button_height))) {
-                            objectBeingPlaced.transform.localScale /= 1f + 0.05f * placementSensitivity;
-                        }
-
-                    }
-                    GUILayout.EndVertical();
-
-                    GUILayout.BeginVertical(GUILayout.Width(placement_column_width));
-                    {
-
-                        if (GUILayout.Button("UP", GUILayout.Height(placement_button_height))) {
-                            objectBeingPlaced.transform.position = new Vector3(objectBeingPlaced.transform.position.x, objectBeingPlaced.transform.position.y + 0.1f * placementSensitivity, objectBeingPlaced.transform.position.z);
-                        }
-
                         GUILayout.BeginHorizontal();
                         {
 
                             if (GUILayout.Button("TILT-", GUILayout.Height(placement_button_height), GUILayout.Width(placement_small_button_width))) {
-                                objectBeingPlaced.transform.Rotate(-1f * placementSensitivity, 0f, 0f, Space.World);
+                                objectBeingPlaced.transform.Rotate(-placementSensitivity, 0f, 0f, Space.World);
                             }
                             if (GUILayout.Button("TILT+", GUILayout.Height(placement_button_height), GUILayout.Width(placement_small_button_width))) {
-                                objectBeingPlaced.transform.Rotate(1f * placementSensitivity, 0f, 0f, Space.World);
+                                objectBeingPlaced.transform.Rotate(placementSensitivity, 0f, 0f, Space.World);
                             }
 
                         }
                         GUILayout.EndHorizontal();
 
-                        if (GUILayout.Button("SIZE+", GUILayout.Height(placement_button_height))) {
-                            objectBeingPlaced.transform.localScale *= 1f + 0.05f * placementSensitivity;
+                        GUILayout.BeginHorizontal();
+                        {
+
+                            if (GUILayout.Button("ROLL-", GUILayout.Height(placement_button_height), GUILayout.Width(placement_small_button_width))) {
+                                objectBeingPlaced.transform.Rotate(0f, 0f, -placementSensitivity, Space.World);
+                            }
+                            if (GUILayout.Button("ROLL+", GUILayout.Height(placement_button_height), GUILayout.Width(placement_small_button_width))) {
+                                objectBeingPlaced.transform.Rotate(0f, 0f, placementSensitivity, Space.World);
+                            }
+
                         }
+                        GUILayout.EndHorizontal();
 
                     }
                     GUILayout.EndVertical();
