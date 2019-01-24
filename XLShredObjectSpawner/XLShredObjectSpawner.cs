@@ -3,8 +3,11 @@ using XLShredLib;
 using XLShredLib.UI;
 
 using System;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using Dreamteck.Splines;
 
 namespace XLShredObjectSpawner {
 
@@ -58,6 +61,44 @@ namespace XLShredObjectSpawner {
 
         private bool generatedStyle = false;
 
+        AssetBundle objectBundle = null;
+
+        void LoadPlaceableObjects() {
+            Console.WriteLine("Loading Placeable Objects");
+            bool bundleLoaded = objectBundle != null;
+            if (bundleLoaded) {
+                objectBundle.Unload(true);
+                objectBundle = null;
+                bundleLoaded = false;
+            }
+            
+            String bundlePath = Path.Combine(Main.modPath, "CustomObjects");
+            objectBundle = AssetBundle.LoadFromFile(bundlePath);
+
+            bundleLoaded = objectBundle != null;
+
+            if (!bundleLoaded) Console.WriteLine($"Failed to load Asset bundle: {bundlePath}");
+            else {
+                GameObject[] spawnableObjects = objectBundle.LoadAllAssets<GameObject>();
+                foreach (GameObject o in spawnableObjects) {
+                    Console.WriteLine(o.name);
+                }
+            }
+        }
+
+        void OnEnable() {
+            Debug.Log("OnEnable called");
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+            Debug.Log("Cleared placed objects after loading scene: " + scene.name);
+            foreach (GameObject gameObject in this.placedGameObjects) {
+                Destroy(objectBeingPlaced);
+            }
+            placedGameObjects.Clear();
+            base.Invoke("LoadPlaceableObjects", 1.0f);
+        }
+
         public void Start() {
             ModMenu.Instance.RegisterTempHideMenu(Main.modId, () => (showSpawnMenu || showPlacementMenu) ? 1 : 0);
 
@@ -69,6 +110,7 @@ namespace XLShredObjectSpawner {
             }, () => Main.enabled);
 
             ModMenu.Instance.RegisterShowCursor(Main.modId, () => (showSpawnMenu || showPlacementMenu) ? 1 : 0);
+            LoadPlaceableObjects();
         }
 
         private void OnGUI() {
@@ -310,6 +352,9 @@ namespace XLShredObjectSpawner {
                         if (!isObjectBeingEdited) {
                             objectBeingPlaced.name = $"{objectBeingPlaced.name} {placedGameObjects.Count + 1}";
                             placedGameObjects.Add(objectBeingPlaced);
+                            AddGrindTriggers(objectBeingPlaced);
+                        } else {
+                            RecalculateGrindTriggers(objectBeingPlaced);
                         }
                         objectBeingPlaced = null;
                         showPlacementMenu = false;
@@ -345,7 +390,90 @@ namespace XLShredObjectSpawner {
             GUILayout.EndVertical();
         }
 
-        
+        private void RecalculateGrindTriggers(GameObject go) {
+            foreach (Transform transform in go.GetComponentsInChildren<Transform>()) {
+                if (transform.name.Contains("GrindSpline") && !transform.name.Contains("Colliders")) {
+                    Transform grindColliders = go.transform.Find(transform.name + "Colliders").transform;
+
+                    Vector3[] grindPoints = new Vector3[transform.childCount];
+                    SplinePoint[] splinePoints = new SplinePoint[grindPoints.Length];
+                    for (int i = 0; i < grindPoints.Length; i++) {
+                        grindPoints[i] = transform.GetChild(i).position;
+                        splinePoints[i] = new SplinePoint(grindPoints[i]);
+                    }
+
+                    SplineComputer splineComputer = grindColliders.gameObject.GetComponent<SplineComputer>();
+                    Vector3[] grindNormals = new Vector3[grindPoints.Length];
+                    for (int i = 0; i < grindPoints.Length - 1; i++) {
+                        GameObject grindCollider = grindColliders.Find("RailCol" + i).gameObject;
+                        grindCollider.transform.position = grindPoints[i];
+                        grindCollider.transform.LookAt(grindPoints[i + 1]);
+                        BoxCollider boxCollider = grindCollider.GetComponent<BoxCollider>();
+                        float segmentLength = Vector3.Distance(grindPoints[i], grindPoints[i + 1]);
+                        boxCollider.size = new Vector3(0.08f / go.transform.lossyScale.x, 0.08f / go.transform.lossyScale.y, segmentLength);
+                        boxCollider.center = Vector3.forward * segmentLength / 2f;
+                        grindNormals[i] = grindCollider.transform.up;
+                    }
+
+                    grindNormals[grindNormals.Length - 1] = grindNormals[grindNormals.Length - 2];
+                    splineComputer.SetPoints(splinePoints);
+                    splineComputer.Evaluate(0.9);
+                    for (int i = 0; i < grindPoints.Length; i++) {
+                        splineComputer.SetPointNormal(i, splineComputer.GetPointNormal(i, SplineComputer.Space.World) + grindNormals[i], SplineComputer.Space.World);
+                    }
+                }
+            }
+        }
+
+        private void AddGrindTriggers(GameObject go) {
+            foreach (Transform transform in go.GetComponentsInChildren<Transform>()) {
+                if (transform.name.Contains("GrindSpline")) {
+                    Transform grindColliders = new GameObject(transform.name + "Colliders").transform;
+                    grindColliders.parent = go.transform;
+                    grindColliders.gameObject.layer = 12;
+                    
+                    if (transform.name.Contains("Metal")) transform.tag = "Metal";
+                    if (transform.name.Contains("Wood")) transform.tag = "Wood";
+                    if (transform.name.Contains("Concrete")) transform.tag = "Concrete";
+
+                    Vector3[] grindPoints = new Vector3[transform.childCount];
+                    SplinePoint[] splinePoints = new SplinePoint[grindPoints.Length];
+                    for (int i = 0; i < grindPoints.Length; i++) {
+                        grindPoints[i] = transform.GetChild(i).position;
+                        splinePoints[i] = new SplinePoint(grindPoints[i]);
+                    }
+                    
+                    SplineComputer splineComputer = grindColliders.gameObject.AddComponent<SplineComputer>();
+                    splineComputer.type = Spline.Type.Linear;
+                    Vector3[] grindNormals = new Vector3[grindPoints.Length];
+                    for (int i = 0; i < grindPoints.Length - 1; i++) {
+                        GameObject grindCollider = new GameObject("RailCol" + i);
+                        grindCollider.layer = 12;
+                        grindCollider.transform.position = grindPoints[i];
+                        grindCollider.transform.LookAt(grindPoints[i + 1]);
+                        BoxCollider boxCollider = grindCollider.AddComponent<BoxCollider>();
+                        float segmentLength = Vector3.Distance(grindPoints[i], grindPoints[i + 1]);
+                        boxCollider.size = new Vector3(0.08f / go.transform.lossyScale.x, 0.08f / go.transform.lossyScale.y, segmentLength);
+                        boxCollider.center = Vector3.forward * segmentLength / 2f;
+                        boxCollider.isTrigger = true;
+                        grindCollider.transform.parent = grindColliders;
+                        grindNormals[i] = grindCollider.transform.up;
+
+                        if (transform.name.Contains("Metal")) grindCollider.tag = "Metal";
+                        if (transform.name.Contains("Wood")) grindCollider.tag = "Wood";
+                        if (transform.name.Contains("Concrete")) grindCollider.tag = "Concrete";
+                    }
+
+                    grindNormals[grindNormals.Length - 1] = grindNormals[grindNormals.Length - 2];
+                    splineComputer.SetPoints(splinePoints);
+                    splineComputer.Evaluate(0.9);
+                    for (int i = 0; i < grindPoints.Length; i++) {
+                        splineComputer.SetPointNormal(i, splineComputer.GetPointNormal(i, SplineComputer.Space.World) + grindNormals[i], SplineComputer.Space.World);
+                    }
+                }
+            }
+        }
+
         private GameObject FindGameObjectByName(string name) {
             foreach (GameObject gameObject in Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[]) {
                 if (gameObject.name == name) {

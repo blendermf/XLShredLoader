@@ -11,10 +11,12 @@ namespace XLShredObjectSpawner
     static class Main
     {
         public static String modId;
+        public static String modPath;
         public static bool enabled;
 
         static bool Load(UnityModManager.ModEntry modEntry) {
             modId = modEntry.Info.Id;
+            modPath = modEntry.Path;
             var harmony = HarmonyInstance.Create(modEntry.Info.Id);
             harmony.PatchAll(Assembly.GetExecutingAssembly());
 

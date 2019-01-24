@@ -60,6 +60,9 @@
       <HintPath>..\references\UnityEngine.AnimationModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule">
+      <HintPath>..\references\UnityEngine.AssetBundleModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\references\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
