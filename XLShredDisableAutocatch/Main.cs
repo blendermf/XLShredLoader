@@ -20,22 +20,27 @@ namespace XLShredDisableAutocatch {
     {
         public static bool enabled;
         public static Settings settings;
+        public static HarmonyInstance harmonyInstance;
 
         static bool Load(UnityModManager.ModEntry modEntry) {
             settings = Settings.Load<Settings>(modEntry);
-            
-            var harmony = HarmonyInstance.Create(modEntry.Info.Id);
-            harmony.PatchAll(Assembly.GetExecutingAssembly());
             modEntry.OnSaveGUI = OnSaveGUI;
             modEntry.OnToggle = OnToggle;
-            
-            ModMenu.Instance.gameObject.AddComponent<XLShredDisableAutocatch>();
 
             return true;
         }
 
         static bool OnToggle(UnityModManager.ModEntry modEntry, bool value) {
+            if (enabled == value) return true;
             enabled = value;
+            if (enabled) {
+                harmonyInstance = HarmonyInstance.Create(modEntry.Info.Id);
+                harmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
+                ModMenu.Instance.gameObject.AddComponent<XLShredDisableAutocatch>();
+            } else {
+                harmonyInstance.UnpatchAll(harmonyInstance.Id);
+                UnityEngine.Object.Destroy(ModMenu.Instance.gameObject.GetComponent<XLShredDisableAutocatch>());
+            }
             return true;
         }
 

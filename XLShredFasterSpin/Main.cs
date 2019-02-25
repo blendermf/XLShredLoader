@@ -23,23 +23,30 @@ namespace XLShredFasterSpin {
     {
         public static bool enabled;
         public static Settings settings;
+        public static HarmonyInstance harmonyInstance;
 
         static bool Load(UnityModManager.ModEntry modEntry) {
             settings = Settings.Load<Settings>(modEntry);
             
-            var harmony = HarmonyInstance.Create(modEntry.Info.Id);
-            harmony.PatchAll(Assembly.GetExecutingAssembly());
             modEntry.OnSaveGUI = OnSaveGUI;
             modEntry.OnToggle = OnToggle;
             
-            ModMenu.Instance.gameObject.AddComponent<XLShredFasterSpin>();
-            PlayerController.Instance.gameObject.AddComponent<PlayerControllerData>();
-
             return true;
         }
 
         static bool OnToggle(UnityModManager.ModEntry modEntry, bool value) {
+            if (enabled == value) return true;
             enabled = value;
+            if (enabled) {
+                harmonyInstance = HarmonyInstance.Create(modEntry.Info.Id);
+                harmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
+                ModMenu.Instance.gameObject.AddComponent<XLShredFasterSpin>();
+                PlayerController.Instance.gameObject.AddComponent<PlayerControllerData>();
+            } else {
+                harmonyInstance.UnpatchAll(harmonyInstance.Id);
+                UnityEngine.Object.Destroy(ModMenu.Instance.gameObject.GetComponent<XLShredFasterSpin>());
+                UnityEngine.Object.Destroy(PlayerController.Instance.gameObject.GetComponent<PlayerControllerData>());
+            }
             return true;
         }
 

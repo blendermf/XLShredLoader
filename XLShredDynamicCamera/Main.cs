@@ -48,25 +48,31 @@ namespace XLShredDynamicCamera {
 
         static bool Load(UnityModManager.ModEntry modEntry) {
             settings = Settings.Load<Settings>(modEntry);
-            var harmony = HarmonyInstance.Create(modEntry.Info.Id);
-            harmony.PatchAll(Assembly.GetExecutingAssembly());
+
             modEntry.OnSaveGUI = OnSaveGUI;
             modEntry.OnToggle = OnToggle;
             
-            ModMenu.Instance.gameObject.AddComponent<XLShredDynamicCamera>();
-
-            CameraControllerData cameraControllerData = PlayerController.Instance.cameraController.gameObject.AddComponent<CameraControllerData>();
-            
-            cameraControllerData.CameraControllerComponent = PlayerController.Instance.cameraController;
-
             return true;
         }
+
+        public static HarmonyInstance harmonyInstance;
 
         static bool OnToggle(UnityModManager.ModEntry modEntry, bool value) {
+            if (enabled == value) return true;
             enabled = value;
+            if (enabled) {
+                harmonyInstance = HarmonyInstance.Create(modEntry.Info.Id);
+                harmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
+                CameraControllerData cameraControllerData = PlayerController.Instance.cameraController.gameObject.AddComponent<CameraControllerData>();
+                cameraControllerData.CameraControllerComponent = PlayerController.Instance.cameraController;
+                ModMenu.Instance.gameObject.AddComponent<XLShredDynamicCamera>();
+            } else {
+                harmonyInstance.UnpatchAll(harmonyInstance.Id);
+                UnityEngine.Object.Destroy(PlayerController.Instance.cameraController.gameObject.GetComponent<CameraControllerData>());
+                UnityEngine.Object.Destroy(ModMenu.Instance.gameObject.AddComponent<XLShredDynamicCamera>());
+            }
             return true;
         }
-
         static void OnSaveGUI(UnityModManager.ModEntry modEntry) {
             settings.Save(modEntry);
         }

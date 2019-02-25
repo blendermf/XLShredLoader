@@ -42,31 +42,30 @@ namespace XLShredPushSpeed {
         public static bool enabled;
         public static Settings settings;
         public static String modId;
+        public static HarmonyInstance harmonyInstance;
 
         static bool Load(UnityModManager.ModEntry modEntry) {
             settings = Settings.Load<Settings>(modEntry);
             modId = modEntry.Info.Id;
-            var harmony = HarmonyInstance.Create(modEntry.Info.Id);
-            harmony.PatchAll(Assembly.GetExecutingAssembly());
+
             modEntry.OnSaveGUI = OnSaveGUI;
             modEntry.OnToggle = OnToggle;
-            if (!modEntry.Enabled) {
-                Main.settings.CustomPushForce = 6f;
-            } else {
-                Main.settings.RestoreCustomPushForce();
-            }
-
-            ModMenu.Instance.gameObject.AddComponent<XLShredPushSpeed>();
-
             return true;
         }
+        
 
         static bool OnToggle(UnityModManager.ModEntry modEntry, bool value) {
+            if (enabled == value) return true;
             enabled = value;
-            if (!value) {
+            if (enabled) {
                 Main.settings.CustomPushForce = 6f;
+                harmonyInstance = HarmonyInstance.Create(modEntry.Info.Id);
+                harmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
+                ModMenu.Instance.gameObject.AddComponent<XLShredPushSpeed>();
             } else {
                 Main.settings.RestoreCustomPushForce();
+                harmonyInstance.UnpatchAll(harmonyInstance.Id);
+                UnityEngine.Object.Destroy(ModMenu.Instance.gameObject.GetComponent<XLShredPushSpeed>());
             }
             return true;
         }
