@@ -63,6 +63,30 @@ namespace XLShredObjectSpawner {
 
         AssetBundle objectBundle = null;
 
+        private void ShowSpawnMenu() {
+            showSpawnMenu = true;
+            ModMenu.Instance.ShowCursor(Main.modId);
+            ModMenu.Instance.EnableMenuHide(Main.modId);
+        }
+
+        private void HideSpawnMenu() {
+            showSpawnMenu = false;
+            ModMenu.Instance.HideCursor(Main.modId);
+            ModMenu.Instance.DisableMenuHide(Main.modId);
+        }
+
+        private void ShowPlacementMenu() {
+            showPlacementMenu = true;
+            ModMenu.Instance.ShowCursor(Main.modId);
+            ModMenu.Instance.EnableMenuHide(Main.modId);
+        }
+
+        private void HidePlacementMenu() {
+            showPlacementMenu = false;
+            ModMenu.Instance.HideCursor(Main.modId);
+            ModMenu.Instance.DisableMenuHide(Main.modId);
+        }
+
         void LoadPlaceableObjects() {
             Console.WriteLine("Loading Placeable Objects");
             bool bundleLoaded = objectBundle != null;
@@ -100,16 +124,13 @@ namespace XLShredObjectSpawner {
         }
 
         public void Start() {
-            ModMenu.Instance.RegisterTempHideMenu(Main.modId, () => (showSpawnMenu || showPlacementMenu) ? 1 : 0);
-
             ModUIBox uiBoxSalty = ModMenu.Instance.RegisterModMaker("salty", "Salty", -1);
             uiBoxSalty.AddCustom(() => {
                 if (GUILayout.Button("Open Map Object Spawner", GUILayout.Height(30f))) {
-                    this.showSpawnMenu = true;
+                    ShowSpawnMenu();
                 }
             }, () => Main.enabled);
-
-            ModMenu.Instance.RegisterShowCursor(Main.modId, () => (showSpawnMenu || showPlacementMenu) ? 1 : 0);
+            
             LoadPlaceableObjects();
         }
 
@@ -223,7 +244,7 @@ namespace XLShredObjectSpawner {
 
 
                 if (GUILayout.Button("Close", GUILayout.Height(spawn_button_height))) {
-                    showSpawnMenu = false;
+                    HideSpawnMenu();
                 }
 
             }
@@ -357,30 +378,29 @@ namespace XLShredObjectSpawner {
                             RecalculateGrindTriggers(objectBeingPlaced);
                         }
                         objectBeingPlaced = null;
-                        showPlacementMenu = false;
-
-                        showSpawnMenu = true;
+                        HidePlacementMenu();
+                        ShowSpawnMenu();
                     }
                     if (isObjectBeingEdited) {
                         if (GUILayout.Button("DELETE", GUILayout.Height(placement_button_height))) {
                             placedGameObjects.Remove(objectBeingPlaced);
                             UnityEngine.Object.Destroy(objectBeingPlaced);
                             objectBeingPlaced = null;
-                            showPlacementMenu = false;
+                            HidePlacementMenu();
                             showSpawnMenu = true;
                         }
                         if (GUILayout.Button("CANCEL", GUILayout.Height(placement_button_height))) {
                             originalTransform.ApplyTo(objectBeingPlaced.transform);
                             objectBeingPlaced = null;
-                            showPlacementMenu = false;
+                            HidePlacementMenu();
                             showSpawnMenu = true;
                         }
                     } else {
                         if (GUILayout.Button("CANCEL/DELETE", GUILayout.Height(placement_button_height))) {
                             UnityEngine.Object.Destroy(objectBeingPlaced);
                             objectBeingPlaced = null;
-                            showPlacementMenu = false;
-                            showSpawnMenu = true;
+                            HidePlacementMenu();
+                            ShowSpawnMenu();
                         }
                     }
                 }
@@ -506,8 +526,8 @@ namespace XLShredObjectSpawner {
                     objectBeingPlaced = gameObject2;
                 }
 
-                showSpawnMenu = false;
-                showPlacementMenu = true;
+                HideSpawnMenu();
+                ShowPlacementMenu();
                 return;
             }
             ModMenu.Instance.ShowMessage("GameObject Not Found: " + name);

@@ -5,7 +5,8 @@ param(
     [String]$ProjectDir = $(throw "-ProjectDir is required."),
     [String]$SolutionDir = $(throw "-SolutionDir is required."),
     [String]$ConfigurationName = $(throw "-ConfigurationName is required."),
-    [Switch]$LoadLib
+    [String[]]$LibNames,
+    [Switch]$LoadLib #Deprecated: Use above more generic parameter with argument "XLShredLib"
 )
 
 $configContent = Get-Content ([io.path]::combine($SolutionDir, "config.json")) | ConvertFrom-Json;
@@ -26,6 +27,15 @@ if ($ConfigurationName -eq "Debug") {
     copy-item ([io.path]::combine( $TargetDir, $TargetName + ".pdb" )) $modTargetDir -force;
 }
 copy-item ([io.path]::combine( $ProjectDir, "Resources\Info.json" )) $modTargetDir -force;
+
+foreach ($libName in $LibNames) {
+    copy-item ([io.path]::combine( $TargetDir, $libName + ".dll" )) $modTargetDir  -force;
+    if ($ConfigurationName -eq "Debug") {
+        copy-item ([io.path]::combine( $TargetDir, $libName + ".pdb" )) $modTargetDir -force;
+    }
+}
+
+#Deprecated; will be deleted at some point
 If ($LoadLib) {
     copy-item ([io.path]::combine( $TargetDir, "XLShredLib.dll" )) $modTargetDir  -force;
     if ($ConfigurationName -eq "Debug") {
@@ -34,7 +44,6 @@ If ($LoadLib) {
 }
 
 if ($ConfigurationName -eq "Release") {
-    
     copy-item -Recurse -Force $modTargetDir $modTargetDirTmp -Exclude Settings.xml;
     Compress-Archive -Force -Path $modTargetDirTmp -DestinationPath ([io.path]::combine($gameDirectory, "Mods\" + $TargetName + '-' + $infoContent.version + '.zip' ));
     Remove-Item -Recurse -Force $modTargetDirTmpParent; 

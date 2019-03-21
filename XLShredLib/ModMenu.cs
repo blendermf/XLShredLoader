@@ -34,6 +34,10 @@ namespace XLShredLib {
         private float btnLastPressed;
         private float realtimeSinceStartup;
 
+        private HashSet<string> cursorVisibilityRegistry = new HashSet<string>();
+        private HashSet<string> hideMenuRegistry = new HashSet<string>();
+        private string exclusiveTimeScaleRegistry = null;
+
         private Dictionary<String, Func<int>> shouldShowCursorFuncs = new Dictionary<string, Func<int>>();
         private bool shouldShowCursor;
 
@@ -97,32 +101,13 @@ namespace XLShredLib {
             public float Epoch { get; set; }
         }
 
-        public void RegisterTimeScaleExclusive(Func<bool> func) {
-            timeScaleExclusiveFunc = func;
-            timeScaleExclusive = true;
-        }
-
-        public void RegisterTimeScaleTarget(String modid, Func<float> func) {
-            timeScaleTargets[modid] = func;
-        }
-        public void UnregisterTimeScaleTarget(String modid) {
-            timeScaleTargets.Remove(modid);
-        }
-
-        public void RegisterShowCursor(String modid, Func<int> func) {
-            shouldShowCursorFuncs[modid] = func;
-        }
-        public void UnregisterShowCursor(String modid) {
-            shouldShowCursorFuncs.Remove(modid);
-        }
-
-        public void RegisterTempHideMenu(String modid, Func<int> func) {
-            tempHideFuncs[modid] = func;
-        }
-        public void UnregisterTempHideMenu(String modid) {
-            tempHideFuncs.Remove(modid);
-        }
-
+        /// <summary>
+        /// Register the mod maker of your mod (used for display in the menu) and returns the <c>ModUIBox</c> for your section.
+        /// </summary>
+        /// <param name="identifier">A string representing your mod maker id.</param>
+        /// <param name="name">A string representing a display friendly name for the mod maker.</param>
+        /// <param name="priority">An int that represents the priority your section will take in the menu. Default value is 0, higher numbers = higher on the list. Unless you have a good reason, don't set it</param>
+        /// <returns>The <c>ModUIBox</c> for your section of the menu.</returns>
         public ModUIBox RegisterModMaker(String identifier, String name, int priority = 0) {
             if (!modMakers.ContainsKey(identifier)) {
                 ModUIBox uiBox = new ModUIBox(name, priority);
@@ -134,6 +119,146 @@ namespace XLShredLib {
             }
         }
 
+        /// <summary>
+        /// Add a <c>ModUIBox</c> to the menu. When you register a mod maker one is already created, so you don't usually need to use this.
+        /// </summary>
+        /// <param name="uiBox">The <c>ModUIBox</c> to add.</param>
+        public void AddUIBox(ModUIBox uiBox) {
+            uiBoxes.Add(uiBox);
+        }
+
+        /// <summary>
+        /// Shows a message on screen temporarily (and writes it to the console).
+        /// </summary>
+        /// <param name="msg">A string representing the message.</param>
+        public void ShowMessage(string msg) {
+            Console.WriteLine(msg);
+            realtimeSinceStartup = Time.realtimeSinceStartup;
+            tmpMessage = new ModMenu.TmpMessage {
+                Msg = msg,
+                Epoch = realtimeSinceStartup
+            };
+        }
+
+        public delegate void KeyPressAction();
+        /// <summary>
+        /// Checks for a key press, and performs action if pressed (with a buffer to prevent excessively rapid actions). 
+        /// </summary>
+        /// <param name="keyCode">The KeyCode you are checking</param>
+        /// <param name="buttonPressBuffer">A float representing the time buffer between actions being called.</param>
+        /// <param name="keyPressAction">The function to call when the key is pressed.</param>
+        public void KeyPress(KeyCode keyCode, float buttonPressBuffer, KeyPressAction keyPressAction) {
+            if (Input.GetKey(keyCode) && (double)(this.realtimeSinceStartup - this.btnLastPressed) > buttonPressBuffer) {
+                this.btnLastPressed = this.realtimeSinceStartup;
+                keyPressAction();
+            }
+        }
+
+        /// <summary>
+        /// Register your mod for exclusive control over <c>Time.timeScale</c>. 
+        /// Disables <c>timeScale</c> functions from all other Mod Menu mods while this is set.
+        /// You can then manually modify <c>Time.timeScale</c> from your mod.
+        /// </summary>
+        /// <param name="modid">A string representing your mod's id.</param>
+        public void EnableExclusiveTimeScale(string modid) {
+            exclusiveTimeScaleRegistry = modid;
+        }
+
+        /// <summary>
+        /// Disables exclusive <c>Time.timeScale</c> control.
+        /// </summary>
+        /// <param name="modid">A string representing your mod's id.</param>
+        public void DisableExclusiveTimeScale(string modid) {
+            if (modid == exclusiveTimeScaleRegistry) exclusiveTimeScaleRegistry = null;
+        }
+
+        /// <summary>
+        /// Register a target timescale for your mod. The slowest target from all mods will be used.
+        /// </summary>
+        /// <param name="modid">A string representing your mod's id.</param>
+        /// <param name="func">A function that returns the target timescale.</param>
+        public void RegisterTimeScaleTarget(string modid, Func<float> func) {
+            timeScaleTargets[modid] = func;
+        }
+
+        /// <summary>
+        /// Unregister your mod's timescale target.
+        /// </summary>
+        /// <param name="modid">A string representing your mod's id.</param>
+        public void UnregisterTimeScaleTarget(string modid) {
+            timeScaleTargets.Remove(modid);
+        }
+
+        /// <summary>
+        /// Tells the menu your mod wants the cursor to be visible.
+        /// </summary>
+        /// <param name="modid">A string representing your mod's id.</param>
+        public void ShowCursor(string modid) {
+            cursorVisibilityRegistry.Add(modid);
+        }
+
+        /// <summary>
+        /// Tells the menu your mod no longer needs the cursor to be visible (other mods still may have it showing).
+        /// </summary>
+        /// <param name="modid">A string representing your mod's id.</param>
+        public void HideCursor(string modid) {
+            cursorVisibilityRegistry.Remove(modid);
+        }
+
+        /// <summary>
+        /// Tells the menu you want it to be temporarily hidden (usually when your mod is showing it's own window/interface)
+        /// </summary>
+        /// <param name="modid">A string representing your mod's id.</param>
+        public void EnableMenuHide(string modid) {
+            hideMenuRegistry.Add(modid);
+        }
+
+        /// <summary>
+        /// Tells the menu you no longer need it to be hidden (other mods may still have it hidden).
+        /// </summary>
+        /// <param name="modid">A string representing your mod's id.</param>
+        public void DisableMenuHide(string modid) {
+            hideMenuRegistry.Remove(modid);
+        }
+
+        /// <summary>
+        /// Register a function for your mod that tells the menu whether it wants the cursor visible or not. This will eventually be removed, use <c>ShowCursor</c>.
+        /// </summary>
+        /// <param name="modid">A string representing your mod's id.</param>
+        /// <param name="func">A function that returns 1 or 0 to indicate if the cursor should be visible or not.</param>
+        [ObsoleteAttribute("This method is obsolete (and will eventually go away). Use ShowCursor instead.", false)]
+        public void RegisterShowCursor(string modid, Func<int> func) {
+            shouldShowCursorFuncs[modid] = func;
+        }
+
+        /// <summary>
+        /// Unregister your show cursor function. This will eventually be removed, use <c>HideCursor</c>.
+        /// </summary>
+        /// <param name="modid">A string representing your mod's id.</param>
+        [ObsoleteAttribute("This method is obsolete (and will eventually go away). Use HideCursor instead.", false)]
+        public void UnregisterShowCursor(string modid) {
+            shouldShowCursorFuncs.Remove(modid);
+        }
+
+        /// <summary>
+        /// Register a function for your mod that tells the menu whether you want it to be temporarily hidden or not. This will eventually be removed, use <c>EnableMenuHide</c>.
+        /// </summary>
+        /// <param name="modid">A string representing your mod's id.</param>
+        /// <param name="func"></param>
+        [ObsoleteAttribute("This method is obsolete (and will eventually go away). Use EnableMenuHide instead.", false)]
+        public void RegisterTempHideMenu(String modid, Func<int> func) {
+            tempHideFuncs[modid] = func;
+        }
+
+        /// <summary>
+        /// Unregister your temporary menu hide function. This will eventually be removed, use <c>DisableMenuHide</c>.
+        /// </summary>
+        /// <param name="modid">A string representing your mod's id.</param>
+        [ObsoleteAttribute("This method is obsolete (and will eventually go away). Use DisableMenuHide instead.", false)]
+        public void UnregisterTempHideMenu(String modid) {
+            tempHideFuncs.Remove(modid);
+        }
+
         public void Update() {
             this.realtimeSinceStartup = Time.realtimeSinceStartup;
 
@@ -141,14 +266,7 @@ namespace XLShredLib {
                 this.showMenu = !this.showMenu;
             });
 
-            if (timeScaleExclusive) {
-                bool timeScaleExclusiveVal = timeScaleExclusiveFunc.Invoke();
-
-                if (!timeScaleExclusiveVal) {
-                    timeScaleExclusiveFunc = null;
-                    timeScaleExclusive = false;
-                }
-            } else {
+            if (exclusiveTimeScaleRegistry == null) {
                 if (timeScaleTargets.Any()) {
                     timeScaleTarget = Enumerable.Min<Func<float>>(timeScaleTargets.Values, (f) => f.Invoke());
                 } else {
@@ -161,27 +279,6 @@ namespace XLShredLib {
                 }
                 Time.timeScale = timeScaleTarget;
             }
-        }
-
-        public void ShowMessage(string msg) {
-            Console.WriteLine(msg);
-            realtimeSinceStartup = Time.realtimeSinceStartup;
-            tmpMessage = new ModMenu.TmpMessage {
-                Msg = msg,
-                Epoch = realtimeSinceStartup
-            };
-        }
-
-        public delegate void KeyPressAction();
-        public void KeyPress(KeyCode keyCode, float buttonPressBuffer, KeyPressAction keyPressAction) {
-            if (Input.GetKey(keyCode) && (double)(this.realtimeSinceStartup - this.btnLastPressed) > buttonPressBuffer) {
-                this.btnLastPressed = this.realtimeSinceStartup;
-                keyPressAction();
-            }
-        }
-
-        public void AddUIBox(ModUIBox uiBox) {
-            uiBoxes.Add(uiBox);
         }
 
         private void OnGUI() {
@@ -226,10 +323,10 @@ namespace XLShredLib {
                 }
             }
 
+            shouldShowCursor = cursorVisibilityRegistry.Any();
+
             if (shouldShowCursorFuncs.Any()) {
-                shouldShowCursor = Enumerable.Max<Func<int>>(shouldShowCursorFuncs.Values, (f) => f.Invoke()) != 0;
-            } else {
-                shouldShowCursor = false;
+                shouldShowCursor = shouldShowCursor || Enumerable.Max<Func<int>>(shouldShowCursorFuncs.Values, (f) => f.Invoke()) != 0;
             }
 
             if (!this.showMenu && !(UnityModManager.UI.Instance != null && UnityModManager.UI.Instance.Opened) && !shouldShowCursor) {
@@ -240,10 +337,10 @@ namespace XLShredLib {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
 
+            tempHideMenu = hideMenuRegistry.Any();
+
             if (tempHideFuncs.Any()) {
-                tempHideMenu = Enumerable.Max<Func<int>>(tempHideFuncs.Values, (f) => f.Invoke()) != 0;
-            } else {
-                tempHideMenu = false;
+                tempHideMenu = tempHideMenu || Enumerable.Max<Func<int>>(tempHideFuncs.Values, (f) => f.Invoke()) != 0;
             }
 
             if (this.showMenu && !tempHideMenu) {
