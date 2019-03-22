@@ -90,6 +90,7 @@ namespace XLShredRespawnNearBail.Extensions.Components {
         }
 
         public void GetTmpSpawnPos() {
+            PlayerController.Instance.respawn.behaviourPuppet.BoostImmunity(1000f);
             RespawnComponent.CancelInvoke("DoRespawn");
             PlayerController.Instance.CancelRespawnInvoke();
             RespawnComponent.puppetMaster.FixTargetToSampledState(1f);
@@ -128,6 +129,7 @@ namespace XLShredRespawnNearBail.Extensions.Components {
             PlayerController.Instance.SetRightIKLerpTarget(0f);
             PlayerController.Instance.SetMaxSteeze(0f);
             PlayerController.Instance.AnimSetPush(false);
+            PlayerController.Instance.AnimSetMongo(false);
             PlayerController.Instance.CrossFadeAnimation("Riding", 0.05f);
             PlayerController.Instance.cameraController.ResetAllCamera();
             RespawnComponent.puppetMaster.targetRoot.position = _setTmpPos[1] + PlayerOffset;
@@ -143,6 +145,8 @@ namespace XLShredRespawnNearBail.Extensions.Components {
             PlayerController.Instance.skaterController.skaterRigidbody.constraints = RigidbodyConstraints.None;
             FinalIk.enabled = true;
             RetryRespawn = false;
+            RespawnComponent.puppetMaster.FixMusclePositions();
+            PlayerController.Instance.respawn.behaviourPuppet.BoostImmunity(1000f);
         }
 
         public void SetTmpSpawnPos() {
