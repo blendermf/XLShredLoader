@@ -7,6 +7,7 @@ using UnityEngine;
 namespace XLShredLib.UI {
 
     public class ModUILabel {
+        public String id = "";
         public LabelType labelType = LabelType.Text;
         public String text = "";
         public Side side;
@@ -16,10 +17,11 @@ namespace XLShredLib.UI {
         public Action<bool> action = null;
         public int priority = 0;
 
-        public ModUILabel(String text, Side side, Func<bool> isEnabled, int priority = 0) :
-            this(LabelType.Text, text, side, isEnabled, false, null, priority) { }
+        public ModUILabel(string id, String text, Side side, Func<bool> isEnabled, int priority = 0) :
+            this(id, LabelType.Text, text, side, isEnabled, false, null, priority) { }
 
-        public ModUILabel(LabelType type, String text, Side side, Func<bool> isEnabled, bool initToggle = false, Action<bool> action = null, int priority = 0) {
+        public ModUILabel(string id, LabelType type, String text, Side side, Func<bool> isEnabled, bool initToggle = false, Action<bool> action = null, int priority = 0) {
+            this.id = id;
             this.labelType = type;
             this.text = text;
             this.side = side;
@@ -29,6 +31,25 @@ namespace XLShredLib.UI {
             this.action = action;
             this.priority = priority;
         }
+
+        #region Deprecated Methods
+        [ObsoleteAttribute("This method is obsolete (and will eventually go away). Use the ModUILabel(string id, ...) version.", false)]
+        public ModUILabel(String text, Side side, Func<bool> isEnabled, int priority = 0) :
+            this("", LabelType.Text, text, side, isEnabled, false, null, priority) { }
+
+        [ObsoleteAttribute("This method is obsolete (and will eventually go away). Use the ModUILabel(string id, ...) version.", false)]
+        public ModUILabel(LabelType type, String text, Side side, Func<bool> isEnabled, bool initToggle = false, Action<bool> action = null, int priority = 0) {
+            this.id = "";
+            this.labelType = type;
+            this.text = text;
+            this.side = side;
+            this.isEnabled = isEnabled;
+            this.toggleValue = initToggle;
+            this.oldToggleValue = initToggle;
+            this.action = action;
+            this.priority = priority;
+        }
+        #endregion
 
         public void SetToggleValue(bool val) {
             oldToggleValue = toggleValue;
@@ -55,15 +76,27 @@ namespace XLShredLib.UI {
     }
 
     public class ModUICustom {
+        public String id = "";
         public Action onGUI = null;
         public Func<bool> isEnabled = null;
         public int priority = 0;
 
-        public ModUICustom(Action onGUI, Func<bool> isEnabled, int priority = 0) {
+        public ModUICustom(string id, Action onGUI, Func<bool> isEnabled, int priority = 0) {
+            this.id = id;
             this.onGUI = onGUI;
             this.isEnabled = isEnabled;
             this.priority = priority;
         }
+
+        #region Deprecated Methods
+        [ObsoleteAttribute("This method is obsolete (and will eventually go away). Use the ModUICustom(string id, ...) version.", false)]
+        public ModUICustom(Action onGUI, Func<bool> isEnabled, int priority = 0) {
+            this.id = "";
+            this.onGUI = onGUI;
+            this.isEnabled = isEnabled;
+            this.priority = priority;
+        }
+        #endregion
 
         public void Render() {
             if (isEnabled != null && isEnabled()) onGUI?.Invoke();
@@ -87,6 +120,8 @@ namespace XLShredLib.UI {
         public List<ModUILabel> labelsLeft;
         public List<ModUILabel> labelsRight;
         public List<ModUICustom> customs;
+        public Dictionary<string, ModUILabel> labelsById;
+        public Dictionary<string, ModUICustom> customsById;
 
         int labelLeftEnabledCount = 0;
         int labelRightEnabledCount = 0;
@@ -96,19 +131,102 @@ namespace XLShredLib.UI {
             labelsLeft = new List<ModUILabel>();
             labelsRight = new List<ModUILabel>();
             customs = new List<ModUICustom>();
+            labelsById = new Dictionary<string, ModUILabel>();
+            customsById = new Dictionary<string, ModUICustom>();
             this.modMaker = modMaker;
             this.priority = priority;
         }
 
         public void AddLabel(ModUILabel uiLabel) {
-            if (uiLabel.side == Side.left) {
-                labelsLeft.Add(uiLabel);
+            if (labelsById.ContainsKey(uiLabel.id)) {
+                ModUILabel oldLabel = labelsById[uiLabel.id];
+                if (oldLabel.side == uiLabel.side) {
+                    if (uiLabel.side == Side.left) {
+                        labelsLeft[labelsLeft.FindIndex(l => l.id == uiLabel.id)] = uiLabel;
+                    } else {
+                        labelsRight[labelsRight.FindIndex(l => l.id == uiLabel.id)] = uiLabel;
+                    }
+                } else {
+                    if (oldLabel.side == Side.left) {
+                        labelsLeft.Remove(oldLabel);
+                        labelsRight.Add(uiLabel);
+                    } else {
+                        labelsRight.Remove(oldLabel);
+                        labelsLeft.Add(uiLabel);
+                    }
+                }
             } else {
-                labelsRight.Add(uiLabel);
+                if (uiLabel.id != "") labelsById[uiLabel.id] = uiLabel;
+
+                if (uiLabel.side == Side.left) {
+                    labelsLeft.Add(uiLabel);
+                } else {
+                    labelsRight.Add(uiLabel);
+                }
             }
+
             UpdateSort();
         }
 
+        public ModUILabel AddLabel(String id, String text, Side side, Func<bool> isEnabled, int priority = 0) {
+
+            ModUILabel uiLabel = new ModUILabel(id, text, side, isEnabled, priority);
+            AddLabel(uiLabel);
+            return uiLabel;
+        }
+
+        public ModUILabel AddLabel(String id, LabelType type, String text, Side side, Func<bool> isEnabled, bool initToggle = false, Action<bool> action = null, int priority = 0) {
+
+            ModUILabel uiLabel = new ModUILabel(id, type, text, side, isEnabled, initToggle, action, priority);
+            AddLabel(uiLabel);
+            UpdateSort();
+
+            return uiLabel;
+        }
+
+        public ModUILabel AddToggle(String id, String text, Side side, Func<bool> isEnabled, bool initToggle = false, Action<bool> action = null, int priority = 0) {
+            ModUILabel uiLabel = new ModUILabel(id, LabelType.Toggle, text, side, isEnabled, initToggle, action, priority);
+            AddLabel(uiLabel);
+            UpdateSort();
+
+            return uiLabel;
+        }
+
+        public void RemoveLabel(string id) {
+            ModUILabel label = labelsById[id];
+            labelsById.Remove(id);
+            labelsLeft.Remove(label);
+            labelsRight.Remove(label);
+        }
+
+        public void AddCustom(ModUICustom uiCustom) {
+            if (customsById.ContainsKey(uiCustom.id)) {
+                ModUICustom oldCustom = customsById[uiCustom.id];
+                customs[customs.FindIndex(c => c.id == uiCustom.id)] = uiCustom;
+              
+            } else {
+                if (uiCustom.id != "") customsById[uiCustom.id] = uiCustom;
+
+                customs.Add(uiCustom);
+            }
+            
+            UpdateSort();
+        }
+
+        public ModUICustom AddCustom(String id, Action onGUI, Func<bool> isEnabled, int priority = 0) {
+            ModUICustom uiCustom = new ModUICustom(id, onGUI, isEnabled, priority);
+            AddCustom(uiCustom);
+            return uiCustom;
+        }
+
+        public void RemoveCustom(string id) {
+            ModUICustom custom = customsById[id];
+            customsById.Remove(id);
+            customs.Remove(custom);
+        }
+
+        #region Deprecated Methods
+        [ObsoleteAttribute("This method is obsolete (and will eventually go away). Use the AddLabel(string id, ...) version.", false)]
         public ModUILabel AddLabel(String text, Side side, Func<bool> isEnabled, int priority = 0) {
 
             ModUILabel uiLabel = new ModUILabel(text, side, isEnabled, priority);
@@ -116,6 +234,7 @@ namespace XLShredLib.UI {
             return uiLabel;
         }
 
+        [ObsoleteAttribute("This method is obsolete (and will eventually go away). Use the AddLabel(string id, ...) version.", false)]
         public ModUILabel AddLabel(LabelType type, String text, Side side, Func<bool> isEnabled, bool initToggle = false, Action<bool> action = null, int priority = 0) {
 
             ModUILabel uiLabel = new ModUILabel(type, text, side, isEnabled, initToggle, action, priority);
@@ -124,6 +243,8 @@ namespace XLShredLib.UI {
 
             return uiLabel;
         }
+
+        [ObsoleteAttribute("This method is obsolete (and will eventually go away). Use the AddLabel(string id, ...) version.", false)]
         public ModUILabel AddToggle(String text, Side side, Func<bool> isEnabled, bool initToggle = false, Action<bool> action = null, int priority = 0) {
             ModUILabel uiLabel = new ModUILabel(LabelType.Toggle, text, side, isEnabled, initToggle, action, priority);
             AddLabel(uiLabel);
@@ -132,16 +253,13 @@ namespace XLShredLib.UI {
             return uiLabel;
         }
 
-        public void AddCustom(ModUICustom uiCustom) {
-            customs.Add(uiCustom);
-            UpdateSort();
-        }
-
+        [ObsoleteAttribute("This method is obsolete (and will eventually go away). Use the AddCustom(string id, ...) version.", false)]
         public ModUICustom AddCustom(Action onGUI, Func<bool> isEnabled, int priority = 0) {
             ModUICustom uiCustom = new ModUICustom(onGUI, isEnabled, priority);
             AddCustom(uiCustom);
             return uiCustom;
         }
+        #endregion
 
         public void UpdateEnabledCounts() {
             labelLeftEnabledCount = Enumerable.Count<ModUILabel>(labelsLeft, (l) => l.isEnabled());

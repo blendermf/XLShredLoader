@@ -11,8 +11,8 @@ namespace XLShredFasterSpin {
         ModUILabel uiLabelFasterBodySpin;
         public void Start() {
             uiBox = ModMenu.Instance.RegisterModMaker("rafahel_mello", "Rafahel Mello");
-            uiLabelFasterGrindSpin = uiBox.AddLabel(LabelType.Toggle, "Faster Grind Spin (G)", Side.left, () => Main.enabled, Main.settings.grindSpinVelocityEnabled && Main.enabled, (b) => Main.settings.grindSpinVelocityEnabled = b, 2);
-            uiLabelFasterBodySpin = uiBox.AddLabel(LabelType.Toggle, "Faster Body Spin (L)", Side.right, () => Main.enabled, Main.settings.spinVelocityEnabled && Main.enabled, (b) => Main.settings.spinVelocityEnabled = b, 2);
+            uiLabelFasterGrindSpin = uiBox.AddLabel("faster-grind-spin", LabelType.Toggle, "Faster Grind Spin (G)", Side.left, () => Main.enabled, Main.settings.grindSpinVelocityEnabled && Main.enabled, (b) => Main.settings.grindSpinVelocityEnabled = b, 2);
+            uiLabelFasterBodySpin = uiBox.AddLabel("faster-body-spin", LabelType.Toggle, "Faster Body Spin (L)", Side.right, () => Main.enabled, Main.settings.spinVelocityEnabled && Main.enabled, (b) => Main.settings.spinVelocityEnabled = b, 2);
         }
 
         public void Update() {
@@ -37,6 +37,11 @@ namespace XLShredFasterSpin {
                     }
                 });
             }
+        }
+
+        public void OnDestroy() {
+            uiBox.RemoveLabel("faster-grind-spin");
+            uiBox.RemoveLabel("faster-body-spin");
         }
     }
 }

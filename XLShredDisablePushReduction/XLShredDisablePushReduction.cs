@@ -10,7 +10,7 @@ namespace XLShredDisablePushReduction {
         ModUILabel uiLabelDisablePushReduction;
         public void Start() {
             uiBox = ModMenu.Instance.RegisterModMaker("com.kiwi", "Kiwi");
-            uiLabelDisablePushReduction = uiBox.AddLabel(LabelType.Toggle, "Disable Push Reduction (P)", Side.left, () => Main.enabled, Main.settings.disablePushReduction && Main.enabled, (b) => Main.settings.disablePushReduction = b);
+            uiLabelDisablePushReduction = uiBox.AddLabel("disable-push-reduction", LabelType.Toggle, "Disable Push Reduction (P)", Side.left, () => Main.enabled, Main.settings.disablePushReduction && Main.enabled, (b) => Main.settings.disablePushReduction = b);
         }
 
         public void Update() {
@@ -25,6 +25,10 @@ namespace XLShredDisablePushReduction {
                     }
                 });
             }
+        }
+
+        public void OnDestroy() {
+            uiBox.RemoveLabel("disable-push-reduction");
         }
     }
 }

@@ -16,7 +16,7 @@ namespace XLShredFixedSlowmo {
 
         public void Start() {
             uiBox = ModMenu.Instance.RegisterModMaker("commander_klepto", "Commander Klepto");
-            uiLabelSlowMotion = uiBox.AddLabel(LabelType.Toggle, "Slow Motion (LB)", Side.right, () => Main.enabled, Main.settings.fixedSlowmo && Main.enabled, (b) => Main.settings.fixedSlowmo = b);
+            uiLabelSlowMotion = uiBox.AddLabel("slow-motion", LabelType.Toggle, "Slow Motion (LB)", Side.right, () => Main.enabled, Main.settings.fixedSlowmo && Main.enabled, (b) => Main.settings.fixedSlowmo = b);
 
             ModMenu.Instance.RegisterTimeScaleTarget(Main.modId, () => {
                 if (Main.enabled && Main.settings.fixedSlowmo) {
@@ -44,6 +44,10 @@ namespace XLShredFixedSlowmo {
                     }
                 }
             }
+        }
+
+        public void OnDestroy() {
+            uiBox.RemoveLabel("slow-motion");
         }
     }
 }

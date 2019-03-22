@@ -6,9 +6,11 @@ using System;
 
 namespace XLShredPushSpeed {
     class XLShredPushSpeed : MonoBehaviour {
+        ModUIBox uiBox;
+
         public void Start() {
-            ModUIBox uiBoxFigzyy = ModMenu.Instance.RegisterModMaker("figzy", "*Figzyy");
-            uiBoxFigzyy.AddLabel("Page UP/DOWN - Adjust Push Speed", Side.left, () => Main.enabled);
+            uiBox = ModMenu.Instance.RegisterModMaker("figzy", "*Figzyy");
+            uiBox.AddLabel("adjust-push-speed", "Page UP/DOWN - Adjust Push Speed", Side.left, () => Main.enabled);
         }
 
         public void Update() {
@@ -39,6 +41,10 @@ namespace XLShredPushSpeed {
                     ModMenu.Instance.ShowMessage("Push Force: " + string.Format("{0:0.0}", Main.settings.CustomPushForce) + " Default: 6.0");
                 });
             }
+        }
+
+        public void OnDestroy() {
+            uiBox.RemoveLabel("adjust-push-speed");
         }
     }
 }

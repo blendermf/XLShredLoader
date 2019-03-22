@@ -6,9 +6,12 @@ using System;
 
 namespace XLShredPopForce {
     class XLShredPopForce : MonoBehaviour {
+
+        ModUIBox uiBox;
+
         public void Start() {
-            ModUIBox uiBoxFigzyy = ModMenu.Instance.RegisterModMaker("figzy", "*Figzyy");
-            uiBoxFigzyy.AddLabel("+/- - Adjust Pop Force", Side.right, () => Main.enabled);
+            uiBox = ModMenu.Instance.RegisterModMaker("figzy", "*Figzyy");
+            uiBox.AddLabel("adjust-pop-force","+/- - Adjust Pop Force", Side.right, () => Main.enabled);
         }
 
         public void Update() {
@@ -55,6 +58,10 @@ namespace XLShredPopForce {
                     ModMenu.Instance.ShowMessage("Pop Force: " + string.Format("{0:0.0}", Main.settings.CustomPopForce) + " Default: 3.0");
                 });
             }
+        }
+
+        public void OnDestroy() {
+            uiBox.RemoveLabel("adjust-pop-force");
         }
     }
 }

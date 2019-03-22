@@ -6,11 +6,11 @@ using System;
 
 namespace XLShredCustomGrindManualPop {
     class XLShredCustomGrindManualPop : MonoBehaviour {
-
+        ModUIBox uiBox;
         public void Start() {
-            ModUIBox uiBoxKlepto = ModMenu.Instance.RegisterModMaker("commander_klepto", "Commander Klepto");
-            uiBoxKlepto.AddLabel("UP/DOWN - Adjust Grind Pop Force", Side.left, () => { return Main.enabled; });
-            uiBoxKlepto.AddLabel("LEFT/RIGHT - Adjust Manual Pop Force", Side.left, () => { return Main.enabled; });
+            uiBox = ModMenu.Instance.RegisterModMaker("commander_klepto", "Commander Klepto");
+            uiBox.AddLabel("adjust-grind-pop-force", "UP/DOWN - Adjust Grind Pop Force", Side.left, () => { return Main.enabled; });
+            uiBox.AddLabel("adjust-manual-pop-force", "LEFT/RIGHT - Adjust Manual Pop Force", Side.left, () => { return Main.enabled; });
         }
 
         public void Update() {
@@ -36,6 +36,11 @@ namespace XLShredCustomGrindManualPop {
                     ModMenu.Instance.ShowMessage("Manual Pop Force: " + Main.settings.customManualPopForce + " Default: 2.5");
                 });
             }
+        }
+
+        public void OnDestroy() {
+            uiBox.RemoveLabel("adjust-grind-pop-force");
+            uiBox.RemoveLabel("adjust-manual-pop-force");
         }
 
     }

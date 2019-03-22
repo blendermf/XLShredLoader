@@ -12,7 +12,7 @@ namespace XLShredRealisticVert {
 
         public void Start() {
             uiBox = ModMenu.Instance.RegisterModMaker("ghfear", "GHFear");
-            uiLabelRealisticVert = uiBox.AddLabel(LabelType.Toggle, "Realistic Vert (V)", Side.left, () => Main.enabled, Main.settings.realisticVert && Main.enabled, (b) => Main.settings.realisticVert = b, 1);
+            uiLabelRealisticVert = uiBox.AddLabel("realistic-vert", LabelType.Toggle, "Realistic Vert (V)", Side.left, () => Main.enabled, Main.settings.realisticVert && Main.enabled, (b) => Main.settings.realisticVert = b, 1);
         }
 
         public void Update() {
@@ -27,6 +27,10 @@ namespace XLShredRealisticVert {
                     }
                 });
             }
+        }
+
+        public void OnDestroy() {
+            uiBox.RemoveLabel("realistic-vert");
         }
     }
 }

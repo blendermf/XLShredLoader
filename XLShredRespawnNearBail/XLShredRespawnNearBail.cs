@@ -10,7 +10,7 @@ namespace XLShredRespawnNearBail {
         ModUILabel uiLabelRespawnNearBail;
         public void Start() {
             uiBox = ModMenu.Instance.RegisterModMaker("com.kiwi", "Kiwi");
-            uiLabelRespawnNearBail = uiBox.AddLabel(LabelType.Toggle, "Respawn Near Bail (R)", Side.left, () => Main.enabled, Main.settings.respawnNearBail && Main.enabled, (b) => Main.settings.respawnNearBail = b);
+            uiLabelRespawnNearBail = uiBox.AddLabel("respawn-near-bail", LabelType.Toggle, "Respawn Near Bail (R)", Side.left, () => Main.enabled, Main.settings.respawnNearBail && Main.enabled, (b) => Main.settings.respawnNearBail = b);
         }
 
         public void Update() {
@@ -25,6 +25,10 @@ namespace XLShredRespawnNearBail {
                     }
                 });
             }
+        }
+
+        public void OnDestroy() {
+            uiBox.RemoveLabel("auto-slow-motion");
         }
     }
 }

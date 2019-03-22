@@ -221,6 +221,8 @@ namespace XLShredLib {
             hideMenuRegistry.Remove(modid);
         }
 
+        #region Deprecated Methods
+
         /// <summary>
         /// Register a function for your mod that tells the menu whether it wants the cursor visible or not. This will eventually be removed, use <c>ShowCursor</c>.
         /// </summary>
@@ -258,6 +260,8 @@ namespace XLShredLib {
         public void UnregisterTempHideMenu(String modid) {
             tempHideFuncs.Remove(modid);
         }
+
+        #endregion
 
         public void Update() {
             this.realtimeSinceStartup = Time.realtimeSinceStartup;

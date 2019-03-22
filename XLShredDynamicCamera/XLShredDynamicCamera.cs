@@ -10,7 +10,7 @@ namespace XLShredDynamicCamera {
         ModUILabel uiLabelDynamicCamera;
         public void Start() {
             uiBox = ModMenu.Instance.RegisterModMaker("rafahel_mello", "Rafahel Mello");
-            uiLabelDynamicCamera = uiBox.AddLabel(LabelType.Toggle, "Dynamic Camera (C)", Side.left, () => Main.enabled, Main.settings.CameraModActive && Main.enabled, (b) => Main.settings.CameraModActive = b, 0);
+            uiLabelDynamicCamera = uiBox.AddLabel("dynamic-camera", LabelType.Toggle, "Dynamic Camera (C)", Side.left, () => Main.enabled, Main.settings.CameraModActive && Main.enabled, (b) => Main.settings.CameraModActive = b, 0);
         }
 
         public void Update() {
@@ -25,6 +25,10 @@ namespace XLShredDynamicCamera {
                     }
                 });
             }
+        }
+
+        public void OnDestroy() {
+            uiBox.RemoveLabel("dynamic-camera");
         }
     }
 }

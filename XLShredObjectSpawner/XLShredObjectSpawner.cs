@@ -31,6 +31,8 @@ namespace XLShredObjectSpawner {
         private static readonly int placement_small_button_width = (placement_column_width / 2) - button_margin_sides;
         private static readonly int placement_middle_spacing_no_margin = placement_middle_spacing - (button_margin_sides * 2);
 
+        ModUIBox uiBox;
+
         private bool showSpawnMenu = false;
         private bool showPlacementMenu = false;
 
@@ -124,8 +126,8 @@ namespace XLShredObjectSpawner {
         }
 
         public void Start() {
-            ModUIBox uiBoxSalty = ModMenu.Instance.RegisterModMaker("salty", "Salty", -1);
-            uiBoxSalty.AddCustom(() => {
+            uiBox = ModMenu.Instance.RegisterModMaker("salty", "Salty", -1);
+            uiBox.AddCustom("open-object-spawner", () => {
                 if (GUILayout.Button("Open Map Object Spawner", GUILayout.Height(30f))) {
                     ShowSpawnMenu();
                 }
@@ -535,6 +537,10 @@ namespace XLShredObjectSpawner {
         
         private string CreateDisplayName(string name) {
             return Regex.Replace(name.Replace(" ", ""), "([a-z])([A-Z])", "$1 $2");
+        }
+
+        public void OnDestroy() {
+            uiBox.RemoveCustom("open-object-spawner");
         }
     }
 }
