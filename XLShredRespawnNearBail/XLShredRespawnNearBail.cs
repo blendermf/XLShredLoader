@@ -28,7 +28,7 @@ namespace XLShredRespawnNearBail {
         }
 
         public void OnDestroy() {
-            uiBox.RemoveLabel("auto-slow-motion");
+            uiBox.RemoveLabel("respawn-near-bail");
         }
     }
 }

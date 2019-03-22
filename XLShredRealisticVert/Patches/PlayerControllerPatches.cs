@@ -36,7 +36,7 @@ namespace XLShredRealisticVert.Patches {
                 if (Vector3.Angle(__instance.GetGroundNormal(), Vector3.up) > 26.0f) {
                     float z = Vector3.Project(skaterBody.velocity, forwardNoY).magnitude * __instance.skaterController.skaterRigidbody.mass;
                     float angle_percent = Vector3.Angle(__instance.GetGroundNormal(), Vector3.up) / 80f;
-                    popDir = (-forwardNoY.normalized * Mathf.Max(z - (0.6f * (1.0f - angle_percent)), 0f) * angle_percent) + (Vector3.up * p_pop);
+                    popDir = (-forwardNoY.normalized * Mathf.Max(z - (0.2f * (1.0f - angle_percent)), 0f) * angle_percent) + (Vector3.up * p_pop);
                 }
                 Vector3 vector = popDir;
                 Vector3 to = __instance.skaterController.skaterRigidbody.velocity + vector;

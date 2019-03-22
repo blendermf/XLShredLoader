@@ -17,7 +17,6 @@ namespace XLShredRespawnNearBail.Extensions.Components {
 
         private Traverse cObj;
         private Traverse<bool> _canPressField;
-        private Traverse<BehaviourPuppet> _behaviourPuppetField;
         private Traverse<bool> _backwardsField;
         private Traverse<FullBodyBipedIK> _finalIkField;
         private Traverse<Vector3> _playerOffsetField;
@@ -33,7 +32,6 @@ namespace XLShredRespawnNearBail.Extensions.Components {
                 _respawnComponent = value;
                 cObj = Traverse.Create(_respawnComponent);
                 _canPressField = cObj.Field<bool>("_canPress");
-                _behaviourPuppetField = cObj.Field<BehaviourPuppet>("_behaviourPuppet");
                 _backwardsField = cObj.Field<bool>("_backwards");
                 _finalIkField = cObj.Field<FullBodyBipedIK>("_finalIk");
                 _playerOffsetField = cObj.Field<Vector3>("_playerOffset");
@@ -46,11 +44,6 @@ namespace XLShredRespawnNearBail.Extensions.Components {
         private bool CanPress {
             get { return _canPressField.Value; }
             set { _canPressField.Value = value; }
-        }
-
-        private BehaviourPuppet BehaviourPuppetComponent {
-            get { return _behaviourPuppetField.Value; }
-            set { _behaviourPuppetField.Value = value; }
         }
 
         private bool Backwards {
@@ -97,11 +90,11 @@ namespace XLShredRespawnNearBail.Extensions.Components {
         }
 
         public void GetTmpSpawnPos() {
-            ((MonoBehaviour) _respawnComponent).CancelInvoke("DoRespawn");
+            RespawnComponent.CancelInvoke("DoRespawn");
             PlayerController.Instance.CancelRespawnInvoke();
             RespawnComponent.puppetMaster.FixTargetToSampledState(1f);
             RespawnComponent.puppetMaster.FixMusclePositions();
-            BehaviourPuppetComponent.StopAllCoroutines();
+            RespawnComponent.behaviourPuppet.StopAllCoroutines();
             FinalIk.enabled = false;
             for (int i = 0; i < RespawnComponent.getSpawn.Length; i++) {
                 RespawnComponent.getSpawn[i].position = _setTmpPos[i];
@@ -143,7 +136,7 @@ namespace XLShredRespawnNearBail.Extensions.Components {
             RespawnComponent.puppetMaster.Resurrect();
             RespawnComponent.puppetMaster.state = PuppetMaster.State.Alive;
             RespawnComponent.puppetMaster.targetAnimator.Play(IdleAnimation, 0, 0f);
-            BehaviourPuppetComponent.SetState(BehaviourPuppet.State.Puppet);
+            RespawnComponent.behaviourPuppet.SetState(BehaviourPuppet.State.Puppet);
             RespawnComponent.puppetMaster.Teleport(_setTmpPos[1] + PlayerOffset, _setTmpRot[0], true);
             PlayerController.Instance.SetIKOnOff(1f);
             PlayerController.Instance.skaterController.skaterRigidbody.useGravity = false;
@@ -151,7 +144,7 @@ namespace XLShredRespawnNearBail.Extensions.Components {
             FinalIk.enabled = true;
             RetryRespawn = false;
         }
-        
+
         public void SetTmpSpawnPos() {
             Quaternion quaternion = Quaternion.LookRotation(RespawnComponent.getSpawn[0].rotation * Vector3.forward, Vector3.up);
             Backwards = PlayerController.Instance.GetBoardBackwards();
