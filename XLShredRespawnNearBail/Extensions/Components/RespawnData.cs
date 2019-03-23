@@ -91,7 +91,7 @@ namespace XLShredRespawnNearBail.Extensions.Components {
 
         public void GetTmpSpawnPos() {
             PlayerController.Instance.respawn.behaviourPuppet.BoostImmunity(1000f);
-            RespawnComponent.CancelInvoke("DoRespawn");
+            ((MonoBehaviour)_respawnComponent).CancelInvoke("DoRespawn");
             PlayerController.Instance.CancelRespawnInvoke();
             RespawnComponent.puppetMaster.FixTargetToSampledState(1f);
             RespawnComponent.puppetMaster.FixMusclePositions();

@@ -26,7 +26,9 @@ namespace XLShredRespawnNearBail {
 
         static bool Load(UnityModManager.ModEntry modEntry) {
             settings = Settings.Load<Settings>(modEntry);
-            
+
+            XLShredDataRegistry.SetData("kiwi.XLShredRespawnNearBail", "isRespawnNearBailActive", settings.respawnNearBail);
+
             modEntry.OnSaveGUI = OnSaveGUI;
             modEntry.OnToggle = OnToggle;
             
@@ -44,10 +46,12 @@ namespace XLShredRespawnNearBail {
                 ModMenu.Instance.gameObject.AddComponent<XLShredRespawnNearBail>();
                 RespawnData respawnData = PlayerController.Instance.respawn.gameObject.AddComponent<RespawnData>();
                 respawnData.RespawnComponent = PlayerController.Instance.respawn;
+                XLShredDataRegistry.SetData("kiwi.XLShredRespawnNearBail", "isRespawnNearBailActive", settings.respawnNearBail);
             } else {
                 harmonyInstance.UnpatchAll(harmonyInstance.Id);
                 UnityEngine.Object.Destroy(ModMenu.Instance.gameObject.GetComponent<XLShredRespawnNearBail>());
                 UnityEngine.Object.Destroy(PlayerController.Instance.respawn.gameObject.GetComponent<RespawnData>());
+                XLShredDataRegistry.SetData("kiwi.XLShredRespawnNearBail", "isRespawnNearBailActive", false);
             }
             return true;
         }
