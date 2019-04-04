@@ -444,6 +444,9 @@ namespace XLShredObjectSpawner {
                         splineComputer.SetPointNormal(i, splineComputer.GetPointNormal(i, SplineComputer.Space.World) + grindNormals[i], SplineComputer.Space.World);
                     }
                 }
+                if (transform.name.Contains("GrindCollider")) {
+                    transform.localScale = new Vector3(1f / go.transform.lossyScale.x, 1f / go.transform.lossyScale.y, 1f);
+                }
             }
         }
 
@@ -453,7 +456,7 @@ namespace XLShredObjectSpawner {
                     Transform grindColliders = new GameObject(transform.name + "Colliders").transform;
                     grindColliders.parent = go.transform;
                     grindColliders.gameObject.layer = 12;
-                    
+
                     if (transform.name.Contains("Metal")) transform.tag = "Metal";
                     if (transform.name.Contains("Wood")) transform.tag = "Wood";
                     if (transform.name.Contains("Concrete")) transform.tag = "Concrete";
@@ -464,7 +467,7 @@ namespace XLShredObjectSpawner {
                         grindPoints[i] = transform.GetChild(i).position;
                         splinePoints[i] = new SplinePoint(grindPoints[i]);
                     }
-                    
+
                     SplineComputer splineComputer = grindColliders.gameObject.AddComponent<SplineComputer>();
                     splineComputer.type = Spline.Type.Linear;
                     Vector3[] grindNormals = new Vector3[grindPoints.Length];
@@ -492,6 +495,9 @@ namespace XLShredObjectSpawner {
                     for (int i = 0; i < grindPoints.Length; i++) {
                         splineComputer.SetPointNormal(i, splineComputer.GetPointNormal(i, SplineComputer.Space.World) + grindNormals[i], SplineComputer.Space.World);
                     }
+                }
+                if (transform.name.Contains("GrindCollider")) {
+                    transform.localScale = new Vector3(1f / go.transform.lossyScale.x, 1f / go.transform.lossyScale.y, transform.localScale.z);
                 }
             }
         }

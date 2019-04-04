@@ -19,6 +19,12 @@
 - [XL Shred Respawn Near Bail](#xl-shred-respawn-near-bail)
 ---
 ### XL Shred Menu Mod
+##### v0.0.5
+- Works with and requires latest version of Unity Mod Manager (0.15.0.0)
+- Improved mod toggling from Unity Mod Manager (now when you disable from there the UMM actually unpatches the mod). This change is not for XLShredLib, just the menu mod, updates to other mods will eventually include this change.
+- Changed folder structure in release to fix Unity Mod Manager uninstall behaviour.
+- Some behind the scene changes for mod developers. Deprecated RegisterShowCursor, UnregisterShowCursor, RegisterTempHideMenu and UnregisterTempHideMenu
+- Added the ability for mods to remove ui labels and custom elements by an id (and deprecated old functions that don't take an id).
 ##### v0.0.4
 - Bumped the version number, you need to update the other mods to the latest versions if you install this.
 - Removed the Replay Mod Menu Compatibility Mod. (integrated in Replay Mod now)
