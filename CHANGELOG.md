@@ -115,6 +115,8 @@
 - Completely changes what the mod does. Now it pretty much ensures off of ramps of a certain angle you will jump straight up, not past the ramp, and not backwards.
 - Requires UMM 0.15.0.0 and XL Shred Mod Menu 0.0.5
 - Fixes issue preventing flip tricks to manny in latest version of the game
+- Improved mod toggling from Unity Mod Manager (now when you disable from there the UMM actually unpatches the mod).
+- Changed folder structure in release to fix Unity Mod Manager uninstall behaviour.
 ##### v0.0.2
 - updated required version of XL Shred Menu Mod to v0.0.4 (under the hood changes)
 - Added repository link so the mod can auto check for updates (and potentially install them for you not sure)
