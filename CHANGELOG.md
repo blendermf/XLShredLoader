@@ -15,7 +15,7 @@
 - [XL Shred Object Spawner](#xl-shred-object-spawner)
 - [XL Shred Custom Pop Force](#xl-shred-custom-pop-force)
 - [XL Shred Custom Push Speed](#xl-shred-custom-push-speed)
-- [XL Shred Realstic Vert](#xl-shred-realistic-vert)
+- [XL Shred Realistic Vert](#xl-shred-realistic-vert)
 - [XL Shred Respawn Near Bail](#xl-shred-respawn-near-bail)
 ---
 ### XL Shred Menu Mod
@@ -110,7 +110,7 @@
 - updated required version of XL Shred Menu Mod to v0.0.4 (under the hood changes)
 - Added repository link so the mod can auto check for updates (and potentially install them for you not sure)
 ---
-#### XL Shred Realstic Vert
+#### XL Shred Realistic Vert
 ##### v0.0.3
 - Completely changes what the mod does. Now it pretty much ensures off of ramps of a certain angle you will jump straight up, not past the ramp, and not backwards.
 - Requires UMM 0.15.0.0 and XL Shred Mod Menu 0.0.5
