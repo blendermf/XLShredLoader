@@ -24,6 +24,7 @@ A collection of mods for Skater XL that use the Unity Mod Manager (reworked from
 - [Session Marker Manager v0.0.2](https://github.com/DanielKIWI/SkaterXL-Modding/releases/tag/XLShredSessionMarkerManager-0.0.2) [(Source)](https://github.com/DanielKIWI/SkaterXL-Modding/tree/XLShredSessionMarkerManager-0.0.2/XLShredMods/XLShredSessionMarkerManager) (saves manages and restores session markers)
 - [Grind to Grind v0.0.2](https://github.com/DanielKIWI/SkaterXL-Modding/releases/tag/XLShredGrindToGrind-0.0.2) [(Source)](https://github.com/DanielKIWI/SkaterXL-Modding/tree/XLShredGrindToGrind-0.0.2/XLShredMods/XLShredGrindToGrind)
 - [Custom Brake Force v0.0.2](https://github.com/brandon-barker/skaterxl-modding/releases/tag/XLShredBrakeForce-0.0.2) [(Source)](https://github.com/brandon-barker/skaterxl-modding/tree/master/XLShredMods/XLShredBrakeForce) (Adjusts the speed at which the player stops when holding B)
+- [Skin Editor](https://github.com/Azahet/SkaterXL_Modding/releases/) [(Source)](https://github.com/Azahet/SkaterXL_Modding)
 
 ### Changelog
 
