@@ -124,6 +124,11 @@
 - **RELEASED:** if at the top of a fully vert ramp, you'll pop up, not away from the ramp
 ---
 #### XL Shred Respawn Near Bail
+##### v0.0.3
+- Added compatibility for Manual Bail Respawn mod from DanielKIWI
+- Requires UMM 0.15.0.0 and XL Shred Mod Menu 0.0.5
+- Improved mod toggling from Unity Mod Manager (now when you disable from there the UMM actually unpatches the mod).
+- Changed folder structure in release to fix Unity Mod Manager uninstall behaviour.
 ##### v0.0.2
 - Fixed problem where if you manually went back to a marker while bailing you would reset twice, once for the manual reset and then once for the reset from the bail.
 ##### v0.0.1
