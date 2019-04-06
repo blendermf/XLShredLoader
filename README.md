@@ -51,7 +51,7 @@ A collection of mods for Skater XL that use the Unity Mod Manager (reworked from
 
 ### Uninstalling a Mod
 
-Right now, until I release a fix (one is coming), you have to manually remove mods to uninstall them. The process is as follows:
+Right now, until I release a fix (one is coming), you have to manually remove some mods to uninstall them. The latest versions of XL Shred Mod Menu, XL Shred Realistic Vert, and XL Shred Respawn Near Bail can be uninstalled from Unity Mod Manager without issue. For now the process for the rest is as follows:
 1. Go to your game directory (you can get this in steam, right click on the game -> properties -> local files -> browse local files)
 2. Go to the Mods folder there.
 3. Delete folders of the mods you want to remove from the game.
