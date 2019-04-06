@@ -19,9 +19,10 @@ A collection of mods for Skater XL that use the Unity Mod Manager (reworked from
 - [Disable Push Reduction v0.0.1](https://github.com/blendermf/XLShredLoader/releases/download/disable-push-reduction-0.0.1/XLShredDisablePushReduction-0.0.1.zip) (on first two pushes)
 
 ### Other Compatible Mods (not on this git)
-- [Replay Editor (Unity Mod Manager Edition) v0.0.5](https://github.com/DanielKIWI/SkaterXL-Modding/releases/tag/XLShredReplayEditor-v0.0.5) [(Source)](https://github.com/DanielKIWI/SkaterXL-Modding/tree/XLShredReplayEditor-v0.0.5/XLShredMods/XLShredReplayEditor)
+- [Replay Editor (Unity Mod Manager Edition) v0.1.0](https://github.com/DanielKIWI/SkaterXL-Modding/releases/tag/XLShredReplayEditor-v0.1.0) [(Source)](https://github.com/DanielKIWI/SkaterXL-Modding/tree/XLShredReplayEditor-v0.1.0/XLShredMods/XLShredReplayEditor)
 - [Adjust Audio Pitch v0.0.1](https://github.com/DanielKIWI/SkaterXL-Modding/releases/tag/XLShredAdjustAudioPitch-0.0.1) [(Source)](https://github.com/DanielKIWI/SkaterXL-Modding/tree/XLShredAdjustAudioPitch-0.0.1/XLShredMods/XLShredAdjustAudioPitch) (pitches audio according to timescale changes like slowmo)
-- [Session Marker Manager](https://github.com/DanielKIWI/SkaterXL-Modding/releases/tag/XLShredSessionMarkerManager-0.0.1) [(Source)](https://github.com/DanielKIWI/SkaterXL-Modding/tree/XLShredSessionMarkerManager-0.0.1/XLShredMods/XLShredSessionMarkerManager) (saves manages and restores session markers)
+- [Session Marker Manager v0.0.2](https://github.com/DanielKIWI/SkaterXL-Modding/releases/tag/XLShredSessionMarkerManager-0.0.2) [(Source)](https://github.com/DanielKIWI/SkaterXL-Modding/tree/XLShredSessionMarkerManager-0.0.2/XLShredMods/XLShredSessionMarkerManager) (saves manages and restores session markers)
+- [Grind to Grind v0.0.2](https://github.com/DanielKIWI/SkaterXL-Modding/releases/tag/XLShredGrindToGrind-0.0.2) [(Source)](https://github.com/DanielKIWI/SkaterXL-Modding/tree/XLShredGrindToGrind-0.0.2/XLShredMods/XLShredGrindToGrind)
 - [Custom Brake Force v0.0.2](https://github.com/brandon-barker/skaterxl-modding/releases/tag/XLShredBrakeForce-0.0.2) [(Source)](https://github.com/brandon-barker/skaterxl-modding/tree/master/XLShredMods/XLShredBrakeForce) (Adjusts the speed at which the player stops when holding B)
 
 ### Changelog
