@@ -20,11 +20,13 @@ A collection of mods for Skater XL that use the Unity Mod Manager (reworked from
 
 ### Other Compatible Mods (not on this git)
 - [Replay Editor (Unity Mod Manager Edition) v0.1.0](https://github.com/DanielKIWI/SkaterXL-Modding/releases/tag/XLShredReplayEditor-v0.1.0) [(Source)](https://github.com/DanielKIWI/SkaterXL-Modding/tree/XLShredReplayEditor-v0.1.0/XLShredMods/XLShredReplayEditor)
+- [Skin Editor](https://github.com/Azahet/SkaterXL_Modding/releases/) [(Source)](https://github.com/Azahet/SkaterXL_Modding)
+- [XLMultiplayer v0.2.3](https://github.com/silentbaws/XLMultiplayer/releases) [(Source)](https://github.com/silentbaws/XLMultiplayer)
+- [XLNoclip v0.1.1](https://github.com/silentbaws/XLNoclip/releases/) [(Source)](https://github.com/silentbaws/XLNoclip)
 - [Adjust Audio Pitch v0.0.1](https://github.com/DanielKIWI/SkaterXL-Modding/releases/tag/XLShredAdjustAudioPitch-0.0.1) [(Source)](https://github.com/DanielKIWI/SkaterXL-Modding/tree/XLShredAdjustAudioPitch-0.0.1/XLShredMods/XLShredAdjustAudioPitch) (pitches audio according to timescale changes like slowmo)
 - [Session Marker Manager v0.0.2](https://github.com/DanielKIWI/SkaterXL-Modding/releases/tag/XLShredSessionMarkerManager-0.0.2) [(Source)](https://github.com/DanielKIWI/SkaterXL-Modding/tree/XLShredSessionMarkerManager-0.0.2/XLShredMods/XLShredSessionMarkerManager) (saves manages and restores session markers)
 - [Grind to Grind v0.0.3](https://github.com/DanielKIWI/SkaterXL-Modding/releases/tag/XLShredGrindToGrind-v0.0.3) [(Source)](https://github.com/DanielKIWI/SkaterXL-Modding/tree/XLShredGrindToGrind-v0.0.3/XLShredMods/XLShredGrindToGrind)
 - [Custom Brake Force v0.0.2](https://github.com/brandon-barker/skaterxl-modding/releases/tag/XLShredBrakeForce-0.0.2) [(Source)](https://github.com/brandon-barker/skaterxl-modding/tree/master/XLShredMods/XLShredBrakeForce) (Adjusts the speed at which the player stops when holding B)
-- [Skin Editor](https://github.com/Azahet/SkaterXL_Modding/releases/) [(Source)](https://github.com/Azahet/SkaterXL_Modding)
 
 ### Changelog
 
