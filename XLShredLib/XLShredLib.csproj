@@ -61,6 +61,9 @@
       <HintPath>..\references\UnityEngine.AnimationModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule">
+      <HintPath>..\references\UnityEngine.AssetBundleModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\references\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
@@ -72,6 +75,9 @@
     <Reference Include="UnityEngine.PhysicsModule">
       <HintPath>..\references\UnityEngine.PhysicsModule.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>..\references\UnityEngine.TextRenderingModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>..\references\UnityEngine.UI.dll</HintPath>
@@ -89,7 +95,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>powershell.exe -ExecutionPolicy Unrestricted -File "$(SolutionDir)pre_build.ps1" -SolutionDir "$(SolutionDir)\"</PreBuildEvent>
+    <PreBuildEvent>taskkill /IM "Skaterxl.exe" /F /T /FI "STATUS eq RUNNING"
+powershell.exe -ExecutionPolicy Unrestricted -File "$(SolutionDir)pre_build.ps1" -SolutionDir "$(SolutionDir)\"</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(TargetPath)" "$(ProjectDir)..\XLShredMenuMod\$(OutDir)" /F /Y</PostBuildEvent>

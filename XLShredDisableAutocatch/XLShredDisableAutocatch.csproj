@@ -102,4 +102,7 @@
   <PropertyGroup>
     <PostBuildEvent>powershell.exe -ExecutionPolicy Unrestricted -File "$(SolutionDir)post_build.ps1" -TargetName "$(TargetName)" -TargetPath "$(TargetPath)" -TargetDir "$(TargetDir)\" -ProjectDir "$(ProjectDir)\" -SolutionDir "$(SolutionDir)\" -ConfigurationName "$(ConfigurationName)"</PostBuildEvent>
   </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>taskkill /IM "Skaterxl.exe" /F /T /FI "STATUS eq RUNNING"</PreBuildEvent>
+  </PropertyGroup>
 </Project>

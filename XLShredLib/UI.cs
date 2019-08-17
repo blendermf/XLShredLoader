@@ -60,7 +60,7 @@ namespace XLShredLib.UI {
             if (isEnabled != null && isEnabled()) {
                 switch (labelType) {
                     case LabelType.Text:
-                        GUILayout.Label(text, ModMenu.fontSmall);
+                        GUILayout.Label(text, ModMenu.Instance.fontSmall);
                         break;
                     case LabelType.Toggle:
                         oldToggleValue = toggleValue;
@@ -68,7 +68,7 @@ namespace XLShredLib.UI {
                         if (toggleValue != oldToggleValue && action != null) action(toggleValue);
                         break;
                     case LabelType.Button:
-                        if (GUILayout.Button(text, ModMenu.fontSmall) && action != null) action(true);
+                        if (GUILayout.Button(text, ModMenu.Instance.fontSmall) && action != null) action(true);
                         break;
                 }
             }

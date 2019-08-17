@@ -5,7 +5,7 @@ param(
     [String]$ProjectDir = $(throw "-ProjectDir is required."),
     [String]$SolutionDir = $(throw "-SolutionDir is required."),
     [String]$ConfigurationName = $(throw "-ConfigurationName is required."),
-    [String[]]$LibNames,
+    [String]$LibNames,
     [Switch]$LoadLib #Deprecated: Use above more generic parameter with argument "XLShredLib"
 )
 
@@ -18,7 +18,7 @@ $modTargetDir = [io.path]::combine( $gameDirectory, "Mods\", $targetModName);
 $modTargetDirTmpParent = $modTargetDir + 'Tmp'
 $modTargetDirTmp = $modTargetDirTmpParent + '\' + $targetModName;
 
-Get-ChildItem $modTargetDir -Recurse -Exclude 'Settings.xml', 'CustomObjects' | Remove-Item;
+Get-ChildItem $modTargetDir -Recurse -Exclude 'Settings.xml', 'CustomObjects', 'mainmenu' | Remove-Item;
 
 New-Item -ItemType directory -Path $modTargetDir -Force;
 
@@ -28,7 +28,8 @@ if ($ConfigurationName -eq "Debug") {
 }
 copy-item ([io.path]::combine( $ProjectDir, "Resources\Info.json" )) $modTargetDir -force;
 
-foreach ($libName in $LibNames) {
+$libNamesArray = $libNames -split ',';
+foreach ($libName in $libNamesArray) {
     copy-item ([io.path]::combine( $TargetDir, $libName + ".dll" )) $modTargetDir  -force;
     if ($ConfigurationName -eq "Debug") {
         copy-item ([io.path]::combine( $TargetDir, $libName + ".pdb" )) $modTargetDir -force;

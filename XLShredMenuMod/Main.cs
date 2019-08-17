@@ -22,7 +22,8 @@ namespace XLShredMenuMod
             modmenu = new GameObject();
             modmenu.AddComponent<ModMenu>();
             UnityEngine.Object.DontDestroyOnLoad(Main.modmenu);
-            
+            ModMenu.Instance.menuModPath = modEntry.Path;
+            ModMenu.Instance.LoadMainMenuAsset();
 
             return true;
         }

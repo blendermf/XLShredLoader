@@ -140,7 +140,7 @@ namespace XLShredObjectSpawner {
             GUI.backgroundColor = ModMenu.windowColor;
 
             if (!generatedStyle) {
-                labelStyle = new GUIStyle(ModMenu.fontSmall);
+                labelStyle = new GUIStyle(ModMenu.Instance.fontSmall);
                 labelStyle.margin.left = 3;
             }
 

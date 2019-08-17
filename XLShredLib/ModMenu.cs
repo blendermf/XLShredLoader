@@ -4,9 +4,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using UnityModManagerNet;
-
+public static class GameObjectExtensions {
+    /// <summary>
+    /// Checks if a GameObject has been destroyed.
+    /// </summary>
+    /// <param name="gameObject">GameObject reference to check for destructedness</param>
+    /// <returns>If the game object has been marked as destroyed by UnityEngine</returns>
+    public static bool IsDestroyed(this GameObject gameObject) {
+        // UnityEngine overloads the == opeator for the GameObject type
+        // and returns null when the object has been destroyed, but 
+        // actually the object is still there but has not been cleaned up yet
+        // if we test both we can determine if the object has been destroyed.
+        return gameObject == null && !ReferenceEquals(gameObject, null);
+    }
+}
 namespace XLShredLib {
+    using System.IO;
     using UI;
+    using UnityEngine.SceneManagement;
+    using UnityEngine.UI;
+    using UnityEngine.EventSystems;
 
     public class ModMenu : MonoBehaviour {
         public static readonly Color windowColor;
@@ -22,13 +39,14 @@ namespace XLShredLib {
         private static readonly int largeFontSize = 28;
         private static readonly int medFontSize = 18;
         private static readonly int smallFontSize = 14;
-        public static readonly GUIStyle fontLarge;
-        public static readonly GUIStyle fontMed;
-        public static readonly GUIStyle fontSmall;
+        public GUIStyle fontLarge;
+        public GUIStyle fontMed;
+        public GUIStyle fontSmall;
 
         private static ModMenu _instance;
 
         private bool showMenu = false;
+        private bool showOldMenu = false;
         private ModMenu.TmpMessage tmpMessage;
 
         private float btnLastPressed;
@@ -62,10 +80,43 @@ namespace XLShredLib {
 
         private bool generatedStyle = false;
 
+        public string menuModPath = "";
+        AssetBundle mainMenuBundle = null;
+        GameObject mainMenu = null;
+        List<GameObject> mainMenuButtons = new List<GameObject>();
+
+        float pausedTimescale = 1.0f;
+
         static ModMenu() {
             windowColor = new Color(0.2f, 0.2f, 0.2f);
             largeFontColor = Color.red;
             smallFontColor = Color.yellow;
+        }
+
+        public static ModMenu Instance {
+            get {
+                return ModMenu._instance;
+            }
+        }
+
+        void OnEnable() {
+            SceneManager.activeSceneChanged += OnSceneLoaded;
+        }
+        void OnSceneLoaded(Scene scene, Scene scene2) {
+            LoadMainMenuAsset();
+        }
+
+        public void Start() {
+            PromptController.Instance.menuthing.enabled = false;
+        }
+
+        private void Awake() {
+            if (ModMenu._instance != null && ModMenu._instance != this) {
+                Destroy(this);
+                return;
+            }
+            ModMenu._instance = this;
+
             fontLarge = new GUIStyle() {
                 fontSize = largeFontSize
             };
@@ -81,18 +132,50 @@ namespace XLShredLib {
             fontSmall.normal.textColor = smallFontColor;
         }
 
-        public static ModMenu Instance {
-            get {
-                return ModMenu._instance;
+        public void LoadMainMenuAsset() {
+            Console.WriteLine("Loading MainMenu Asset");
+            bool bundleLoaded = mainMenuBundle != null;
+
+            if (bundleLoaded) {
+                mainMenuBundle.Unload(true);
+                mainMenuBundle = null;
+                bundleLoaded = false;
             }
+
+            String bundlePath = Path.Combine(menuModPath, "mainmenu");
+            Console.WriteLine(bundlePath);
+            mainMenuBundle = AssetBundle.LoadFromFile(bundlePath);
+
+            bundleLoaded = mainMenuBundle != null;
+
+            if (!bundleLoaded) Console.WriteLine($"Failed to load Asset bundle: {bundlePath}");
+            else {
+                mainMenuBundle.LoadAllAssets<GameObject>();
+                GameObject mainMenuPrefab = FindGameObjectByName("MainMenuCanvas");
+                GameObject buttonPrefab = FindGameObjectByName("MainMenuButton");
+
+                mainMenu = UnityEngine.Object.Instantiate<GameObject>(mainMenuPrefab);
+                mainMenu.SetActive(false);
+          
+                Transform mainMenuPanel = mainMenu.transform.Find("MainMenuPanel");
+                mainMenuButtons.Clear();
+                for (int i = 0; i < 5; i++) {
+                    GameObject button = UnityEngine.Object.Instantiate<GameObject>(buttonPrefab);
+
+                    button.transform.SetParent(mainMenuPanel);
+                    mainMenuButtons.Add(button);
+                }
+            }
+
         }
 
-        private void Awake() {
-            if (ModMenu._instance != null && ModMenu._instance != this) {
-                Destroy(this);
-                return;
+        private static GameObject FindGameObjectByName(string name) {
+            foreach (GameObject gameObject in Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[]) {
+                if (gameObject.name == name) {
+                    return gameObject;
+                }
             }
-            ModMenu._instance = this;
+            return null;
         }
 
         private class TmpMessage {
@@ -266,11 +349,28 @@ namespace XLShredLib {
         public void Update() {
             this.realtimeSinceStartup = Time.realtimeSinceStartup;
 
+            if (PlayerController.Instance.inputController.player.GetButtonDown("Start")) {
+                if (this.showMenu) {
+                    FindObjectOfType<EventSystem>().SetSelectedGameObject(null);
+                    mainMenu.SetActive(false);
+                    showMenu = false;
+                    Time.timeScale = pausedTimescale;
+                } else if (!this.showMenu) {
+                    mainMenu.SetActive(true);
+                    FindObjectOfType<EventSystem>().SetSelectedGameObject(mainMenuButtons[0]);
+                    showMenu = true;
+                    pausedTimescale = Time.timeScale;
+                }
+            }
+
+
             KeyPress(KeyCode.F8, 0.15f, () => {
-                this.showMenu = !this.showMenu;
+                this.showOldMenu = !this.showOldMenu;
             });
 
-            if (exclusiveTimeScaleRegistry == null) {
+            if (showMenu) {
+                Time.timeScale = 0;
+            } else if (exclusiveTimeScaleRegistry == null) {
                 if (timeScaleTargets.Any()) {
                     timeScaleTarget = Enumerable.Min<Func<float>>(timeScaleTargets.Values, (f) => f.Invoke());
                 } else {
@@ -283,6 +383,9 @@ namespace XLShredLib {
                 }
                 Time.timeScale = timeScaleTarget;
             }
+
+
+
         }
 
         private void OnGUI() {
@@ -333,7 +436,7 @@ namespace XLShredLib {
                 shouldShowCursor = shouldShowCursor || Enumerable.Max<Func<int>>(shouldShowCursorFuncs.Values, (f) => f.Invoke()) != 0;
             }
 
-            if (!this.showMenu && !(UnityModManager.UI.Instance != null && UnityModManager.UI.Instance.Opened) && !shouldShowCursor) {
+            if (!this.showOldMenu && !(UnityModManager.UI.Instance != null && UnityModManager.UI.Instance.Opened) && !shouldShowCursor) {
                 Cursor.visible = false;
                 return;
             }
@@ -347,7 +450,7 @@ namespace XLShredLib {
                 tempHideMenu = tempHideMenu || Enumerable.Max<Func<int>>(tempHideFuncs.Values, (f) => f.Invoke()) != 0;
             }
 
-            if (this.showMenu && !tempHideMenu) {
+            if (this.showOldMenu && !tempHideMenu) {
                 windowRect = GUILayout.Window(GUIUtility.GetControlID(FocusType.Passive), windowRect, RenderWindow, "Skater XL Shred Menu", windowStyle, GUILayout.Width(600));
             }
         }
