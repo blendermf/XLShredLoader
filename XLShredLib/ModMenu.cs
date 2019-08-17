@@ -4,20 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using UnityModManagerNet;
-public static class GameObjectExtensions {
-    /// <summary>
-    /// Checks if a GameObject has been destroyed.
-    /// </summary>
-    /// <param name="gameObject">GameObject reference to check for destructedness</param>
-    /// <returns>If the game object has been marked as destroyed by UnityEngine</returns>
-    public static bool IsDestroyed(this GameObject gameObject) {
-        // UnityEngine overloads the == opeator for the GameObject type
-        // and returns null when the object has been destroyed, but 
-        // actually the object is still there but has not been cleaned up yet
-        // if we test both we can determine if the object has been destroyed.
-        return gameObject == null && !ReferenceEquals(gameObject, null);
-    }
-}
+
 namespace XLShredLib {
     using System.IO;
     using UI;
@@ -84,7 +71,7 @@ namespace XLShredLib {
         AssetBundle mainMenuBundle = null;
         GameObject mainMenu = null;
         List<GameObject> mainMenuButtons = new List<GameObject>();
-
+        public readonly string[] initialMainMenuLabels = { "Mod Settings", "Settings", "Tutorial", "Quit" };
         float pausedTimescale = 1.0f;
 
         static ModMenu() {
@@ -159,11 +146,12 @@ namespace XLShredLib {
           
                 Transform mainMenuPanel = mainMenu.transform.Find("MainMenuPanel");
                 mainMenuButtons.Clear();
-                for (int i = 0; i < 5; i++) {
-                    GameObject button = UnityEngine.Object.Instantiate<GameObject>(buttonPrefab);
 
-                    button.transform.SetParent(mainMenuPanel);
+                foreach (string label in initialMainMenuLabels) {
+                    GameObject button = UnityEngine.Object.Instantiate<GameObject>(buttonPrefab);
+                    button.transform.Find("Text").GetComponent<Text>().text = label;
                     mainMenuButtons.Add(button);
+                    button.transform.SetParent(mainMenuPanel);
                 }
             }
 
