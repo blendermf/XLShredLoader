@@ -15,12 +15,17 @@ namespace XLShredLib.UI {
     public class ModUIControl {
         public String id = "";
         public int priority = 0;
+
+        public ModUIControl(string id, int priority = 0) {
+            this.id = id;
+            this.priority = priority;
+        };
     }
 
     public class ModUILabel : ModUIControl, IModUIControlText {
         public string Text { get; set; }
 
-        public ModUILabel(string id, String text, int priority = 0) {
+        public ModUILabel(string id, String text, int priority = 0) : base(id, priority) {
 
         }
 
@@ -50,7 +55,7 @@ namespace XLShredLib.UI {
             this(id, LabelType.Text, text, side, isEnabled, false, null, priority) { }
 
         [ObsoleteAttribute("This method is obsolete (and will eventually go away). Use the ModUILabel(string id, String text, int priority = 0) version, or one of the specific controls for Buttons/Toggles.", false)]
-        public ModUILabel(string id, LabelType type, String text, Side side, Func<bool> isEnabled, bool initToggle = false, Action<bool> action = null, int priority = 0) {
+        public ModUILabel(string id, LabelType type, String text, Side side, Func<bool> isEnabled, bool initToggle = false, Action<bool> action = null, int priority = 0) : base(id, priority) {
             this.id = id;
             this.labelType = type;
             this.Text = text;
@@ -68,7 +73,7 @@ namespace XLShredLib.UI {
             this("", LabelType.Text, text, side, isEnabled, false, null, priority) { }
 
         [ObsoleteAttribute("This method is obsolete (and will eventually go away). Use the ModUILabel(string id, ...) version.", false)]
-        public ModUILabel(LabelType type, String text, Side side, Func<bool> isEnabled, bool initToggle = false, Action<bool> action = null, int priority = 0) {
+        public ModUILabel(LabelType type, String text, Side side, Func<bool> isEnabled, bool initToggle = false, Action<bool> action = null, int priority = 0) : base(id, priority) {
             this.id = "";
             this.labelType = type;
             this.Text = text;
