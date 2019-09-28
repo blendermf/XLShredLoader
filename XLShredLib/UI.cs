@@ -26,7 +26,7 @@ namespace XLShredLib.UI {
         public string Text { get; set; }
 
         public ModUILabel(string id, String text, int priority = 0) : base(id, priority) {
-
+            Text = text;
         }
 
         #region Deprecated Fields
