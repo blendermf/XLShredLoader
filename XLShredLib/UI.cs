@@ -5,141 +5,121 @@ using System.Text;
 using UnityEngine;
 
 namespace XLShredLib.UI {
+    class ModUI {
 
-    public interface IModUIControlText {
-        string Text {
-            get; set;
-        }
     }
 
-    public class ModUIControl {
+    class ModControl {
+
+    }
+
+    #region Old Menu
+    [ObsoleteAttribute("This class is obsolete. Use ModControl, and subclasses instead", false)]
+    public class ModUILabel {
         public String id = "";
         public int priority = 0;
+        public string text = "";
+        public Func<bool> isEnabled = null;
+        public Side side;
+        public LabelType labelType = LabelType.Text;
+        private bool oldToggleValue = false;
+        private bool toggleValue = false;
+        public Action<bool> action = null;
 
-        public ModUIControl(string id, int priority = 0) {
+        public ModUILabel(string id, String text, Side side, Func<bool> isEnabled, int priority = 0) :
+            this(id, LabelType.Text, text, side, isEnabled, false, null, priority) { }
+
+        public ModUILabel(string id, LabelType type, String text, Side side, Func<bool> isEnabled, bool initToggle = false, Action<bool> action = null, int priority = 0) {
             this.id = id;
+            this.labelType = type;
+            this.text = text;
+            this.side = side;
+            this.isEnabled = isEnabled;
+            this.toggleValue = initToggle;
+            this.oldToggleValue = initToggle;
+            this.action = action;
             this.priority = priority;
         }
-    }
 
-    public class ModUILabel : ModUIControl, IModUIControlText {
-        public string Text { get; set; }
+        public ModUILabel(String text, Side side, Func<bool> isEnabled, int priority = 0) :
+            this("", LabelType.Text, text, side, isEnabled, false, null, priority) { }
 
-        public ModUILabel(string id, String text, int priority = 0) : base(id, priority) {
-            Text = text;
+        public ModUILabel(LabelType type, String text, Side side, Func<bool> isEnabled, bool initToggle = false, Action<bool> action = null, int priority = 0) {
+            this.id = "";
+            this.labelType = type;
+            this.text = text;
+            this.side = side;
+            this.isEnabled = isEnabled;
+            this.toggleValue = initToggle;
+            this.oldToggleValue = initToggle;
+            this.action = action;
+            this.priority = priority;
+        }
+
+        public void SetToggleValue(bool val) {
+            oldToggleValue = toggleValue;
+            toggleValue = val;
         }
 
         public void Render() {
             if (isEnabled != null && isEnabled()) {
                 switch (labelType) {
                     case LabelType.Text:
-                        GUILayout.Label(Text, ModMenu.Instance.fontSmall);
+                        GUILayout.Label(text, ModMenu.Instance.fontSmall);
                         break;
                     case LabelType.Toggle:
                         oldToggleValue = toggleValue;
-                        toggleValue = GUILayout.Toggle(toggleValue, Text, ModMenu.Instance.toggleStyle);
+                        toggleValue = GUILayout.Toggle(toggleValue, text, ModMenu.Instance.toggleStyle);
                         if (toggleValue != oldToggleValue && action != null) action(toggleValue);
                         break;
                     case LabelType.Button:
-                        if (GUILayout.Button(Text, ModMenu.Instance.fontSmall) && action != null) action(true);
+                        if (GUILayout.Button(text, ModMenu.Instance.fontSmall) && action != null) action(true);
                         break;
                 }
             }
         }
-
-        #region Deprecated Fields
-        [ObsoleteAttribute("This field is obsolete. Add or remove the ModUIBox or label when enabled/disabled", false)]
-        public Func<bool> isEnabled = null;
-
-        [ObsoleteAttribute("This field is obsolete. There is no concept of side in the new menu.", false)]
-        public Side side;
-
-        [ObsoleteAttribute("This field is obsolete. ModUILabel is now meant only to be a label.", false)]
-        public LabelType labelType = LabelType.Text;
-
-        [ObsoleteAttribute("This field is obsolete. Use dedicated toggle control instead of ModUILabel", false)]
-        private bool oldToggleValue = false;
-
-        [ObsoleteAttribute("This field is obsolete. Use dedicated toggle control instead of ModUILabel", false)]
-        private bool toggleValue = false;
-
-        [ObsoleteAttribute("This field is obsolete. Use dedicated controls that include actions instead of ModUILabel", false)]
-        public Action<bool> action = null;
-        #endregion
-
-        #region Deprecated Methods
-        [ObsoleteAttribute("This method is obsolete (and will eventually go away). Use the ModUILabel(string id, String text, int priority = 0) version, or one of the specific controls for Buttons/Toggles.", false)]
-        public ModUILabel(string id, String text, Side side, Func<bool> isEnabled, int priority = 0) :
-            this(id, LabelType.Text, text, side, isEnabled, false, null, priority) { }
-
-        [ObsoleteAttribute("This method is obsolete (and will eventually go away). Use the ModUILabel(string id, String text, int priority = 0) version, or one of the specific controls for Buttons/Toggles.", false)]
-        public ModUILabel(string id, LabelType type, String text, Side side, Func<bool> isEnabled, bool initToggle = false, Action<bool> action = null, int priority = 0) : base(id, priority) {
-            this.labelType = type;
-            this.Text = text;
-            this.side = side;
-            this.isEnabled = isEnabled;
-            this.toggleValue = initToggle;
-            this.oldToggleValue = initToggle;
-            this.action = action;
-        }
-
-
-        [ObsoleteAttribute("This method is obsolete (and will eventually go away). Use the ModUILabel(string id, ...) version.", false)]
-        public ModUILabel(String text, Side side, Func<bool> isEnabled, int priority = 0) :
-            this("", LabelType.Text, text, side, isEnabled, false, null, priority) { }
-
-        [ObsoleteAttribute("This method is obsolete (and will eventually go away). Use the ModUILabel(string id, ...) version.", false)]
-        public ModUILabel(LabelType type, String text, Side side, Func<bool> isEnabled, bool initToggle = false, Action<bool> action = null, int priority = 0) : base("", priority) {
-            this.labelType = type;
-            this.Text = text;
-            this.side = side;
-            this.isEnabled = isEnabled;
-            this.toggleValue = initToggle;
-            this.oldToggleValue = initToggle;
-            this.action = action;
-        }
-
-        [ObsoleteAttribute("This method is obsolete. Use dedicated toggle control instead of ModUILabel", false)]
-        public void SetToggleValue(bool val) {
-            oldToggleValue = toggleValue;
-            toggleValue = val;
-        }
-        #endregion
     }
 
-    public class ModUICustom : ModUIControl {
+    [ObsoleteAttribute("This class is obsolete. Use ModControl, and subclasses instead", false)]
+    public class ModUICustom {
+        public string id = "";
         public Action onGUI = null;
         public Func<bool> isEnabled = null;
+        public int priority = 0;
 
-        public ModUICustom(string id, Action onGUI, Func<bool> isEnabled, int priority = 0) : base(id, priority) {
+        public ModUICustom(string id, Action onGUI, Func<bool> isEnabled, int priority = 0) {
+            this.id = id;
             this.onGUI = onGUI;
             this.isEnabled = isEnabled;
+            this.priority = priority;
         }
 
-        #region Deprecated Methods
-        [ObsoleteAttribute("This method is obsolete (and will eventually go away). Use the ModUICustom(string id, ...) version.", false)]
-        public ModUICustom(Action onGUI, Func<bool> isEnabled, int priority = 0) : base("", priority) {
+        public ModUICustom(Action onGUI, Func<bool> isEnabled, int priority = 0) {
+            this.id = "";
             this.onGUI = onGUI;
             this.isEnabled = isEnabled;
+            this.priority = priority;
         }
-        #endregion
 
         public void Render() {
             if (isEnabled != null && isEnabled()) onGUI?.Invoke();
         }
     }
 
+    [ObsoleteAttribute("This class is obsolete. Sides are no longer a concept", false)]
     public enum Side {
         left,
         right
     }
 
+    [ObsoleteAttribute("This class is obsolete. Different types are now their own class with ModControls", false)]
     public enum LabelType {
         Text,
         Toggle,
         Button
     }
 
+    [ObsoleteAttribute("This class is obsolete. Use ModUI, and subclasses instead", false)]
     public class ModUIBox {
         public String modMaker = "";
         public string modName = "";
@@ -147,7 +127,6 @@ namespace XLShredLib.UI {
         public List<ModUILabel> labelsLeft;
         public List<ModUILabel> labelsRight;
         public List<ModUICustom> customs;
-        public List<ModUIControl> controls;
         public Dictionary<string, ModUILabel> labelsById;
         public Dictionary<string, ModUICustom> customsById;
 
@@ -264,8 +243,6 @@ namespace XLShredLib.UI {
             customs.Remove(custom);
         }
 
-        #region Deprecated Methods
-        [ObsoleteAttribute("This method is obsolete (and will eventually go away). Use the AddLabel(string id, ...) version.", false)]
         public ModUILabel AddLabel(String text, Side side, Func<bool> isEnabled, int priority = 0) {
 
             ModUILabel uiLabel = new ModUILabel(text, side, isEnabled, priority);
@@ -273,7 +250,6 @@ namespace XLShredLib.UI {
             return uiLabel;
         }
 
-        [ObsoleteAttribute("This method is obsolete (and will eventually go away). Use the AddLabel(string id, ...) version.", false)]
         public ModUILabel AddLabel(LabelType type, String text, Side side, Func<bool> isEnabled, bool initToggle = false, Action<bool> action = null, int priority = 0) {
 
             ModUILabel uiLabel = new ModUILabel(type, text, side, isEnabled, initToggle, action, priority);
@@ -283,7 +259,6 @@ namespace XLShredLib.UI {
             return uiLabel;
         }
 
-        [ObsoleteAttribute("This method is obsolete (and will eventually go away). Use the AddLabel(string id, ...) version.", false)]
         public ModUILabel AddToggle(String text, Side side, Func<bool> isEnabled, bool initToggle = false, Action<bool> action = null, int priority = 0) {
             ModUILabel uiLabel = new ModUILabel(LabelType.Toggle, text, side, isEnabled, initToggle, action, priority);
             AddLabel(uiLabel);
@@ -292,13 +267,11 @@ namespace XLShredLib.UI {
             return uiLabel;
         }
 
-        [ObsoleteAttribute("This method is obsolete (and will eventually go away). Use the AddCustom(string id, ...) version.", false)]
         public ModUICustom AddCustom(Action onGUI, Func<bool> isEnabled, int priority = 0) {
             ModUICustom uiCustom = new ModUICustom(onGUI, isEnabled, priority);
             AddCustom(uiCustom);
             return uiCustom;
         }
-        #endregion
 
         public void UpdateEnabledCounts() {
             labelLeftEnabledCount = Enumerable.Count<ModUILabel>(labelsLeft, (l) => l.isEnabled());
@@ -378,4 +351,5 @@ namespace XLShredLib.UI {
             }
         }
     }
+    #endregion
 }
