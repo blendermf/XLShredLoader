@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
+using Harmony12;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using UnityModManagerNet;
+using TMPro;
+using GameManagement;
 
 namespace XLShredLib {
     using System.IO;
     using UI;
     using UnityEngine.SceneManagement;
     using UnityEngine.UI;
-    using UnityEngine.EventSystems;
 
     public class ModMenu : MonoBehaviour {
         public static readonly Color windowColor;
@@ -55,6 +57,8 @@ namespace XLShredLib {
         private List<ModUIBox> uiBoxes = new List<ModUIBox>();
         private Dictionary<String, ModUIBox> modMakers = new Dictionary<String, ModUIBox>();
 
+        private List<Type> timescaleOverrideStates = new List<Type>();
+
         private bool timeScaleExclusive = false;
         private Func<bool> timeScaleExclusiveFunc = null;
 
@@ -89,12 +93,34 @@ namespace XLShredLib {
         void OnEnable() {
             SceneManager.activeSceneChanged += OnSceneLoaded;
         }
+
         void OnSceneLoaded(Scene scene, Scene scene2) {
-            LoadMainMenuAsset();
+            //LoadMainMenuAsset();
         }
 
+
+
         public void Start() {
-            PromptController.Instance.menuthing.enabled = false;
+            //PromptController.Instance.menuthing.enabled = false;
+            Invoke("AppendMenuButtons", 1f);
+        }
+
+        public void AppendMenuButtons() {
+            
+            GameObject modButton = UnityEngine.Object.Instantiate<GameObject>(FindGameObjectByName("Gear Button"));
+            GameObject exitButton = UnityEngine.Object.Instantiate<GameObject>(FindGameObjectByName("Gear Button"));
+            modButton.GetComponentInChildren<TextMeshProUGUI>().SetText("Mod Settings");
+            modButton.GetComponentInChildren<MenuButton>().onClick = new Button.ButtonClickedEvent();
+            modButton.GetComponentInChildren<MenuButton>().onClick.AddListener(() => { GameStateMachine.Instance.RequestTransitionTo(typeof(ModSettingsState)); });
+            exitButton.GetComponentInChildren<TextMeshProUGUI>().SetText("Exit");
+            exitButton.GetComponentInChildren<MenuButton>().onClick = new Button.ButtonClickedEvent();
+            exitButton.GetComponentInChildren<MenuButton>().onClick.AddListener(() => { Application.Quit(); });
+            modButton.GetComponent<RectTransform>().SetParent(FindGameObjectByName("Buttons").GetComponent<RectTransform>(), false);
+            exitButton.GetComponent<RectTransform>().SetParent(FindGameObjectByName("Buttons").GetComponent<RectTransform>(), false);
+            modButton.GetComponent<RectTransform>().SetSiblingIndex(4);
+            // ModUtils.DumpGameObject(modButton, "    ", true);
+            // ModUtils.DumpGameObject(FindGameObjectByName("Gear Button"), "    ", true);
+            //ModUtils.DumpGameObjectCloneCompare(modButton, FindGameObjectByName("Gear Button"), "    ");
         }
 
         private void Awake() {
@@ -103,6 +129,9 @@ namespace XLShredLib {
                 return;
             }
             ModMenu._instance = this;
+
+            timescaleOverrideStates.Add(typeof(PlayState));
+            timescaleOverrideStates.Add(typeof(TutorialState));
 
             fontLarge = new GUIStyle() {
                 fontSize = largeFontSize
@@ -119,6 +148,7 @@ namespace XLShredLib {
             fontSmall.normal.textColor = smallFontColor;
         }
 
+        // Deprecated
         public void LoadMainMenuAsset() {
             Console.WriteLine("Loading MainMenu Asset");
             bool bundleLoaded = mainMenuBundle != null;
@@ -336,7 +366,7 @@ namespace XLShredLib {
 
         public void Update() {
             this.realtimeSinceStartup = Time.realtimeSinceStartup;
-
+            /*
             if (PlayerController.Instance.inputController.player.GetButtonDown("Start")) {
                 if (this.showMenu) {
                     FindObjectOfType<EventSystem>().SetSelectedGameObject(null);
@@ -349,16 +379,18 @@ namespace XLShredLib {
                     showMenu = true;
                     pausedTimescale = Time.timeScale;
                 }
-            }
+            }*/
 
 
             KeyPress(KeyCode.F8, 0.15f, () => {
                 this.showOldMenu = !this.showOldMenu;
             });
 
-            if (showMenu) {
-                Time.timeScale = 0;
-            } else if (exclusiveTimeScaleRegistry == null) {
+            KeyPress(KeyCode.P, 0.15f, () => {
+                ModUtils.DumpGameObject(GameStateMachine.Instance.LevelSelectionObject, "    ", true);
+            });
+
+            if (timescaleOverrideStates.Contains(GameStateMachine.Instance.CurrentState.GetType()) && exclusiveTimeScaleRegistry == null) {
                 if (timeScaleTargets.Any()) {
                     timeScaleTarget = Enumerable.Min<Func<float>>(timeScaleTargets.Values, (f) => f.Invoke());
                 } else {

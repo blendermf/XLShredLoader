@@ -53,6 +53,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>..\references\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine">
       <HintPath>..\references\UnityEngine.dll</HintPath>
       <Private>False</Private>
@@ -83,11 +86,17 @@
       <HintPath>..\references\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>..\references\UnityEngine.UIModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityModManager">
       <HintPath>..\references\UnityModManager.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControlListViewController.cs" />
+    <Compile Include="ModifiedStates.cs" />
+    <Compile Include="ModSettingsState.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="ModMenu.cs" />
     <Compile Include="UI.cs" />
@@ -96,7 +105,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>taskkill /IM "Skaterxl.exe" /F /T /FI "STATUS eq RUNNING"
-powershell.exe -ExecutionPolicy Unrestricted -File "$(SolutionDir)pre_build.ps1" -SolutionDir "$(SolutionDir)\"</PreBuildEvent>
+powershell.exe -ExecutionPolicy Unrestricted -File "$(SolutionDir)pre_build.ps1" -SolutionDir "$(SolutionDir)\" -GameAssemblyReferences "UnityEngine.UIModule.dll,Unity.TextMeshPro.dll"</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(TargetPath)" "$(ProjectDir)..\XLShredMenuMod\$(OutDir)" /F /Y</PostBuildEvent>

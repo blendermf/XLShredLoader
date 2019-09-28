@@ -472,8 +472,9 @@ namespace XLShredObjectSpawner {
                     splineComputer.type = Spline.Type.Linear;
                     Vector3[] grindNormals = new Vector3[grindPoints.Length];
                     for (int i = 0; i < grindPoints.Length - 1; i++) {
-                        GameObject grindCollider = new GameObject("RailCol" + i);
-                        grindCollider.layer = 12;
+                        GameObject grindCollider = new GameObject("RailCol" + i) {
+                            layer = 12
+                        };
                         grindCollider.transform.position = grindPoints[i];
                         grindCollider.transform.LookAt(grindPoints[i + 1]);
                         BoxCollider boxCollider = grindCollider.AddComponent<BoxCollider>();

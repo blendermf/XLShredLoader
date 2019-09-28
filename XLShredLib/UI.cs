@@ -6,7 +6,9 @@ using UnityEngine;
 
 namespace XLShredLib.UI {
 
-    public class ModUILabel {
+    public class ModUIControl { }
+
+    public class ModUILabel : ModUIControl {
         public String id = "";
         public LabelType labelType = LabelType.Text;
         public String text = "";
@@ -75,7 +77,7 @@ namespace XLShredLib.UI {
         }
     }
 
-    public class ModUICustom {
+    public class ModUICustom : ModUIControl {
         public String id = "";
         public Action onGUI = null;
         public Func<bool> isEnabled = null;
@@ -115,17 +117,30 @@ namespace XLShredLib.UI {
     }
 
     public class ModUIBox {
-        public String modMaker;
+        public String modMaker = "";
+        public string modName = "";
         public int priority;
         public List<ModUILabel> labelsLeft;
         public List<ModUILabel> labelsRight;
         public List<ModUICustom> customs;
+        public List<ModUIControl> controls;
         public Dictionary<string, ModUILabel> labelsById;
         public Dictionary<string, ModUICustom> customsById;
 
         int labelLeftEnabledCount = 0;
         int labelRightEnabledCount = 0;
         int customEnabledCount = 0;
+
+        public ModUIBox(String modName, String modMaker, int priority = 0) {
+            labelsLeft = new List<ModUILabel>();
+            labelsRight = new List<ModUILabel>();
+            customs = new List<ModUICustom>();
+            labelsById = new Dictionary<string, ModUILabel>();
+            customsById = new Dictionary<string, ModUICustom>();
+            this.modName = modName;
+            this.modMaker = modMaker;
+            this.priority = priority;
+        }
 
         public ModUIBox(String modMaker, int priority = 0) {
             labelsLeft = new List<ModUILabel>();

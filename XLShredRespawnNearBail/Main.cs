@@ -7,12 +7,22 @@ using XLShredLib;
 
 namespace XLShredRespawnNearBail {
 
-    using Extensions.Components;
-
     [Serializable]
     public class Settings : UnityModManager.ModSettings {
 
-        public bool respawnNearBail = false;
+        public bool _respawnNearBail = false;
+
+        public bool RespawnNearBail {
+            get {
+                return this._respawnNearBail;
+            }
+            set {
+                if (Main.enabled) {
+                    _respawnNearBail = value;
+                    PlayerController.Instance.respawn.respawnAtSpot = value;
+                }
+            }
+        }
 
         public override void Save(UnityModManager.ModEntry modEntry) {
             UnityModManager.ModSettings.Save<Settings>(this, modEntry);
@@ -26,8 +36,7 @@ namespace XLShredRespawnNearBail {
 
         static bool Load(UnityModManager.ModEntry modEntry) {
             settings = Settings.Load<Settings>(modEntry);
-
-            XLShredDataRegistry.SetData("kiwi.XLShredRespawnNearBail", "isRespawnNearBailActive", settings.respawnNearBail);
+            XLShredDataRegistry.SetData("kiwi.XLShredRespawnNearBail", "isRespawnNearBailActive", settings.RespawnNearBail);
 
             modEntry.OnSaveGUI = OnSaveGUI;
             modEntry.OnToggle = OnToggle;
@@ -44,14 +53,12 @@ namespace XLShredRespawnNearBail {
                 harmonyInstance = HarmonyInstance.Create(modEntry.Info.Id);
                 harmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
                 ModMenu.Instance.gameObject.AddComponent<XLShredRespawnNearBail>();
-                RespawnData respawnData = PlayerController.Instance.respawn.gameObject.AddComponent<RespawnData>();
-                respawnData.RespawnComponent = PlayerController.Instance.respawn;
-                XLShredDataRegistry.SetData("kiwi.XLShredRespawnNearBail", "isRespawnNearBailActive", settings.respawnNearBail);
+                PlayerController.Instance.respawn.respawnAtSpot = settings.RespawnNearBail;
+
             } else {
                 harmonyInstance.UnpatchAll(harmonyInstance.Id);
                 UnityEngine.Object.Destroy(ModMenu.Instance.gameObject.GetComponent<XLShredRespawnNearBail>());
-                UnityEngine.Object.Destroy(PlayerController.Instance.respawn.gameObject.GetComponent<RespawnData>());
-                XLShredDataRegistry.SetData("kiwi.XLShredRespawnNearBail", "isRespawnNearBailActive", false);
+                PlayerController.Instance.respawn.respawnAtSpot = false;
             }
             return true;
         }

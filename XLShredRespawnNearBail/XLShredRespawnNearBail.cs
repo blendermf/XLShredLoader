@@ -5,16 +5,15 @@ using XLShredLib.UI;
 using System;
 
 namespace XLShredRespawnNearBail {
-    using Extensions;
     class XLShredRespawnNearBail : MonoBehaviour {
         ModUIBox uiBox;
         ModUILabel uiLabelRespawnNearBail;
         public void Start() {
             uiBox = ModMenu.Instance.RegisterModMaker("com.kiwi", "Kiwi");
             uiLabelRespawnNearBail = uiBox.AddLabel("respawn-near-bail", LabelType.Toggle, "Respawn Near Bail (R)", Side.left,
-                () => Main.enabled, Main.settings.respawnNearBail && Main.enabled, 
+                () => Main.enabled, Main.settings.RespawnNearBail && Main.enabled, 
                 (b) => {
-                    Main.settings.respawnNearBail = b;
+                    Main.settings.RespawnNearBail = b;
                     XLShredDataRegistry.SetData("kiwi.XLShredRespawnNearBail", "isRespawnNearBailActive", b);
                 }
             );
@@ -23,10 +22,10 @@ namespace XLShredRespawnNearBail {
         public void Update() {
             if (Main.enabled) {
                 ModMenu.Instance.KeyPress(KeyCode.R, 0.2f, () => {
-                    Main.settings.respawnNearBail = !Main.settings.respawnNearBail;
-                    uiLabelRespawnNearBail.SetToggleValue(Main.settings.respawnNearBail);
-                    XLShredDataRegistry.SetData("kiwi.XLShredRespawnNearBail", "isRespawnNearBailActive", Main.settings.respawnNearBail);
-                    if (Main.settings.respawnNearBail) {
+                    Main.settings.RespawnNearBail = !Main.settings.RespawnNearBail;
+                    uiLabelRespawnNearBail.SetToggleValue(Main.settings.RespawnNearBail);
+                    XLShredDataRegistry.SetData("kiwi.XLShredRespawnNearBail", "isRespawnNearBailActive", Main.settings.RespawnNearBail);
+                    if (Main.settings.RespawnNearBail) {
                         ModMenu.Instance.ShowMessage("Respawn Near Bail: ON");
                     } else {
                         ModMenu.Instance.ShowMessage("Respawn Near Bail: OFF");
