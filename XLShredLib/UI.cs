@@ -29,6 +29,24 @@ namespace XLShredLib.UI {
             Text = text;
         }
 
+        public void Render() {
+            if (isEnabled != null && isEnabled()) {
+                switch (labelType) {
+                    case LabelType.Text:
+                        GUILayout.Label(Text, ModMenu.Instance.fontSmall);
+                        break;
+                    case LabelType.Toggle:
+                        oldToggleValue = toggleValue;
+                        toggleValue = GUILayout.Toggle(toggleValue, Text, ModMenu.Instance.toggleStyle);
+                        if (toggleValue != oldToggleValue && action != null) action(toggleValue);
+                        break;
+                    case LabelType.Button:
+                        if (GUILayout.Button(Text, ModMenu.Instance.fontSmall) && action != null) action(true);
+                        break;
+                }
+            }
+        }
+
         #region Deprecated Fields
         [ObsoleteAttribute("This field is obsolete. Add or remove the ModUIBox or label when enabled/disabled", false)]
         public Func<bool> isEnabled = null;
@@ -87,24 +105,6 @@ namespace XLShredLib.UI {
             toggleValue = val;
         }
         #endregion
-
-        public void Render() {
-            if (isEnabled != null && isEnabled()) {
-                switch (labelType) {
-                    case LabelType.Text:
-                        GUILayout.Label(Text, ModMenu.Instance.fontSmall);
-                        break;
-                    case LabelType.Toggle:
-                        oldToggleValue = toggleValue;
-                        toggleValue = GUILayout.Toggle(toggleValue, Text, ModMenu.Instance.toggleStyle);
-                        if (toggleValue != oldToggleValue && action != null) action(toggleValue);
-                        break;
-                    case LabelType.Button:
-                        if (GUILayout.Button(Text, ModMenu.Instance.fontSmall) && action != null) action(true);
-                        break;
-                }
-            }
-        }
     }
 
     public class ModUICustom : ModUIControl {
