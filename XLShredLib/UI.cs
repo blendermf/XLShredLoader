@@ -6,26 +6,54 @@ using UnityEngine;
 
 namespace XLShredLib.UI {
 
-    public class ModUIControl { }
+    public interface IModUIControlText {
+        string Text {
+            get; set;
+        }
+    }
 
-    public class ModUILabel : ModUIControl {
+    public class ModUIControl {
         public String id = "";
-        public LabelType labelType = LabelType.Text;
-        public String text = "";
-        public Side side;
-        public Func<bool> isEnabled = null;
-        private bool oldToggleValue = false;
-        private bool toggleValue = false;
-        public Action<bool> action = null;
         public int priority = 0;
+    }
 
+    public class ModUILabel : ModUIControl, IModUIControlText {
+        public string Text { get; set; }
+
+        public ModUILabel(string id, String text, int priority = 0) {
+
+        }
+
+        #region Deprecated Fields
+        [ObsoleteAttribute("This field is obsolete. Add or remove the ModUIBox or label when enabled/disabled", false)]
+        public Func<bool> isEnabled = null;
+
+        [ObsoleteAttribute("This field is obsolete. There is no concept of side in the new menu.", false)]
+        public Side side;
+
+        [ObsoleteAttribute("This field is obsolete. ModUILabel is now meant only to be a label.", false)]
+        public LabelType labelType = LabelType.Text;
+
+        [ObsoleteAttribute("This field is obsolete. Use dedicated toggle control instead of ModUILabel", false)]
+        private bool oldToggleValue = false;
+
+        [ObsoleteAttribute("This field is obsolete. Use dedicated toggle control instead of ModUILabel", false)]
+        private bool toggleValue = false;
+
+        [ObsoleteAttribute("This field is obsolete. Use dedicated controls that include actions instead of ModUILabel", false)]
+        public Action<bool> action = null;
+        #endregion
+
+        #region Deprecated Methods
+        [ObsoleteAttribute("This method is obsolete (and will eventually go away). Use the ModUILabel(string id, String text, int priority = 0) version, or one of the specific controls for Buttons/Toggles.", false)]
         public ModUILabel(string id, String text, Side side, Func<bool> isEnabled, int priority = 0) :
             this(id, LabelType.Text, text, side, isEnabled, false, null, priority) { }
 
+        [ObsoleteAttribute("This method is obsolete (and will eventually go away). Use the ModUILabel(string id, String text, int priority = 0) version, or one of the specific controls for Buttons/Toggles.", false)]
         public ModUILabel(string id, LabelType type, String text, Side side, Func<bool> isEnabled, bool initToggle = false, Action<bool> action = null, int priority = 0) {
             this.id = id;
             this.labelType = type;
-            this.text = text;
+            this.Text = text;
             this.side = side;
             this.isEnabled = isEnabled;
             this.toggleValue = initToggle;
@@ -34,7 +62,7 @@ namespace XLShredLib.UI {
             this.priority = priority;
         }
 
-        #region Deprecated Methods
+
         [ObsoleteAttribute("This method is obsolete (and will eventually go away). Use the ModUILabel(string id, ...) version.", false)]
         public ModUILabel(String text, Side side, Func<bool> isEnabled, int priority = 0) :
             this("", LabelType.Text, text, side, isEnabled, false, null, priority) { }
@@ -43,7 +71,7 @@ namespace XLShredLib.UI {
         public ModUILabel(LabelType type, String text, Side side, Func<bool> isEnabled, bool initToggle = false, Action<bool> action = null, int priority = 0) {
             this.id = "";
             this.labelType = type;
-            this.text = text;
+            this.Text = text;
             this.side = side;
             this.isEnabled = isEnabled;
             this.toggleValue = initToggle;
@@ -51,26 +79,27 @@ namespace XLShredLib.UI {
             this.action = action;
             this.priority = priority;
         }
-        #endregion
 
+        [ObsoleteAttribute("This method is obsolete. Use dedicated toggle control instead of ModUILabel", false)]
         public void SetToggleValue(bool val) {
             oldToggleValue = toggleValue;
             toggleValue = val;
         }
+        #endregion
 
         public void Render() {
             if (isEnabled != null && isEnabled()) {
                 switch (labelType) {
                     case LabelType.Text:
-                        GUILayout.Label(text, ModMenu.Instance.fontSmall);
+                        GUILayout.Label(Text, ModMenu.Instance.fontSmall);
                         break;
                     case LabelType.Toggle:
                         oldToggleValue = toggleValue;
-                        toggleValue = GUILayout.Toggle(toggleValue, text, ModMenu.Instance.toggleStyle);
+                        toggleValue = GUILayout.Toggle(toggleValue, Text, ModMenu.Instance.toggleStyle);
                         if (toggleValue != oldToggleValue && action != null) action(toggleValue);
                         break;
                     case LabelType.Button:
-                        if (GUILayout.Button(text, ModMenu.Instance.fontSmall) && action != null) action(true);
+                        if (GUILayout.Button(Text, ModMenu.Instance.fontSmall) && action != null) action(true);
                         break;
                 }
             }
@@ -78,10 +107,8 @@ namespace XLShredLib.UI {
     }
 
     public class ModUICustom : ModUIControl {
-        public String id = "";
         public Action onGUI = null;
         public Func<bool> isEnabled = null;
-        public int priority = 0;
 
         public ModUICustom(string id, Action onGUI, Func<bool> isEnabled, int priority = 0) {
             this.id = id;
